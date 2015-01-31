@@ -1,0 +1,13 @@
+.DS_Store
+node_modules
+.grunt
+.grunt-tasks
+.tests
+lib/
+*Spec.js
+.gitignore
+.jshintrc
+.npmignore
+.travis.yml
+TODO.txt
+gruntfile.js
