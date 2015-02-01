@@ -1474,7 +1474,7 @@ grunt pre-release
 grunt patch
 
 ## Publish current version to npm and bower
-grunt deploy
+grunt publish
 
 ```
 

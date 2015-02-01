@@ -65,7 +65,7 @@ module.exports = function(grunt) {
         ]);
 
     grunt.registerTask(
-        'deploy',
+        'publish',
         [
             'travis',
             'exec:npm-publish',
