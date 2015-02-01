@@ -58,10 +58,10 @@ module.exports = function(grunt) {
         ]);
 
     grunt.registerTask(
-        'minor-release',
+        'patch',
         [
             'travis',
-            'bump:minor'
+            'bump:patch'
         ]);
 
     grunt.registerTask(

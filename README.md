@@ -1471,7 +1471,7 @@ grunt
 grunt pre-release
 
 ## change the package.json, bower.json minor version (v1.0.1)
-grunt release
+grunt patch
 
 ## Publish current version to npm and bower
 grunt deploy
