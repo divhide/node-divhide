@@ -544,6 +544,10 @@ Set the expected type as an object. The **value** is an object with rules.
 <br />
 Set the expected type as an object. The **value** is an array with rules.
 
+`.function()`
+<br />
+Set the expected type as a function.
+
 `.required()`
 <br />
 Set as required.

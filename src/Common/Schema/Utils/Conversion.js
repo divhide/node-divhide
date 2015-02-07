@@ -78,6 +78,22 @@ var Defaults = {
 
         return value;
 
+    },
+
+    function: function(value){
+
+        if(!Type.isFunction(value)){
+            return;
+        }
+
+        // no default value and its required!
+        value = new SchemaDefinition({
+            schema: function(){},
+            required: true
+        });
+
+        return value;
+
     }
 
 };
@@ -107,7 +123,9 @@ var Conversion = {
             return schema;
         }
 
-        var result = Defaults.object(schema) || Defaults.array(schema) || Defaults.string(schema) || Defaults.number(schema);
+        var result = Defaults.object(schema) || Defaults.array(schema) ||
+                     Defaults.string(schema) || Defaults.number(schema) ||
+                     Defaults.function(schema);
 
         if(!result){
             throw new Error("Schema conversion not supported.");

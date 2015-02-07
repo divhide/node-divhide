@@ -240,7 +240,7 @@ describe("CustomSchema", function () {
     });
 
 
-    it("Schema().serialize()", function (done) {
+    it(".serialize()", function (done) {
 
         var schema = new Schema()
                         .any()
@@ -268,7 +268,7 @@ describe("CustomSchema", function () {
 
     });
 
-    it("Schema().object().serialize()", function (done) {
+    it(".object().serialize()", function (done) {
 
         var schema = new Schema()
                         .object({
@@ -310,7 +310,7 @@ describe("CustomSchema", function () {
 
     });
 
-    it("Schema().object().deserialize(object)", function (done) {
+    it(".object().deserialize(object)", function (done) {
 
         var schema = new Schema()
                         .object({
@@ -344,7 +344,7 @@ describe("CustomSchema", function () {
 
     });
 
-    it("Schema().array().deserialize(object)", function (done) {
+    it(".array().deserialize(object)", function (done) {
 
         var schema = new Schema()
                         .array([
@@ -362,6 +362,27 @@ describe("CustomSchema", function () {
 
         expect(value)
             .equals(["any", "str"]);
+
+        done();
+
+    });
+
+    it(".function()", function (done) {
+
+        var schema = new Schema().function();
+
+        var value = schema.value(function(){});
+
+        expect(typeof(value))
+            .equals("function");
+
+
+        var errors = schema.errors({});
+        expect(errors.length)
+            .toBe(1);
+
+        expect(errors.items[0])
+            .toMatch("'function' was expected but found 'object' instead");
 
         done();
 
