@@ -44,6 +44,26 @@ Internal.getI18NMessage = function(message, messageData){
 
 /**
  *
+ * Get the stack trace
+ *
+ * @return {String}
+ *
+ */
+Internal.getStackTrace = function(){
+
+    var error    = new Error(),
+        stackStr = Safe.string(error.stack),
+        stack    = stackStr.split('\n');
+
+    /// Remove Error message + 2 first lines of the stack trace
+    stack.splice(0,3);
+
+    return stack.join('\n');
+
+};
+
+/**
+ *
  * @class Error Class
  *
  * @param {String|I18NString} message
@@ -54,8 +74,31 @@ var Exception = function(message, messageData) {
     message     = Internal.getI18NMessage(message, messageData);
     messageData = Safe.object(messageData);
 
-    /// initialize the Error.message
-    this.message = message.toString();
+    /// get the stack trace
+    var stack = Internal.getStackTrace();
+
+    /// define the error message
+    Object.defineProperty(
+        this,
+        "message",
+        {
+            get: function(){
+                return this.toString();
+            },
+            configurable: false
+        }
+    );
+
+    /// define the this.stack to return the created Error
+    /// stack
+    Object.defineProperty(
+        this,
+        'stack', {
+        get: function() {
+            return this.toString() + "\n" + stack;
+        },
+        configurable: false
+    });
 
     /**
      *

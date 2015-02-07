@@ -5,6 +5,25 @@ var _               = require("lodash"),
     Safe            = require("../Safe"),
     Exception       = require("./Exception");
 
+/**
+ *
+ * Get the stack trace
+ *
+ * @return {String}
+ *
+ */
+var getStackTrace = function(){
+
+    var error    = new Error(),
+        stackStr = Safe.string(error.stack),
+        stack    = stackStr.split('\n');
+
+    /// Remove Error message + 2 first lines of the stack trace
+    stack.splice(0,3);
+
+    return stack.join('\n');
+
+};
 
 /**
  *
@@ -14,7 +33,21 @@ var _               = require("lodash"),
  */
 var ExceptionList = function() {
 
-    var _items = [];
+    /// instance of error
+    var items  = [];
+
+    /// get the stack trace
+    var stack = getStackTrace();
+
+    /// define the this.stack to return the created Error
+    /// stack
+    Object.defineProperty(
+        this,
+        'stack', {
+        get: function() {
+            return this.toString() + "\n" + stack;
+        }
+    });
 
     Object.defineProperty(
         this,
@@ -32,7 +65,7 @@ var ExceptionList = function() {
         "items",
         {
             get: function(){
-                return _.clone(_items);
+                return _.clone(items);
             },
             configurable: false
         }
@@ -43,7 +76,7 @@ var ExceptionList = function() {
         "length",
         {
             get: function(){
-                return _items.length;
+                return items.length;
             },
             configurable: false
         }
@@ -84,7 +117,7 @@ var ExceptionList = function() {
                     throw new Error("Expected instance of type Error");
                 }
 
-                _items.push(error);
+                items.push(error);
 
             });
 
@@ -98,7 +131,7 @@ var ExceptionList = function() {
      *
      */
     this.clear = function(){
-        while(_items.length) _items.pop();
+        while(items.length) items.pop();
     };
 
     /**
@@ -113,11 +146,11 @@ var ExceptionList = function() {
     this.toString = function(translations){
 
         var str         = "",
-            length      = _items.length,
+            length      = items.length,
             separator   = ", ";
 
         _.each(
-            _items,
+            items,
             function(error, index){
 
                 if(error instanceof Exception){
