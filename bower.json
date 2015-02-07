@@ -3,7 +3,7 @@
     "description": "Divhide javascript core components for NodeJs, Browser, Titanium, ... and everything that run javascript.",
     "homepage": "https://github.com/divhide/divhide-core#1.X",
     "license": "MIT",
-    "version": "1.0.1",
+    "version": "1.0.3",
 
     "authors": [
         "Oscar Brito <aetheon@gmail.com>"
