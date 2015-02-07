@@ -1,7 +1,7 @@
 {
   "name": "divhide",
   "description": "Divhide javascript core components for NodeJs, Browser, Titanium, ... and everything that runs javascript.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": {
     "name": "Oscar Brito <aetheon@gmail.com>",
     "url": "https://twitter.com/aetheon"
