@@ -388,4 +388,28 @@ describe("CustomSchema", function () {
 
     });
 
+    it(".boolean()", function (done) {
+
+        var schema = new Schema().boolean();
+
+        var value = schema.value(true);
+        expect(value)
+            .equals(true);
+
+        value = schema.value(false);
+        expect(value)
+            .equals(false);
+
+
+        var errors = schema.errors({});
+        expect(errors.length)
+            .toBe(1);
+
+        expect(errors.items[0])
+            .toMatch("'boolean' was expected but found 'object' instead");
+
+        done();
+
+    });
+
 });

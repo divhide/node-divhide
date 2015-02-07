@@ -80,6 +80,22 @@ var Defaults = {
 
     },
 
+    boolean: function(value){
+
+        if(!Type.isBoolean(value)){
+            return;
+        }
+
+        // no default value and its required!
+        value = new SchemaDefinition({
+            schema: Boolean(value),
+            required: true
+        });
+
+        return value;
+
+    },
+
     function: function(value){
 
         if(!Type.isFunction(value)){
@@ -94,7 +110,7 @@ var Defaults = {
 
         return value;
 
-    }
+    },
 
 };
 
@@ -125,7 +141,7 @@ var Conversion = {
 
         var result = Defaults.object(schema) || Defaults.array(schema) ||
                      Defaults.string(schema) || Defaults.number(schema) ||
-                     Defaults.function(schema);
+                     Defaults.boolean(schema) || Defaults.function(schema);
 
         if(!result){
             throw new Error("Schema conversion not supported.");

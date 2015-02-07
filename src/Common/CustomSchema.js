@@ -87,14 +87,20 @@ var SchemaChainableFns = {
         this.any = false;
     },
 
-    function : function(val, obj){
+    function : function(){
         this.schema = function(){};
         this.required = true;
         this.any = false;
     },
 
-    number : function(val){
+    number : function(){
         this.schema = 0;
+        this.required = true;
+        this.any = false;
+    },
+
+    boolean : function(){
+        this.schema = Boolean(true);
         this.required = true;
         this.any = false;
     },

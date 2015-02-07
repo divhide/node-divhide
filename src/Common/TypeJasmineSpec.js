@@ -252,5 +252,25 @@ describe("TypeSpec", function () {
 
     });
 
+    it(".of()", function (done) {
+
+        var Type = Divhide.Type;
+
+        expect(Type.of({}))
+            .toBe("object");
+
+        expect(Type.of([]))
+            .toBe("array");
+
+        expect(Type.of(true))
+            .toBe("boolean");
+
+        expect(Type.of(false))
+            .toBe("boolean");
+
+        done();
+
+    });
+
 
 });

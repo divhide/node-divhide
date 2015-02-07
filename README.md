@@ -536,6 +536,10 @@ Set the expected type as a string
 <br />
 Set the expected type as a number
 
+`.boolean()`
+<br />
+Set the expected type as a boolean
+
 `.object(value)`
 <br />
 Set the expected type as an object. The **value** is an object with rules.

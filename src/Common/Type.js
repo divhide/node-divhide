@@ -27,8 +27,12 @@ Type.of = function (obj) {
 
     var t = typeof obj;
 
-    if(t == "object" && obj instanceof Array)
+    if(t == "object" && obj instanceof Array){
         return "array";
+    }
+    else if(t == "object" && typeof(obj) == "boolean"){
+        return "boolean";
+    }
 
     return t;
 };
