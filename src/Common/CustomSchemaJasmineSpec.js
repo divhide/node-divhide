@@ -400,6 +400,10 @@ describe("CustomSchema", function () {
         expect(value)
             .equals(false);
 
+        value = schema.value("false");
+        expect(value)
+            .equals(false);
+
 
         var errors = schema.errors({});
         expect(errors.length)

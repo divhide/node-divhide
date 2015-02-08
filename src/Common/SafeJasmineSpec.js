@@ -356,5 +356,46 @@ describe("SafeSpec", function () {
     });
 
 
+    it(".coerce(, Boolean)", function (done) {
+
+        var Safe = Divhide.Safe;
+
+        var value = Safe.coerce(true, Boolean());
+        expect(value)
+            .toBe(true);
+
+        value = Safe.coerce(false, Boolean());
+        expect(value)
+            .toBe(false);
+
+        value = Safe.coerce(1, Boolean());
+        expect(value)
+            .toBe(true);
+
+        value = Safe.coerce(0, Boolean());
+        expect(value)
+            .toBe(false);
+
+        value = Safe.coerce(9999, Boolean());
+        expect(value)
+            .toBe(9999);
+
+        value = Safe.coerce("true", Boolean());
+        expect(value)
+            .toBe(true);
+
+        value = Safe.coerce("false", Boolean());
+        expect(value)
+            .toBe(false);
+
+        value = Safe.coerce("no", Boolean());
+        expect(value)
+            .toBe("no");
+
+        done();
+
+    });
+
+
 
 });

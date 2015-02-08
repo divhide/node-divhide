@@ -9016,8 +9016,30 @@ Safe.coerce = function(value, expected){
     // Expecting a boolean
     if(Type.isBoolean(expected)){
 
+        /// try to get it from a number
         if(Type.isNumber(value)){
-            return Boolean(Number(value));
+
+            value = Safe.number(value);
+            if(value === 1){
+                return Boolean(true);
+            }
+            else if(value === 0){
+                return Boolean(false);
+            }
+
+        }
+        /// try to get it from a string
+        else if(Type.isString(value)){
+
+            value = value.toLowerCase();
+
+            if(value == "true"){
+                return Boolean(true);
+            }
+            else if(value == "false"){
+                return Boolean(false);
+            }
+
         }
 
     }
