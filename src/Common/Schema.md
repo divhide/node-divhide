@@ -8,6 +8,10 @@ compile and/or evaluate the rules.
 <br />
 Set the expected type as any object.
 
+`.strict()`
+<br />
+Disable the type coercion. Strict types are required.
+
 `.string()`
 <br />
 Set the expected type as a string

@@ -420,7 +420,7 @@ describe("CustomSchema", function () {
 
     });
 
-    it(".strict()", function (done) {
+    it(".strict().boolean()", function (done) {
 
         var schema = new Schema().strict().boolean();
 
