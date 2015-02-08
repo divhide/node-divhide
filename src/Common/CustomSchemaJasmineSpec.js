@@ -253,6 +253,7 @@ describe("CustomSchema", function () {
         expect(value)
         .equals({
             schema: null,
+            strict: false,
             any: true,
             default: 'default_value',
             required: false,
@@ -284,6 +285,7 @@ describe("CustomSchema", function () {
             schema: {
                 one: {
                     schema: null,
+                    strict: false,
                     any: true,
                     default: undefined,
                     required: true,
@@ -292,6 +294,7 @@ describe("CustomSchema", function () {
                 },
                 two: {
                     schema: '',
+                    strict: false,
                     any: false,
                     default: undefined,
                     required: true,
@@ -299,6 +302,7 @@ describe("CustomSchema", function () {
                     validations: [ { name: "max", args: [5] } ]
                 }
             },
+            strict: false,
             any: false,
             default: undefined,
             required: false,
@@ -411,6 +415,39 @@ describe("CustomSchema", function () {
 
         expect(errors.items[0])
             .toMatch("'boolean' was expected but found 'object' instead");
+
+        done();
+
+    });
+
+    it(".strict()", function (done) {
+
+        var schema = new Schema().strict().boolean();
+
+        var value = schema.value(true);
+        expect(value)
+            .equals(true);
+
+        value = schema.value(false);
+        expect(value)
+            .equals(false);
+
+
+        var errors = schema.errors("false");
+        expect(errors.length)
+            .toBe(1);
+
+        expect(errors.items[0])
+            .toMatch("'boolean' was expected but found 'string' instead");
+
+
+        errors = schema.errors(1);
+        expect(errors.length)
+            .toBe(1);
+
+        expect(errors.items[0])
+            .toMatch("'boolean' was expected but found 'number' instead");
+
 
         done();
 

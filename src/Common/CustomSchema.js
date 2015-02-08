@@ -67,6 +67,10 @@ var SchemaChainableFns = {
         this.schema = null;
     },
 
+    strict: function(){
+        this.strict = true;
+    },
+
     string : function(val, obj){
         this.schema = "";
         this.required = true;

@@ -30,6 +30,15 @@ var SchemaDefinition = function(options){
 
     /**
      *
+     * Flag that enables strict convertion.
+     *
+     * @type {Boolean}
+     *
+     */
+    this.strict = Safe.boolean(options.strict, false);
+
+    /**
+     *
      * Any flag. This means that any value is accepted.
      *
      * @type {Boolean}
@@ -108,8 +117,11 @@ SchemaDefinition.prototype.value = function(value, validationFns){
         schema = value;
     }
 
-    /// tries to normalize the value (e.g. a number can be on string representation )
-    value = Safe.coerce(value, schema);
+    /// if not strict tries to normalize
+    /// the value (e.g. a number can be on string representation )
+    if(!this.strict){
+        value = Safe.coerce(value, schema);
+    }
 
     /// If not defined and its required throw
     /* jshint -W041 */
