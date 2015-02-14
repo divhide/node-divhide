@@ -2,14 +2,11 @@
 
 describe("Assert.*Spec", function () {
 
-    beforeEach(function (done) {
-
-        done();
-
+    beforeEach(function () {
     });
 
 
-    it(".required()", function (done) {
+    it(".required()", function () {
 
         var required = Divhide.SubModules.Assert.Required;
 
@@ -28,12 +25,10 @@ describe("Assert.*Spec", function () {
         expect(function(){ required(undefined); })
             .toThrow();
 
-        done();
-
     });
 
 
-    it(".string()", function (done) {
+    it(".string()", function () {
 
         var string = Divhide.SubModules.Assert.String;
 
@@ -55,13 +50,10 @@ describe("Assert.*Spec", function () {
         expect(function(){ string(undefined); })
             .toThrow();
 
-
-        done();
-
     });
 
 
-    it(".number()", function (done) {
+    it(".number()", function () {
 
         var number = Divhide.SubModules.Assert.Number;
 
@@ -86,13 +78,10 @@ describe("Assert.*Spec", function () {
         expect(function(){ number(undefined); })
             .toThrow();
 
-
-        done();
-
     });
 
 
-    it(".object()", function (done) {
+    it(".object()", function () {
 
         var object = Divhide.SubModules.Assert.Object;
 
@@ -111,13 +100,10 @@ describe("Assert.*Spec", function () {
         expect(function(){ object(undefined); })
             .toThrow();
 
-
-        done();
-
     });
 
 
-    it(".array()", function (done) {
+    it(".array()", function () {
 
         var array = Divhide.SubModules.Assert.Array;
 
@@ -136,12 +122,10 @@ describe("Assert.*Spec", function () {
         expect(function(){ array(undefined); })
             .toThrow();
 
-        done();
-
     });
 
 
-    it(".max()", function (done) {
+    it(".max()", function () {
 
         var max = Divhide.SubModules.Assert.Max;
 
@@ -178,12 +162,10 @@ describe("Assert.*Spec", function () {
         expect(function(){ max({ one: 1, two: 2 }, 1); })
             .toThrow();
 
-        done();
-
     });
 
 
-    it(".min()", function (done) {
+    it(".min()", function () {
 
         var min = Divhide.SubModules.Assert.Min;
 
@@ -220,11 +202,10 @@ describe("Assert.*Spec", function () {
         expect(function(){ min({}, 1); })
             .toThrow();
 
-        done();
     });
 
 
-    it(".regex()", function (done) {
+    it(".regex()", function () {
 
         var regex = Divhide.SubModules.Assert.Regex;
 
@@ -246,7 +227,19 @@ describe("Assert.*Spec", function () {
         expect(function(){ regex([], "bbb"); })
             .toThrow();
 
-        done();
+    });
+
+    it(".instanceOf()", function () {
+
+        var instanceOf = Divhide.SubModules.Assert.InstanceOf;
+
+        expect( instanceOf("a", String) )
+            .toEqual("a");
+
+        expect(function(){
+            instanceOf(1, String);
+        })
+        .toThrowError(/Expected instance of 'String'/);
 
     });
 

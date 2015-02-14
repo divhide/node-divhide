@@ -73,5 +73,13 @@ Messages.VALIDATION_INVALID_LIST_LENGTH = "Expected list with <%= expected %> it
  */
 Messages.VALIDATION_INVALID_LIST_LENGTH_MULTIPLE_OF = "Expected list length to be multiple of <%= expected %> but found length of <%= value %>.";
 
+/**
+ *
+ * Invalid List
+ *
+ * @type {String}
+ *
+ */
+Messages.VALIDATION_INSTANCEOF = "Expected instance of '<%= value %>'.";
 
 module.exports = Messages;

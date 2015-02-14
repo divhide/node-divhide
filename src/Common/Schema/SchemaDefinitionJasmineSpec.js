@@ -1,10 +1,8 @@
 'use strict';
 
-describe("SubModules.Schema.Utils.CompilationSpec", function () {
+describe("SubModules.Schema.SchemaDefinition", function () {
 
-    var SchemaDefinition    = Divhide.SubModules.Schema.Entity.SchemaDefinition,
-        Compilation         = Divhide.SubModules.Schema.Utils.Compilation;
-
+    var SchemaDefinition = Divhide.SubModules.Schema.SchemaDefinition;
 
     beforeEach(function (done) {
 
@@ -24,22 +22,7 @@ describe("SubModules.Schema.Utils.CompilationSpec", function () {
 
     });
 
-    it("compile(SchemaDefinition)", function (done) {
-
-        var c = new SchemaDefinition({
-            schema : { one: 1 },
-            default: { one: 2 }
-        });
-
-        var schema = Compilation.compile(c);
-
-        expect(schema).equals(c);
-
-        done();
-
-    });
-
-    it("compile([])", function (done) {
+    it("ctor([])", function () {
 
         var c = new SchemaDefinition({
             schema : [ 1, 2 ],
@@ -48,34 +31,29 @@ describe("SubModules.Schema.Utils.CompilationSpec", function () {
             repeatable: false
         });
 
-        var expected = new SchemaDefinition({
+        var schema = new SchemaDefinition({
             schema : [
-                new SchemaDefinition({ schema: 0, required: true }),
-                new SchemaDefinition({ schema: 0, required: true })
+                new SchemaDefinition({ schema: 2, required: true }),
+                new SchemaDefinition({ schema: 1, required: true })
             ],
+            default: [],
             required: true,
             repeatable: false
         });
 
-        var schema = Compilation.compile(c.schema);
-
-        expect(schema).equals(expected);
-        expect(schema).not.equals(c);
-
-        done();
+        expect(schema).equals(c);
 
     });
 
-    it("compile({})", function (done) {
+    it("ctor({})", function () {
 
         var c = new SchemaDefinition({
             schema : { one: 1, two: 2 },
-            default: {},
             required: true,
             repeatable: false
         });
 
-        var expected = new SchemaDefinition({
+        var schema = new SchemaDefinition({
             schema : {
                 "one": new SchemaDefinition({ schema: 0, required: true }),
                 "two": new SchemaDefinition({ schema: 0, required: true })
@@ -84,16 +62,11 @@ describe("SubModules.Schema.Utils.CompilationSpec", function () {
             repeatable: false
         });
 
-        var schema = Compilation.compile(c.schema);
-
-        expect(schema).equals(expected);
-        expect(schema).not.equals(c);
-
-        done();
+        expect(schema).equals(c);
 
     });
 
-    it("compile('')", function (done) {
+    it("ctor('')", function () {
 
         var expected = new SchemaDefinition({
             schema : '',
@@ -101,15 +74,14 @@ describe("SubModules.Schema.Utils.CompilationSpec", function () {
             repeatable: false
         });
 
-        var schema = Compilation.compile('0');
+        var schema = new SchemaDefinition({ schema: '0' });
 
         expect(schema).equals(expected);
 
-        done();
 
     });
 
-    it("compile(0)", function (done) {
+    it("ctor(0)", function () {
 
         var expected = new SchemaDefinition({
             schema : 0,
@@ -117,11 +89,9 @@ describe("SubModules.Schema.Utils.CompilationSpec", function () {
             repeatable: false
         });
 
-        var schema = Compilation.compile(1);
+        var schema = new SchemaDefinition({ schema: 1 });
 
         expect(schema).equals(expected);
-
-        done();
 
     });
 

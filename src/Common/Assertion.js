@@ -23,7 +23,7 @@ ChainableFns.number     = require("./Assert/Number");
 ChainableFns.max        = require("./Assert/Max");
 ChainableFns.min        = require("./Assert/Min");
 ChainableFns.regex      = require("./Assert/Regex");
-
+ChainableFns.instanceOf = require("./Assert/InstanceOf");
 
 /**
  *

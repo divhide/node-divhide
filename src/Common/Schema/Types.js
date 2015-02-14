@@ -18,7 +18,15 @@ var Types = {
      * Schema
      *
      */
-    Schema: function(options){ _.extend(this, options); },
+    Schema: function Schema(options){ _.extend(this, options); },
+
+    /**
+     *
+     * @class
+     * Schema
+     *
+     */
+    SchemaDefinition: function SchemaDefinition(options){ _.extend(this, options); },
 
     /**
      *
@@ -26,7 +34,23 @@ var Types = {
      * SchemaEvaluator
      *
      */
-    SchemaEvaluator: function(options){ _.extend(this, options); }
+    SchemaEvaluator: function SchemaEvaluator(options){ _.extend(this, options); },
+
+    /**
+     *
+     * @class
+     * SchemaResult
+     *
+     */
+    SchemaResult: function SchemaResult(options){ _.extend(this, options); },
+
+    /**
+     *
+     * @class
+     * SchemaResultNode
+     *
+     */
+    SchemaResultNode: function SchemaResultNode(options){ _.extend(this, options); }
 
 };
 

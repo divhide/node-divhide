@@ -19,7 +19,7 @@ expect(
     function(){
         schema.value();
     })
-    .toThrow(new Error("Value is required."));
+    .toThrowError("Value is required., The minimum value allowed is 3.");
 
 
 /// value is required!

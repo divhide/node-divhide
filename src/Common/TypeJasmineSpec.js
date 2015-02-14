@@ -272,5 +272,23 @@ describe("TypeSpec", function () {
 
     });
 
+    it(".instanceOf()", function () {
+
+        var Type = Divhide.Type;
+
+        expect( Type.instanceOf(["adasdasdas"], Array) )
+            .toBeTruthy();
+
+        expect( Type.instanceOf(false, Boolean) )
+            .toBeTruthy();
+
+        expect( Type.instanceOf(false, Object) )
+            .not.toBeTruthy();
+
+        expect( Type.instanceOf(null, Object) )
+            .not.toBeTruthy();
+
+    });
+
 
 });

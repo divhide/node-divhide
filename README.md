@@ -319,6 +319,10 @@ Set the expected value to have a specified maximum. In the case of String or Arr
 <br />
 Set the expected value to have a specified minimum. In the case of String or Array the context will be the value length. In the case of an object will be the number of keys
 
+* `.instanceOf(fn)`
+<br />
+Set the expected value to be an instance of the given function.
+
 * `.regex(value)`
 <br />
 Set the expected value to pass the regex
@@ -627,25 +631,23 @@ var schema = Schema.object({
         data: Schema.array([ "" ]).repeatable().max(10),
 
         /// every other object key is optional
-        "/.*/": Schema.string().optional()
+        "/.*/": Schema.number().optional()
 
     }).required();
 
 
 /// apply the schema to the value
-var value = schema.value(
-    {
-        data: [ 1, 2, 3, 4, 5 , 6],
-        timestamp: "1404373579473"
-    });
+var value = schema.value({
+    data: [ 1, 2, 3, 4, 5, 6],
+    timestamp: "1404373579473"
+});
 
 
 /// test the value
-expect(value).equals(
-    {
-        data: [ '1', '2', '3', '4', '5' , '6'],
-        timestamp: "1404373579473"
-    });
+expect(value).equals({
+    data: [ '1', '2', '3', '4', '5' , '6'],
+    timestamp: 1404373579473
+});
 
 
 
@@ -709,7 +711,7 @@ var schema = Schema.number()
 
 /// value is correct
 var value = schema.value(3);
-expect(value).toBe(3)
+expect(value).toBe(3);
 
 
 /// optional value
@@ -780,7 +782,7 @@ expect(
     function(){
         schema.value();
     })
-    .toThrow(new Error("Value is required."));
+    .toThrowError("Value is required., The minimum value allowed is 3.");
 
 
 /// value is required!
@@ -949,36 +951,37 @@ data Types.
 
 **Methods**
 
-* `Type.of(value)`
+* `.of(value)`
 <br />
 Gets the string representation of the given value.
 
-* `Type.isArray(value)`
+* `.isArray(value)`
 
-* `Type.isBoolean(value)`
+* `.isBoolean(value)`
 
-* `Type.isFunction(value)`
+* `.isFunction(value)`
 
-* `Type.isString(value)`
+* `.isString(value)`
 
-* `Type.isObject(value)`
+* `.isObject(value)`
 
-* `Type.isBoolean(value)`
+* `.isBoolean(value)`
 
-* `Type.isRegExp(value)`
+* `.isRegExp(value)`
 
-* `Type.isRegExpStr(value)`
+* `.isRegExpStr(value)`
 
-* `Type.isNumber(value)`
+* `.isNumber(value)`
 
-* `Type.isDefined(value)`
+* `.instanceOf(value)`
+
+* `.isDefined(value)`
 <br />
 Checks if the value is defined.
 
-* `Type.isEmpty(value)`
+* `.isEmpty(value)`
 <br />
 Checks if the value is empty (executed in string, list and object context ).
-
 
 ```js
 
@@ -1044,6 +1047,9 @@ expect(isEmpty).toBe(true);
 
 var isEmpty =  Type.isEmpty(null);
 expect(isEmpty).toBe(true);
+
+var isString = Type.instanceOf("string", String);
+expect(isString).toBe(true);
 
 
 

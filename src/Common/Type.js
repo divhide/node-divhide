@@ -187,6 +187,34 @@ Type.isDefined = function(value){
 
 /**
  *
+ * Test if value is instanceOf 'fn'
+ *
+ * @param {*} value
+ * @param {*} fn
+ * 
+ * @return {Boolean}
+ * 
+ */
+Type.instanceOf = function(value, fn){
+
+    /// take care of javascript quirks first!
+    
+    if(Type.isString(value) && fn == String){
+        return true;
+    }
+    else if(Type.isNumber(value) && fn == Number){
+        return true;   
+    }
+    else if(Type.isBoolean(value) && fn == Boolean){
+        return true;
+    }
+
+    return (value instanceof fn);
+    
+};
+
+/**
+ *
  * Tests if the value is Empty
  *
  * @param  {*}  value

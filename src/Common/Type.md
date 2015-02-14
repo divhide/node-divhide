@@ -4,36 +4,37 @@ data Types.
 
 **Methods**
 
-* `Type.of(value)`
+* `.of(value)`
 <br />
 Gets the string representation of the given value.
 
-* `Type.isArray(value)`
+* `.isArray(value)`
 
-* `Type.isBoolean(value)`
+* `.isBoolean(value)`
 
-* `Type.isFunction(value)`
+* `.isFunction(value)`
 
-* `Type.isString(value)`
+* `.isString(value)`
 
-* `Type.isObject(value)`
+* `.isObject(value)`
 
-* `Type.isBoolean(value)`
+* `.isBoolean(value)`
 
-* `Type.isRegExp(value)`
+* `.isRegExp(value)`
 
-* `Type.isRegExpStr(value)`
+* `.isRegExpStr(value)`
 
-* `Type.isNumber(value)`
+* `.isNumber(value)`
 
-* `Type.isDefined(value)`
+* `.instanceOf(value)`
+
+* `.isDefined(value)`
 <br />
 Checks if the value is defined.
 
-* `Type.isEmpty(value)`
+* `.isEmpty(value)`
 <br />
 Checks if the value is empty (executed in string, list and object context ).
-
 
 ```js
 

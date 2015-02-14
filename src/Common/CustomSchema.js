@@ -1,12 +1,13 @@
 'use strict';
 
 var _                        = require("lodash"),
+    Type                     = require("./Type"),
     Safe                     = require("./Safe"),
     Chain                    = require("./Chain"),
     ChainContext             = require("./Chain/ChainContext"),
     Types                    = require("./Schema/Types"),
-    SchemaDefinition         = require("./Schema/Entity/SchemaDefinition"),
-    SchemaEvaluator          = require("./Schema/Utils/SchemaEvaluator");
+    SchemaDefinition         = require("./Schema/SchemaDefinition"),
+    SchemaEvaluator          = require("./Schema/SchemaEvaluator");
 
 /**
  *
@@ -40,6 +41,7 @@ Internal.wrapValidationFunction = function(name){
 
         /// first argument is the eval object, so discard it.
         args.shift();
+        
         /// last argument is the chain argument option, so discard it
         args.pop();
 
@@ -50,6 +52,43 @@ Internal.wrapValidationFunction = function(name){
         });
 
     };
+
+};
+
+/**
+ *
+ * SchemaDefinition compile options.
+ *
+ * @type {Object}
+ * 
+ */
+Internal.compileOptions = {
+
+    /**
+     *
+     * Prepare the given value for the SchemaDefinition 
+     * conversion. If the value is instance of Schema get 
+     * its SchemaDefinition value for the conversions
+     *
+     * @param  {*} val
+     * 
+     * @return {*}
+     * 
+     */
+    prepare: function(val){
+
+        if(Type.instanceOf(val, Types.Schema)){
+            var schemaData = val.serialize();
+            val = new SchemaDefinition(schemaData, { 
+                prepare: function(val){
+                    return new SchemaDefinition(val, { compile: false });
+                }
+            });
+        }
+
+        return val;
+
+    }
 
 };
 
@@ -163,7 +202,7 @@ var EvaluationFns = {
             throw err;
         }
 
-        return new SchemaEvaluator(this, argument);
+        return new SchemaEvaluator(this, argument, Internal.compileOptions);
 
     },
 
@@ -185,7 +224,7 @@ var EvaluationFns = {
             throw err;
         }
 
-        var r = new SchemaEvaluator(this, argument);
+        var r = new SchemaEvaluator(this, argument, Internal.compileOptions);
         return r.value(result);
 
     },
@@ -206,7 +245,7 @@ var EvaluationFns = {
             throw err;
         }
 
-        var r = new SchemaEvaluator(this, argument);
+        var r = new SchemaEvaluator(this, argument, Internal.compileOptions);
         return r.errors(result);
 
     },
@@ -227,7 +266,7 @@ var EvaluationFns = {
             throw err;
         }
 
-        var r = new SchemaEvaluator(this, argument);
+        var r = new SchemaEvaluator(this, argument, Internal.compileOptions);
         return r.isValid(result);
 
     },
@@ -241,7 +280,7 @@ var EvaluationFns = {
      */
     serialize: function(result, argument, err){
 
-        var evaluator = new SchemaEvaluator(this, argument);
+        var evaluator = new SchemaEvaluator(this, argument, Internal.compileOptions);
         return evaluator.serialize();
 
     },
@@ -255,7 +294,7 @@ var EvaluationFns = {
      */
     deserialize: function(value, argument, err){
 
-        var evaluator = new SchemaEvaluator(this, argument);
+        var evaluator = new SchemaEvaluator(this, argument, Internal.compileOptions);
         return evaluator.deserialize(value);
 
     }
@@ -318,7 +357,7 @@ var Schema = function(customFns){
 
         /// set the scope for each chainable function execution.
         scope: function() {
-            return new SchemaDefinition();
+            return new SchemaDefinition(null, { compile: false });
         },
 
         /// Evaluation argument. This argument will be present in every

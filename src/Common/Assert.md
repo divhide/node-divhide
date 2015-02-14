@@ -31,6 +31,10 @@ Set the expected value to have a specified maximum. In the case of String or Arr
 <br />
 Set the expected value to have a specified minimum. In the case of String or Array the context will be the value length. In the case of an object will be the number of keys
 
+* `.instanceOf(fn)`
+<br />
+Set the expected value to be an instance of the given function.
+
 * `.regex(value)`
 <br />
 Set the expected value to pass the regex

@@ -10,7 +10,7 @@ var schema = Schema.number()
 
 /// value is correct
 var value = schema.value(3);
-expect(value).toBe(3)
+expect(value).toBe(3);
 
 
 /// optional value

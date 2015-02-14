@@ -60,3 +60,6 @@ expect(isEmpty).toBe(true);
 
 var isEmpty =  Type.isEmpty(null);
 expect(isEmpty).toBe(true);
+
+var isString = Type.instanceOf("string", String);
+expect(isString).toBe(true);

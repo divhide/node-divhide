@@ -24,37 +24,18 @@ describe("CustomSchema", function () {
     });
 
 
-    it(".compile().errors()", function (done) {
-
-        var validator = new Schema()
-                        .object({ "one": 1 })
-                        .compile();
-
-        var errors = validator.errors("errors");
-
-        expect(errors.length).equals(1);
-
-        done();
-
-    });
-
-
-    it(".compile().value()", function (done) {
+    it(".value()", function () {
 
         var validator = new Schema()
                         .string()
-                        .default('default')
-                        .compile();
+                        .default('default');
 
         var value = validator.value(null);
-
         expect(value).equals("default");
-
-        done();
 
     });
 
-    it(".errors()", function (done) {
+    it(".errors()", function () {
 
         var errors = new Schema()
                         .object({ "one": 1 })
@@ -62,11 +43,9 @@ describe("CustomSchema", function () {
 
         expect(errors.length).equals(1);
 
-        done();
-
     });
 
-    it(".value()", function (done) {
+    it(".value()", function () {
 
         var value = new Schema()
                         .object({ "one": 0 })
@@ -74,11 +53,9 @@ describe("CustomSchema", function () {
 
         expect(value).equals({ "one": 1 });
 
-        done();
-
     });
 
-    it(".value() throws", function (done) {
+    it(".value() throws", function () {
 
         var fn = function(){
             new Schema()
@@ -88,29 +65,23 @@ describe("CustomSchema", function () {
 
         expect(fn).toThrow();
 
-        done();
-
     });
 
-    it("recursive", function (done) {
+    it("recursive", function () {
 
         var validator = new Schema()
                         .object({
                             "value": new Schema().string().required()
                         })
-                        .optional()
-                        .compile();
+                        .optional();
 
         var value = validator.value({ "value": "1" });
-
         expect(value).equals({ "value": "1" });
-
-        done();
 
     });
 
 
-    it(".object({}).required().default()", function (done) {
+    it(".object({}).required().default()", function () {
 
         var value = new Schema()
                         .object({ "one": 0 })
@@ -120,11 +91,9 @@ describe("CustomSchema", function () {
 
         expect(value).equals({ "one": 1 });
 
-        done();
-
     });
 
-    it(".object({ '/regex/': ? })", function (done) {
+    it(".object({ '/regex/': ? })", function () {
 
         var value = new Schema()
                         .object({ "/^t/": 0 })
@@ -132,11 +101,9 @@ describe("CustomSchema", function () {
 
         expect(value).equals({ "two": 2, "three": 3 });
 
-        done();
-
     });
 
-    it(".object({}) min", function (done) {
+    it(".object({}) min", function() {
 
         var fn = function(){
             var value = new Schema()
@@ -147,11 +114,9 @@ describe("CustomSchema", function () {
 
         expect(fn).toThrow();
 
-        done();
-
     });
 
-    it(".object({}) max", function (done) {
+    it(".object({}) max", function () {
 
         var fn = function(){
             var value = new Schema()
@@ -162,11 +127,13 @@ describe("CustomSchema", function () {
 
         expect(fn).toThrow();
 
-        done();
-
     });
 
-    it(".array([ 1, 2 ])", function (done) {
+    ///
+    /// Array tests
+    ///
+
+    it(".array([ 1, 2 ])", function () {
 
         var value = new Schema()
                         .array([ 0, 0 ])
@@ -175,11 +142,9 @@ describe("CustomSchema", function () {
 
         expect(value).equals([ 1, 2 ]);
 
-        done();
-
     });
 
-    it(".array([ 1, 2 ]).repeatable()", function (done) {
+    it(".array([ 1, 2 ]).repeatable()", function () {
 
         var value = new Schema()
                         .array([ 0, 0 ])
@@ -189,11 +154,13 @@ describe("CustomSchema", function () {
 
         expect(value).equals([ 1, 2, 3, 4 ]);
 
-        done();
-
     });
 
-    it(".any().optional().value()", function (done) {
+    ///
+    /// Any tests
+    ///
+
+    it(".any().optional().value()", function () {
 
         var schema = new Schema()
                         .any()
@@ -211,12 +178,10 @@ describe("CustomSchema", function () {
         value = schema.value(1);
         expect(value).equals(1);
 
-        done();
-
     });
 
 
-    it(".any().optional().default().value()", function (done) {
+    it(".any().optional().default().value()", function () {
 
         var schema = new Schema()
                         .any()
@@ -224,10 +189,10 @@ describe("CustomSchema", function () {
                         .optional();
 
         var value = schema.value(undefined);
-        expect(value).equals("default_value");
+        expect(value).equals(null);
 
         value = schema.value(null);
-        expect(value).equals("default_value");
+        expect(value).equals(null);
 
         value = schema.value("val");
         expect(value).equals("val");
@@ -235,12 +200,13 @@ describe("CustomSchema", function () {
         value = schema.value(1);
         expect(value).equals(1);
 
-        done();
-
     });
 
+    ///
+    /// Serialization tests
+    ///
 
-    it(".serialize()", function (done) {
+    it(".serialize()", function () {
 
         var schema = new Schema()
                         .any()
@@ -264,12 +230,9 @@ describe("CustomSchema", function () {
             }]
         });
 
-
-        done();
-
     });
 
-    it(".object().serialize()", function (done) {
+    it(".object().serialize()", function () {
 
         var schema = new Schema()
                         .object({
@@ -310,11 +273,13 @@ describe("CustomSchema", function () {
             validations: [  ]
         });
 
-        done();
-
     });
 
-    it(".object().deserialize(object)", function (done) {
+    ///
+    /// Deserialization tests
+    ///
+
+    it(".object().deserialize(object)", function () {
 
         var schema = new Schema()
                         .object({
@@ -342,13 +307,11 @@ describe("CustomSchema", function () {
 
         expect(function(){
             schema.value({ "one": 1, "two": "long string" });
-        }).toThrow(new Error("The maximum value allowed is 5."));
-
-        done();
+        }).toThrowError("The maximum value allowed is 5.");
 
     });
 
-    it(".array().deserialize(object)", function (done) {
+    it(".array().deserialize(object)", function () {
 
         var schema = new Schema()
                         .array([
@@ -367,11 +330,9 @@ describe("CustomSchema", function () {
         expect(value)
             .equals(["any", "str"]);
 
-        done();
-
     });
 
-    it(".function()", function (done) {
+    it(".function()", function () {
 
         var schema = new Schema().function();
 
@@ -388,11 +349,9 @@ describe("CustomSchema", function () {
         expect(errors.items[0])
             .toMatch("'function' was expected but found 'object' instead");
 
-        done();
-
     });
 
-    it(".boolean()", function (done) {
+    it(".boolean()", function () {
 
         var schema = new Schema().boolean();
 
@@ -416,11 +375,9 @@ describe("CustomSchema", function () {
         expect(errors.items[0])
             .toMatch("'boolean' was expected but found 'object' instead");
 
-        done();
-
     });
 
-    it(".strict().boolean()", function (done) {
+    it(".strict().boolean()", function () {
 
         var schema = new Schema().strict().boolean();
 
@@ -448,9 +405,30 @@ describe("CustomSchema", function () {
         expect(errors.items[0])
             .toMatch("'boolean' was expected but found 'number' instead");
 
+    });
 
-        done();
+    ///
+    /// Compilation tests
+    ///
+    
+    it("compiling .object() and array() should return values", function () {
+
+        /// get the schema
+        var schema = new Schema().object({
+            data: new Schema().array([ "" ]).repeatable().max(10)
+        }).required();
+
+        /// apply the schema to the value
+        var value = schema.value({
+            data: [ 1, 2, 3, 4, 5, 6],
+            timestamp: "1404373579473"
+        });
+
+        expect(value).equals({
+            data: [ '1', '2', '3', '4', '5', '6' ]
+        });
 
     });
+
 
 });

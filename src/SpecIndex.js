@@ -35,6 +35,7 @@ var SpecIndex = _.extend({}, Divhide, {
             Required: require("./Common/Assert/Required"),
             String: require("./Common/Assert/String"),
             Object: require("./Common/Assert/Object"),
+            InstanceOf: require("./Common/Assert/InstanceOf"),
         },
 
         Chain: {
@@ -44,12 +45,12 @@ var SpecIndex = _.extend({}, Divhide, {
 
         Schema: {
 
-            Entity: {
-                SchemaDefinition : require("./Common/Schema/Entity/SchemaDefinition")
-            },
-            Utils: {
-                Compilation : require("./Common/Schema/Utils/Compilation"),
-                Execution   : require("./Common/Schema/Utils/Execution")
+            SchemaDefinition: require("./Common/Schema/SchemaDefinition"),
+            SchemaResultNode: require("./Common/Schema/SchemaResultNode"),
+            
+            Mixins: {
+                SchemaExecution: require("./Common/Schema/Mixins/SchemaExecution"),
+                SchemaExecutionHelper: require("./Common/Schema/Mixins/SchemaExecutionHelper")
             }
 
         }
