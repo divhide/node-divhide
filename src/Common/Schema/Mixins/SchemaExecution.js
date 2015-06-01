@@ -39,6 +39,11 @@ var execute = function(schema, value, validationFns){
         return result;
     }
 
+    /// if is expecting any value return it straight away
+    if(schema.any){
+        return result;
+    }
+
     /// if is not a complex value return the value
     if(!schema.isArray() && !schema.isObject()){
         return result;

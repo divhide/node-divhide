@@ -22,6 +22,10 @@ describe("SubModules.Schema.Mixins.SchemaExecution", function () {
 
     });
 
+    ///
+    /// Literal validation tests
+    ///
+
     it(".value() should apply default value", function () {
 
         var schema = new SchemaDefinition({
@@ -33,6 +37,71 @@ describe("SubModules.Schema.Mixins.SchemaExecution", function () {
         /// test default value
         var result = schema.execute();
         expect(result.value).equals("default");
+        expect(result.errors.length).equals(0);
+
+    });
+
+    ///
+    /// Any validation rules
+    ///
+    
+    it(".any() required=true should ignore schema definition", function () {
+
+        var schema = new SchemaDefinition({
+            schema : { "one": 1 },
+            default: "default",
+            required: true,
+            any: true
+        });
+
+        /// test value with different schema
+        var result = schema.execute("");
+        expect(result.value).equals("");
+        expect(result.errors.length).equals(0);
+
+        /// test value with different schema
+        result = schema.execute([]);
+        expect(result.value).equals([]);
+        expect(result.errors.length).equals(0);
+
+    });
+
+    it(".any() required=true should apply default value", function () {
+
+        var schema = new SchemaDefinition({
+            default: "default",
+            required: true,
+            any: true
+        });
+
+        /// test undefined value
+        var result = schema.execute();
+        expect(result.value).equals("default");
+        expect(result.errors.length).equals(0);
+
+        /// test defined value
+        result = schema.execute({});
+        expect(result.value).equals({});
+        expect(result.errors.length).equals(0);
+
+    });
+
+    it(".any() required=false should not apply default value", function () {
+
+        var schema = new SchemaDefinition({
+            default: "default",
+            required: false,
+            any: true
+        });
+
+        /// test undefined value
+        var result = schema.execute();
+        expect(result.value).equals(null);
+        expect(result.errors.length).equals(0);
+
+        /// test defined value
+        result = schema.execute({});
+        expect(result.value).equals({});
         expect(result.errors.length).equals(0);
 
     });

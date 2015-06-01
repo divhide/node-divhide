@@ -37,12 +37,10 @@ var prepareSchema = function(schema, value, validationFns){
         errors.push(
             new Exception("VALIDATION_REQUIRED"));
     }
-
     /* jshint -W041 */
     else if(!schema.required && value == null){
         /// continue (optional parameter)
     }
-
     /// check for compatibility of types if any flag is not used
     else if(!schema.any && Type.of(schema.schema) !== Type.of(value)){
         errors.push(
