@@ -1,10 +1,9 @@
 'use strict';
 
-describe("SubModules.Schema.Mixins.SchemaExecutionHelper", function() {
+describe("Schema.Mixins.SchemaExecutionHelper", function() {
 
     var SchemaDefinition = Divhide.SubModules.Schema.SchemaDefinition,
         Helper           = Divhide.SubModules.Schema.Mixins.SchemaExecutionHelper;
-
 
     beforeEach(function() {
 
@@ -21,7 +20,6 @@ describe("SubModules.Schema.Mixins.SchemaExecutionHelper", function() {
         });
 
     });
-
 
     ///
     /// .prepareValue() tests

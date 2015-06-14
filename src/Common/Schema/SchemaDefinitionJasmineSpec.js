@@ -1,6 +1,6 @@
 'use strict';
 
-describe("SubModules.Schema.SchemaDefinition", function () {
+describe("Schema.SchemaDefinition", function () {
 
     var SchemaDefinition = Divhide.SubModules.Schema.SchemaDefinition;
 
@@ -22,7 +22,7 @@ describe("SubModules.Schema.SchemaDefinition", function () {
 
     });
 
-    it("ctor([])", function () {
+    it(".ctor(Array)", function () {
 
         var c = new SchemaDefinition({
             schema : [ 1, 2 ],
@@ -45,7 +45,7 @@ describe("SubModules.Schema.SchemaDefinition", function () {
 
     });
 
-    it("ctor({})", function () {
+    it(".ctor(Object)", function () {
 
         var c = new SchemaDefinition({
             schema : { one: 1, two: 2 },
@@ -66,7 +66,7 @@ describe("SubModules.Schema.SchemaDefinition", function () {
 
     });
 
-    it("ctor('')", function () {
+    it(".ctor(String)", function () {
 
         var expected = new SchemaDefinition({
             schema : '',
@@ -81,7 +81,7 @@ describe("SubModules.Schema.SchemaDefinition", function () {
 
     });
 
-    it("ctor(0)", function () {
+    it(".ctor(Number)", function () {
 
         var expected = new SchemaDefinition({
             schema : 0,

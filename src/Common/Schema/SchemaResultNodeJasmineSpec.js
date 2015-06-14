@@ -2,7 +2,7 @@
 
 /* jshint -W041 */
 
-describe("SubModules.Schema.SchemaResultNode", function () {
+describe("Schema.SchemaResultNode", function () {
 
     var SchemaDefinition        = Divhide.SubModules.Schema.SchemaDefinition,
         SchemaResultNode    = Divhide.SubModules.Schema.SchemaResultNode,
