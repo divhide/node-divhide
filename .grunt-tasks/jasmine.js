@@ -6,7 +6,7 @@ var jasmine = {
         options: {
 
             vendor: [
-                "node_modules/lodash/dist/lodash.js",
+                "node_modules/lodash/index.js",
                 "test/divhide.js"
             ],
 

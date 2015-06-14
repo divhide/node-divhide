@@ -38,7 +38,7 @@ Internal.applyTemplate = function(name, data, messages, customMessages){
 
     var tmplStr = Safe.string(messages[name]) || name;
 
-    return _.template(tmplStr, data);
+    return _.template(tmplStr)(data);
 
 };
 
@@ -81,7 +81,7 @@ var I18NString = function(name, data, messages){
         } catch(e){
 
             var error = _.template(
-                "Error on template '<%= name %>': <%= error %>", {
+                "Error on template '<%= name %>': <%= error %>")({
                     name: name,
                     error: e.message
                 });
