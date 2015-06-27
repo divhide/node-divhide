@@ -14,6 +14,8 @@ module.exports = function(grunt) {
 
         'simplemocha'       : require("./.grunt-tasks/simplemocha.js"),
 
+        'karma'             : require("./.grunt-tasks/karma.js"),
+
         'readme'            : require("./.grunt-tasks/readme.js"),
 
         'http-server'       : require("./.grunt-tasks/http-server.js"),
@@ -28,19 +30,13 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
     grunt.registerTask(
-        'travis',
+        'default',
         [
             'readme',
             'jshint',
             'browserify',
-            'jasmine',
-            'simplemocha'
-        ]);
-
-    grunt.registerTask(
-        'default',
-        [
-            'travis'
+            'simplemocha',
+            'karma'
         ]);
 
     grunt.registerTask(
@@ -50,13 +46,6 @@ module.exports = function(grunt) {
             'browserify:test',
             'http-server',
             'watch',
-        ]);
-
-    grunt.registerTask(
-        'js',
-        [
-            'jshint',
-            'browserify',
         ]);
 
     grunt.registerTask(

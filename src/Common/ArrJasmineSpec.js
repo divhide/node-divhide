@@ -19,7 +19,6 @@ describe("ArrSpec", function () {
 
     it(".insert()", function (done) {
 
-
         var arr = Arr.insert([1,2], 3);
         expect(arr).toEqual([1,2,3]);
 

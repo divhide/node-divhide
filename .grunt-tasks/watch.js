@@ -8,7 +8,8 @@ var watch = {
             ".readme/**/*.js",
         ],
         tasks: [
-          'browserify:test',
+          "browserify:test",
+          "jasmine:test:build"
         ],
         options: {
             interrupt: true,

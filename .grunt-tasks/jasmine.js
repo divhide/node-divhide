@@ -1,8 +1,8 @@
 
 var jasmine = {
 
-    lib: {
-
+    test: {
+        
         options: {
 
             vendor: [
@@ -15,7 +15,7 @@ var jasmine = {
                 'src/**/*JasmineSpec.js'
             ],
 
-            outfile: 'test/common.html',
+            outfile: 'test/index.html',
             keepRunner: true
 
         }

@@ -122,6 +122,7 @@ var Browserify = {
 
             postBundleCB: postBundleCB,
             browserifyOptions: {
+                transform: [ require("browserify-istanbul") ],
                 standalone: "Divhide",
                 debug: true
             }
