@@ -1,28 +1,13 @@
-    'use strict';
-
+'use strict';
 
 describe("Schema", function () {
 
     var Schema  = Divhide.Schema;
 
-    beforeEach(function (done) {
-
-        jasmine.addMatchers({
-            equals: function(expected) {
-
-                return {
-                    compare: function(actual, expected) {
-                        return { pass: _.isEqual(actual, expected) };
-                    }
-                };
-
-            }
-        });
-
-        done();
-
+    beforeEach(function () {
+        jasmine.addMatchers(window.JasmineCustomMatchers);
     });
-
+    
     it("Divhide.Specs.SchemaOverview", function (done) {
 
         Divhide.Specs.SchemaOverview();

@@ -3,6 +3,7 @@
 describe("ObjSpec", function () {
 
     beforeEach(function () {
+        jasmine.addMatchers(window.JasmineCustomMatchers);
     });
 
 

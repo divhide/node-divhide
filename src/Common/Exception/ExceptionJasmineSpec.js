@@ -5,24 +5,10 @@ describe("Exception.ExceptionSpec", function () {
     var I18NString  = Divhide.I18N.String,
         Exception   = Divhide.Exception.Exception;
 
-    beforeEach(function (done) {
-
-        jasmine.addMatchers({
-            equals: function(expected) {
-
-                return {
-                    compare: function(actual, expected) {
-                        return { pass: _.isEqual(actual, expected) };
-                    }
-                };
-
-            }
-        });
-
-        done();
-
+    beforeEach(function () {
+        jasmine.addMatchers(window.JasmineCustomMatchers);
     });
-
+    
     it("Divhide.Specs.ExceptionDocExample", function() {
         Divhide.Specs.ExceptionDocExample();
     });

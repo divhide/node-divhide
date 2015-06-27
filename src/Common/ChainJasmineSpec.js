@@ -4,26 +4,10 @@ describe("ChainSpec", function () {
 
     var Chain = Divhide.Chain;
 
-
-    beforeEach(function (done) {
-
-        jasmine.addMatchers({
-            isEqual: function(expected) {
-
-                return {
-                    compare: function(actual, expected) {
-                        return { pass: _.isEqual(actual, expected) };
-                    }
-                };
-
-            }
-        });
-
-        done();
-
+    beforeEach(function () {
+        jasmine.addMatchers(window.JasmineCustomMatchers);
     });
-
-
+    
     it("Divhide.Specs.ChainExample", function(){
         Divhide.Specs.ChainExample();
     });
@@ -48,7 +32,7 @@ describe("ChainSpec", function () {
             .value("value", "extra");
 
         expect(value)
-            .isEqual([
+            .equals([
                 /// arguments:
                 "value",
                 "extra",
@@ -82,7 +66,7 @@ describe("ChainSpec", function () {
             .value("value", "extra");
 
         expect(value)
-            .isEqual([
+            .equals([
                 /// arguments:
                 "value",
                 "extra",
@@ -229,7 +213,7 @@ describe("ChainSpec", function () {
             .value([ 0, 1, 2 ]);
 
         expect(result)
-            .isEqual([ 1, 2, 3 ]);
+            .equals([ 1, 2, 3 ]);
 
         done();
 

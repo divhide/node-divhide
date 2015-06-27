@@ -2,24 +2,10 @@
 
 describe("AssertSpec", function () {
 
-    beforeEach(function (done) {
-
-        jasmine.addMatchers({
-            equals: function(expected) {
-
-                return {
-                    compare: function(actual, expected) {
-                        return { pass: _.isEqual(actual, expected) };
-                    }
-                };
-
-            }
-        });
-
-        done();
-
+    beforeEach(function () {
+        jasmine.addMatchers(window.JasmineCustomMatchers);
     });
-
+    
     it("Divhide.Specs.AssertExample", function() {
         Divhide.Specs.AssertExample();
     });

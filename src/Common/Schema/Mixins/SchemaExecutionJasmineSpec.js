@@ -5,21 +5,9 @@ describe("Schema.Mixins.SchemaExecution", function () {
     var SchemaDefinition = Divhide.SubModules.Schema.SchemaDefinition;
 
     beforeEach(function () {
-
-        jasmine.addMatchers({
-            equals: function(expected) {
-
-                return {
-                    compare: function(actual, expected) {
-                        return { pass: _.isEqual(actual, expected) };
-                    }
-                };
-
-            }
-        });
-
+        jasmine.addMatchers(window.JasmineCustomMatchers);
     });
-
+    
     describe('execute() .string()', function(){
 
         it(".string().default().required() should return default value and no errors", function () {

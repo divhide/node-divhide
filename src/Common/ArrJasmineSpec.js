@@ -4,10 +4,8 @@ describe("ArrSpec", function () {
 
     var Arr = Divhide.Arr;
 
-    beforeEach(function (done) {
-
-        done();
-
+    beforeEach(function () {
+        jasmine.addMatchers(window.JasmineCustomMatchers);
     });
 
 

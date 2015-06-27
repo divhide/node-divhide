@@ -4,10 +4,8 @@ describe("Exception.ExceptionListSpec", function () {
 
     var ExceptionList = Divhide.Exception.ExceptionList;
 
-    beforeEach(function (done) {
-
-        done();
-
+    beforeEach(function () {
+        jasmine.addMatchers(window.JasmineCustomMatchers);
     });
 
     it("Divhide.Specs.ExceptionListDocExample", function () {

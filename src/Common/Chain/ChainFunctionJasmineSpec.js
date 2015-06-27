@@ -5,13 +5,9 @@ describe("SubModules.Chain.ChainFunctionSpec", function () {
 
     var ChainFunction = Divhide.SubModules.Chain.ChainFunction;
 
-
-    beforeEach(function (done) {
-
-        done();
-
+    beforeEach(function () {
+        jasmine.addMatchers(window.JasmineCustomMatchers);
     });
-
 
     it('.apply()', function(done){
 

@@ -72,12 +72,39 @@ var Browserify = {
 
     /**
      *
+     * 3rd party libraries distribution files. This can be useful to reuse purpose.
+     *
+     * @type {Object}
+     *
+     */
+    "test-libs": {
+
+        files: {
+            'test/divhide-libs.js': []
+        },
+
+        options: {
+
+            alias: {
+                "lodash": "./node_modules/lodash/index.js"
+            },
+
+            browserifyOptions: {
+                debug: true
+            }
+
+        }
+
+    },
+
+    /**
+     *
      * Test configuration
      *
      * @type {Object}
      *
      */
-    test: {
+    "test": {
 
         files: {
             'test/divhide.js': [
@@ -88,6 +115,11 @@ var Browserify = {
         options: {
 
             exclude: [ "src/**/*Spec.js" ],
+
+            external: [
+                "lodash"
+            ],
+
             postBundleCB: postBundleCB,
             browserifyOptions: {
                 standalone: "Divhide",

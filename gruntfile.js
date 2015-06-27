@@ -46,6 +46,8 @@ module.exports = function(grunt) {
     grunt.registerTask(
         'dev',
         [
+            'browserify:test-libs',
+            'browserify:test',
             'http-server',
             'watch',
         ]);

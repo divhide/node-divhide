@@ -1,30 +1,13 @@
-    'use strict';
+'use strict';
 
 describe("SubModules.Chain.ChainContextSpec", function () {
 
-
     var ChainContext = Divhide.SubModules.Chain.ChainContext;
 
-
-    beforeEach(function (done) {
-
-        jasmine.addMatchers({
-            isEqual: function(expected) {
-
-                return {
-                    compare: function(actual, expected) {
-                        return { pass: _.isEqual(actual, expected) };
-                    }
-                };
-
-            }
-        });
-
-        done();
-
+    beforeEach(function () {
+        jasmine.addMatchers(window.JasmineCustomMatchers);
     });
-
-
+    
     it('.exec()', function(done){
 
         var context = new ChainContext();

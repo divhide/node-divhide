@@ -6,11 +6,12 @@ var jasmine = {
         options: {
 
             vendor: [
-                "node_modules/lodash/index.js",
+                "test/divhide-libs.js",
                 "test/divhide.js"
             ],
 
             specs: [
+                'src/*JasmineSpec.js',
                 'src/**/*JasmineSpec.js'
             ],
 

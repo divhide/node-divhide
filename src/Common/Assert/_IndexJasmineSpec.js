@@ -3,8 +3,8 @@
 describe("Assert.*Spec", function () {
 
     beforeEach(function () {
+        jasmine.addMatchers(window.JasmineCustomMatchers);
     });
-
 
     it(".required()", function () {
 

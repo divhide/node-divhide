@@ -4,24 +4,10 @@ describe("Schema.SchemaDefinition", function () {
 
     var SchemaDefinition = Divhide.SubModules.Schema.SchemaDefinition;
 
-    beforeEach(function (done) {
-
-        jasmine.addMatchers({
-            equals: function(expected) {
-
-                return {
-                    compare: function(actual, expected) {
-                        return { pass: _.isEqual(actual, expected) };
-                    }
-                };
-
-            }
-        });
-
-        done();
-
+    beforeEach(function () {
+        jasmine.addMatchers(window.JasmineCustomMatchers);
     });
-
+    
     it(".ctor(Array)", function () {
 
         var c = new SchemaDefinition({

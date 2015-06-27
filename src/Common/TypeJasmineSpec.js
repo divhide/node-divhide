@@ -3,10 +3,8 @@
 describe("TypeSpec", function () {
 
 
-    beforeEach(function (done) {
-
-        done();
-
+    beforeEach(function () {
+        jasmine.addMatchers(window.JasmineCustomMatchers);
     });
 
     it("Divhide.Specs.TypeExample", function (done) {

@@ -2,14 +2,9 @@
 
 describe("UrlSpec", function () {
 
-
-    beforeEach(function (done) {
-
-        done();
-
+    beforeEach(function () {
+        jasmine.addMatchers(window.JasmineCustomMatchers);
     });
-
-
 
     it(".isAbsolute()", function (done) {
 

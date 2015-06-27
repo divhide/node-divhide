@@ -9,21 +9,9 @@ describe("Schema.SchemaResultNode", function () {
         Schema                  = Divhide.Schema;
 
     beforeEach(function () {
-
-        jasmine.addMatchers({
-            equals: function(expected) {
-
-                return {
-                    compare: function(actual, expected) {
-                        return { pass: _.isEqual(actual, expected) };
-                    }
-                };
-
-            }
-        });
-
+        jasmine.addMatchers(window.JasmineCustomMatchers);
     });
-
+    
     it(".ctor()", function () {
 
         /// expected instanceof Schema

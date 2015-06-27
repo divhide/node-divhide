@@ -5,22 +5,10 @@ describe("Schema.Mixins.SchemaExecutionHelper", function() {
     var SchemaDefinition = Divhide.SubModules.Schema.SchemaDefinition,
         Helper           = Divhide.SubModules.Schema.Mixins.SchemaExecutionHelper;
 
-    beforeEach(function() {
-
-        jasmine.addMatchers({
-            equals: function(expected) {
-
-                return {
-                    compare: function(actual, expected) {
-                        return { pass: _.isEqual(actual, expected) };
-                    }
-                };
-
-            }
-        });
-
+    beforeEach(function () {
+        jasmine.addMatchers(window.JasmineCustomMatchers);
     });
-
+    
     ///
     /// .prepareValue() tests
     ///

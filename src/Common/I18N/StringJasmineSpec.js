@@ -4,25 +4,10 @@ describe("I18N.StringSpec", function () {
 
     var I18NString = Divhide.I18N.String;
 
-
-    beforeEach(function (done) {
-
-        jasmine.addMatchers({
-            equals: function(expected) {
-
-                return {
-                    compare: function(actual, expected) {
-                        return { pass: _.isEqual(actual, expected) };
-                    }
-                };
-
-            }
-        });
-
-        done();
-
+    beforeEach(function () {
+        jasmine.addMatchers(window.JasmineCustomMatchers);
     });
-
+    
     it("Divhide.Specs.I18NStringDocExample", function () {
         Divhide.Specs.I18NStringDocExample();
     });
