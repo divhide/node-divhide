@@ -56,7 +56,8 @@ module.exports = {
                 "jasmine",
                 "beforeEach",
                 "it",
-                "expect"
+                "expect",
+                "window"
             ],
 
             "-W064": true
