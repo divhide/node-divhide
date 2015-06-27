@@ -22,7 +22,9 @@ module.exports = function(grunt) {
 
         'bump'              : require("./.grunt-tasks/bump.js"),
 
-        'exec'              : require("./.grunt-tasks/exec.js")
+        'exec'              : require("./.grunt-tasks/exec.js"),
+
+        'coveralls'         : require("./.grunt-tasks/coveralls.js")
 
     });
 
@@ -37,6 +39,13 @@ module.exports = function(grunt) {
             'browserify',
             'simplemocha',
             'karma'
+        ]);
+
+    grunt.registerTask(
+        'travis',
+        [
+            'default',
+            'coveralls'
         ]);
 
     grunt.registerTask(

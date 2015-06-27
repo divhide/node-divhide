@@ -1,7 +1,7 @@
 
 # [![Divhide](http://blog.divhide.com/assets/images/divhide_128px.png)](http://divhide.com/) divhide-core
 
-{%= _.badge("travis") %} {%= _.badge("fury") %} {%= _.badge("gemnasium") %}
+{%= _.badge("travis") %} {%= _.badge("coveralls") %} {%= _.badge("fury") %} {%= _.badge("gemnasium") %}
 
 {%= _.badge("nodeio") %} ![alt text](https://raw.githubusercontent.com/divhide/divhide-core/master/.readme/assets/bower-logo.jpg) ![alt text](https://raw.githubusercontent.com/divhide/divhide-core/master/.readme/assets/titanium-logo.png)
 
