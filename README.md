@@ -1458,7 +1458,7 @@ the browserify bundle.
 ``` bash
 
 
-grunt dev
+grunt test
 
 
 ```
