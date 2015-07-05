@@ -24,8 +24,9 @@ var SchemaResult = function(schema, value){
     Assert.instanceOf(Types.SchemaDefinition)
         .assert(schema);
     
+    /// make sure its a value
     value = Safe.value(value);
-
+    
     /**
      *
      * Top-down global error tracking
@@ -54,32 +55,42 @@ var SchemaResult = function(schema, value){
     var self = {
 
         /// TODO
-        schema: schema,
-        value: value,
         errors: errors,
 
         /**
          *
-         * Set the value of the given index.
+         * Get the value result.
+         * 
+         * @return {*}
+         * 
+         */
+        getValue: function(){
+            return value;
+        },
+
+        /**
          *
-         * @param {Number|String} index
+         * Set the value of the given index.
+         * 
          * @param {*} value
+         * @param {Object} options
          *
          */
-        set: function(index, value) {
+        setValue: function(val, options) {
 
-            /// just set the value if is an array or an object
-            if(!(schema.isArray() || schema.isObject())){
-                return;
+            /// normalize val
+            val = Safe.value(val);
+
+            /// normalize options
+            options = Safe.object(options);
+            options.index   = Safe.value(options.index, null);
+
+            if(options.index !== null){
+                value[options.index] = val;
             }
-
-            /// if is an object and is null and its not required, ignore!
-            /* jshint -W041 */
-            if(schema.isObject() && value == null && !this.schema.required){
-                return;
+            else {
+                value = val;
             }
-
-            this.value[index] = value;
 
         }
 

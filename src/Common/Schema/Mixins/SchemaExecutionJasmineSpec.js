@@ -20,7 +20,7 @@ describe("Schema.Mixins.SchemaExecution", function () {
 
             /// test default value
             var result = schema.execute();
-            expect(result.value).equals("default");
+            expect(result.getValue()).equals("default");
             expect(result.errors.length).equals(0);
 
         });
@@ -40,12 +40,12 @@ describe("Schema.Mixins.SchemaExecution", function () {
 
             /// test value with different schema
             var result = schema.execute("");
-            expect(result.value).equals("");
+            expect(result.getValue()).equals("");
             expect(result.errors.length).equals(0);
 
             /// test value with different schema
             result = schema.execute([]);
-            expect(result.value).equals([]);
+            expect(result.getValue()).equals([]);
             expect(result.errors.length).equals(0);
 
         });
@@ -60,7 +60,7 @@ describe("Schema.Mixins.SchemaExecution", function () {
 
             /// test undefined value
             var result = schema.execute();
-            expect(result.value).equals("default");
+            expect(result.getValue()).equals("default");
             expect(result.errors.length).equals(0);
 
         });
@@ -84,7 +84,7 @@ describe("Schema.Mixins.SchemaExecution", function () {
 
             /// test valid value
             var result = schema.execute({ "val": "value", "val2": "value2" });
-            expect(result.value).equals({ "val": "value" });
+            expect(result.getValue()).equals({ "val": "value" });
             expect(result.errors.length).equals(0);
 
         });
@@ -101,7 +101,7 @@ describe("Schema.Mixins.SchemaExecution", function () {
 
             /// test default value
             var result = schema.execute({});
-            expect(result.value).equals({ "val": "default" });
+            expect(result.getValue()).equals({ "val": "default" });
             expect(result.errors.length).equals(0);
 
         });
@@ -118,7 +118,7 @@ describe("Schema.Mixins.SchemaExecution", function () {
 
             /// test default value
             var result = schema.execute({ "val": [1, 2] });
-            expect(result.value).equals({ "val": "default" });
+            expect(result.getValue()).equals({ "val": "default" });
             expect(result.errors.length).equals(0);
 
         });
@@ -135,12 +135,12 @@ describe("Schema.Mixins.SchemaExecution", function () {
 
             /// test empty result
             var result = schema.execute({});
-            expect(result.value).equals({});
+            expect(result.getValue()).equals({});
             expect(result.errors.length).equals(0);
 
             /// test result 
             result = schema.execute({ "optional": "val" });
-            expect(result.value).equals({ "optional": "val" });
+            expect(result.getValue()).equals({ "optional": "val" });
             expect(result.errors.length).equals(0);
 
         });
@@ -157,12 +157,12 @@ describe("Schema.Mixins.SchemaExecution", function () {
 
             /// test empty result
             var result = schema.execute({});
-            expect(result.value).equals({});
+            expect(result.getValue()).equals({});
             expect(result.errors.length).equals(0);
 
             /// test result 
             result = schema.execute({ "optional": "val" });
-            expect(result.value).equals({ "optional": "val" });
+            expect(result.getValue()).equals({ "optional": "val" });
             expect(result.errors.length).equals(0);
 
         });
@@ -189,12 +189,12 @@ describe("Schema.Mixins.SchemaExecution", function () {
 
             /// test null (will fail on required)
             var result = schema.execute(null);
-            expect(result.value).equals([ '1', '2' ]);
+            expect(result.getValue()).equals([ '1', '2' ]);
             expect(result.errors.length).equals(0);
 
             /// test empty
             result = schema.execute([]);
-            expect(result.value).equals([ '1', '2' ]);
+            expect(result.getValue()).equals([ '1', '2' ]);
             expect(result.errors.length).equals(0);
 
         });
@@ -209,7 +209,7 @@ describe("Schema.Mixins.SchemaExecution", function () {
             });
 
             var result = schema.execute(["1", "2", "3"]);
-            expect(result.value).equals(["1", "2", "3"]);
+            expect(result.getValue()).equals(["1", "2", "3"]);
             expect(result.errors.length).equals(0);
 
         });
@@ -225,7 +225,7 @@ describe("Schema.Mixins.SchemaExecution", function () {
             });
 
             var result = schema.execute([]);
-            expect(result.value).equals([]);
+            expect(result.getValue()).equals([]);
             expect(result.errors.length).equals(1);
             expect(result.errors.items[0].toString())
                 .equals("Expected list length to be multiple of 2 but found length of 0.");
@@ -244,7 +244,7 @@ describe("Schema.Mixins.SchemaExecution", function () {
             });
 
             var result = schema.execute([ null, "a" ]);
-            expect(result.value).equals([ null, "a" ]);
+            expect(result.getValue()).equals([ null, "a" ]);
             expect(result.errors.length).equals(0);
 
         });

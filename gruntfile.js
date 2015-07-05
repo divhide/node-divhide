@@ -49,7 +49,7 @@ module.exports = function(grunt) {
         ]);
 
     grunt.registerTask(
-        'test',
+        'debug',
         [
             'browserify:test-libs',
             'browserify:test',

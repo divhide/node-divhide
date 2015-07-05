@@ -101,7 +101,7 @@ var SchemaEvaluator = function(schema, validationFns, cOptions){
                 throw result.errors;
             }
 
-            return result.value;
+            return result.getValue();
 
         },
 

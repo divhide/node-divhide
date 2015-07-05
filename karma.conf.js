@@ -14,7 +14,7 @@ module.exports = function(config) {
 
         files : [
             'test/divhide-libs.js',
-            'test/divhide.js',
+            'test/divhide-coverage.js',
             'src/**/*JasmineSpec.js',
         ],
 

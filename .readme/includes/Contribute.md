@@ -7,7 +7,7 @@ the browserify bundle.
 ``` bash
 
 
-grunt test
+grunt debug
 
 
 ```

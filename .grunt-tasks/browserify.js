@@ -122,6 +122,39 @@ var Browserify = {
 
             postBundleCB: postBundleCB,
             browserifyOptions: {
+                standalone: "Divhide",
+                debug: true
+            }
+
+        }
+
+    },
+
+    /**
+     *
+     * Test configuration
+     *
+     * @type {Object}
+     *
+     */
+    "coverage": {
+
+        files: {
+            'test/divhide-coverage.js': [
+                'src/SpecIndex.js'
+            ]
+        },
+
+        options: {
+
+            exclude: [ "src/**/*Spec.js" ],
+
+            external: [
+                "lodash"
+            ],
+
+            postBundleCB: postBundleCB,
+            browserifyOptions: {
                 transform: [ require("browserify-istanbul") ],
                 standalone: "Divhide",
                 debug: true

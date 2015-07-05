@@ -26,7 +26,8 @@ var execute = function(schema, value, validationFns){
 
     /// get the value from the schema
     try {
-        value = result.value = SchemaExecutionHelper.prepareValue(schema, value, validationFns);
+        value = SchemaExecutionHelper.prepareValue(schema, value, validationFns);
+        result.setValue(value);
     }
     catch(e){
         result.errors.push(e);    
@@ -63,10 +64,10 @@ var execute = function(schema, value, validationFns){
     result = SchemaResult(schema, schema.isObject() ? {} : []);
     
     /// recursion over the inner values of the schema
-    _.each(schema.schema, function(schema, key){
+    _.each(schema.schema, function(innerSchema, key){
 
         /// recursive execute the schema
-        var innerResult = schema.execute(value[key], validationFns);
+        var innerResult = innerSchema.execute(value[key], validationFns);
 
         /// add result to errors
         if(innerResult.errors.length){
@@ -74,13 +75,16 @@ var execute = function(schema, value, validationFns){
             return;
         }
 
+        /// get the inner result value
+        var innerValue = innerResult.getValue();
+
         /// if is an object and value is not required ignore!
-        if(result.schema.isObject() && innerResult.value == null && !schema.required){
+        if(schema.isObject() && innerValue == null && !innerSchema.required){
             return;
         }
 
         /// set the value
-        result.set(key, innerResult.value);
+        result.setValue(innerValue, { index: key });
 
     });
 
