@@ -15,7 +15,7 @@ var _                       = require("lodash"),
  *
  * @param  {SchemaDefinition} schema
  * @param  {*} value
- * 
+ *
  * @return {SchemaResult}
  *
  */
@@ -30,7 +30,7 @@ var execute = function(schema, value, validationFns){
         result.setValue(value);
     }
     catch(e){
-        result.errors.push(e);    
+        result.addError(e);
         return result;
     }
 
@@ -50,19 +50,19 @@ var execute = function(schema, value, validationFns){
         return result;
     }
 
-    /// prepare the schema for execution against the value. This will expand 
+    /// prepare the schema for execution against the value. This will expand
     /// the schema to match the value
     try {
         schema = SchemaExecutionHelper.prepareSchema(schema, value, validationFns);
     }
     catch(e){
-        result.errors.push(e);    
+        result.addError(e);
         return result;
     }
 
     /// reset the result value before iterating
     result = SchemaResult(schema, schema.isObject() ? {} : []);
-    
+
     /// recursion over the inner values of the schema
     _.each(schema.schema, function(innerSchema, key){
 
@@ -70,8 +70,8 @@ var execute = function(schema, value, validationFns){
         var innerResult = innerSchema.execute(value[key], validationFns);
 
         /// add result to errors
-        if(innerResult.errors.length){
-            result.errors.push(innerResult.errors);
+        if(!innerResult.isValid()){
+            result.addError(innerResult.getErrors());
             return;
         }
 
@@ -121,19 +121,19 @@ var Execution = function(){
 
         /// if it has no errors iterate over the object
         var result = execute(this, value, validationFns);
-        
+
         /// if there's error try to recover by applying the default value
-        if(result.errors.length){
+        if(!result.isValid()){
 
             /// try to fallback to the default value if it can
             /* jshint -W041 */
             if(this.default != null){
-                
+
                 var dresult = execute(this, this.default, validationFns);
-                
-                /// if default value is valid use it, otherwise use the given 
+
+                /// if default value is valid use it, otherwise use the given
                 /// value
-                if(!dresult.errors.length){
+                if(dresult.isValid()){
                     result = dresult;
                 }
 

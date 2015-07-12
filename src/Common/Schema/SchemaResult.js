@@ -10,7 +10,7 @@ var Safe                = require("../Safe"),
 /**
  *
  * @class
- * Stores the result of a schema evaluation. It will keep reference to 
+ * Stores the result of a schema evaluation. It will keep reference to
  * the global structure and the evaluation tree as well.
  *
  * @param {*} schema
@@ -23,46 +23,76 @@ var SchemaResult = function(schema, value){
     /// validate schema
     Assert.instanceOf(Types.SchemaDefinition)
         .assert(schema);
-    
+
     /// make sure its a value
     value = Safe.value(value);
-    
+
     /**
      *
      * Top-down global error tracking
-     * 
+     *
      * @type {ExceptionList}
-     * 
+     *
      */
     var errors = new ExceptionList();
 
     /**
      *
      * Hierarchical evaluation reference node
-     * 
+     *
      * @type {SchemaResultNode}
-     * 
+     *
      */
     var node = new SchemaResultNode(schema);
-    
+
     /**
      *
      * SchemaResult API
-     * 
+     *
      * @type {Object}
-     * 
+     *
      */
     var self = {
 
-        /// TODO
-        errors: errors,
+        /**
+         *
+         * Get the errors
+         *
+         * @return {ExceptionList}
+         *
+         */
+        getErrors: function(){
+            return errors;
+        },
+
+        /**
+         *
+         * Add the given errors
+         *
+         * @param {ExceptionList} error
+         *
+         */
+        addError: function(error){
+            errors.push(error);
+        },
+
+        /**
+         *
+         * Checks if the result is valid
+         *
+         * @return {Boolean}
+         *
+         */
+        isValid: function(){
+            return errors.length === 0;
+        },
 
         /**
          *
          * Get the value result.
-         * 
+         *
          * @return {*}
-         * 
+         *
          */
         getValue: function(){
             return value;
@@ -71,7 +101,7 @@ var SchemaResult = function(schema, value){
         /**
          *
          * Set the value of the given index.
-         * 
+         *
          * @param {*} value
          * @param {Object} options
          *

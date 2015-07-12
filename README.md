@@ -1457,8 +1457,8 @@ the browserify bundle.
 
 ``` bash
 
-
-grunt debug
+## open http://localhost:8585/test/ to run the tests on your browser
+grunt
 
 
 ```
@@ -1476,7 +1476,7 @@ The following command will run the build.
 ``` bash
 
 
-grunt
+grunt build
 
 
 ```

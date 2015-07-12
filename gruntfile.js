@@ -34,6 +34,15 @@ module.exports = function(grunt) {
     grunt.registerTask(
         'default',
         [
+            'browserify:test-libs',
+            'browserify:test',
+            'http-server',
+            'watch',
+        ]);
+    
+    grunt.registerTask(
+        'build',
+        [
             'readme',
             'jshint',
             'browserify',
@@ -44,17 +53,8 @@ module.exports = function(grunt) {
     grunt.registerTask(
         'travis',
         [
-            'default',
+            'build',
             'coveralls'
-        ]);
-
-    grunt.registerTask(
-        'debug',
-        [
-            'browserify:test-libs',
-            'browserify:test',
-            'http-server',
-            'watch',
         ]);
 
     grunt.registerTask(

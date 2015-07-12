@@ -62,7 +62,7 @@ var SchemaEvaluator = function(schema, validationFns, cOptions){
         errors: function(value){
 
             var result = schema.execute(value, validationFns);
-            return result.errors;
+            return result.getErrors();
 
         },
 
@@ -78,7 +78,7 @@ var SchemaEvaluator = function(schema, validationFns, cOptions){
         isValid: function(value){
 
             var result = schema.execute(value, validationFns);
-            return result.errors.length === 0;
+            return result.isValid();
 
         },
 
@@ -97,8 +97,8 @@ var SchemaEvaluator = function(schema, validationFns, cOptions){
 
             var result = schema.execute(value, validationFns);
 
-            if(result.errors.length){
-                throw result.errors;
+            if(!result.isValid()){
+                throw result.getErrors();
             }
 
             return result.getValue();
