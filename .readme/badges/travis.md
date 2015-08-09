@@ -1,1 +1,1 @@
-[![Build Status](https://travis-ci.org/divhide/divhide-core.png?branch=master)](https://travis-ci.org/divhide/divhide-core)
+[![Build Status](https://travis-ci.org/divhide/node-divhide)](https://travis-ci.org/divhide/divhide-core)

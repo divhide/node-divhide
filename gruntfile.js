@@ -39,7 +39,7 @@ module.exports = function(grunt) {
             'http-server',
             'watch',
         ]);
-    
+
     grunt.registerTask(
         'build',
         [
@@ -55,20 +55,6 @@ module.exports = function(grunt) {
         [
             'build',
             'coveralls'
-        ]);
-
-    grunt.registerTask(
-        'pre-release',
-        [
-            'travis',
-            'bump:prerelease'
-        ]);
-
-    grunt.registerTask(
-        'patch',
-        [
-            'travis',
-            'bump:patch'
         ]);
 
     grunt.registerTask(

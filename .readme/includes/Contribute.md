@@ -9,7 +9,6 @@ the browserify bundle.
 # open http://localhost:8585/test/ to run the tests on your browser
 grunt
 
-
 ```
 
 ### Build
@@ -24,9 +23,7 @@ The following command will run the build.
 
 ``` bash
 
-
 grunt build
-
 
 ```
 
@@ -35,10 +32,10 @@ grunt build
 ``` bash
 
 # change the package.json, bower.json pre-release version (v1.0.0-1)
-grunt pre-release
+grunt bump:prerelease
 
 # change the package.json, bower.json minor version (v1.0.1)
-grunt patch
+grunt bump:patch
 
 # Publish current version to npm and bower
 grunt publish
