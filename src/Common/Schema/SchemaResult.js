@@ -4,8 +4,7 @@ var Safe                = require("../Safe"),
     Type                = require("../Type"),
     Assert              = require("../Assert"),
     ExceptionList       = require("../Exception/ExceptionList"),
-    Types               = require("./Types"),
-    SchemaResultNode    = require("./SchemaResultNode");
+    Types               = require("./Types");
 
 /**
  *
@@ -35,15 +34,6 @@ var SchemaResult = function(schema, value){
      *
      */
     var errors = new ExceptionList();
-
-    /**
-     *
-     * Hierarchical evaluation reference node
-     *
-     * @type {SchemaResultNode}
-     *
-     */
-    var node = new SchemaResultNode(schema);
 
     /**
      *

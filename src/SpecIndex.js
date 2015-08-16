@@ -46,8 +46,7 @@ var SpecIndex = _.extend({}, Divhide, {
         Schema: {
 
             SchemaDefinition: require("./Common/Schema/SchemaDefinition"),
-            SchemaResultNode: require("./Common/Schema/SchemaResultNode"),
-            
+
             Mixins: {
                 SchemaExecution: require("./Common/Schema/Mixins/SchemaExecution"),
                 SchemaExecutionHelper: require("./Common/Schema/Mixins/SchemaExecutionHelper")
