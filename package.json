@@ -1,7 +1,7 @@
 {
   "name": "divhide",
   "description": "Divhide javascript core components for NodeJs, Browser, Titanium, ... and everything that runs javascript.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": {
     "name": "Oscar Brito <aetheon@gmail.com>",
     "url": "https://twitter.com/aetheon"
@@ -23,7 +23,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:divhide/divhide-core.git"
+    "url": "git@github.com:divhide/node-divhide.git"
   },
   "devDependencies": {
     "browserify": "9.0.7",
