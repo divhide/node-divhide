@@ -1,6 +1,6 @@
 # [![Divhide](http://blog.divhide.com/assets/images/divhide_128px.png)](http://divhide.com/) divhide-core
 
-[![Build Status](https://travis-ci.org/divhide/node-divhide)](https://travis-ci.org/divhide/divhide-core) [![Coverage Status](https://coveralls.io/repos/divhide/divhide-core/badge.svg)](https://coveralls.io/r/divhide/divhide-core) [![NPM version](https://badge.fury.io/js/divhide.svg)](http://badge.fury.io/js/divhide) [![Dependency Status](https://gemnasium.com/divhide/divhide-core.svg)](https://gemnasium.com/divhide/divhide-core)
+[![Build Status](https://travis-ci.org/divhide/node-divhide.png?branch=master)](https://travis-ci.org/divhide/node-divhide) [![Coverage Status](https://coveralls.io/repos/divhide/divhide-core/badge.svg)](https://coveralls.io/r/divhide/divhide-core) [![NPM version](https://badge.fury.io/js/divhide.svg)](http://badge.fury.io/js/divhide) [![Dependency Status](https://gemnasium.com/divhide/divhide-core.svg)](https://gemnasium.com/divhide/divhide-core)
 
 [![NPM Stats](https://nodei.co/npm/divhide.png?downloads=true)](https://www.npmjs.com/package/divhide) ![alt text](https://raw.githubusercontent.com/divhide/divhide-core/master/.readme/assets/bower-logo.jpg) ![alt text](https://raw.githubusercontent.com/divhide/divhide-core/master/.readme/assets/titanium-logo.png)
 
@@ -1445,7 +1445,6 @@ expect(array).toEqual([3]);
 
 
 ```
-
 
 
 ## Contribute
