@@ -22,15 +22,16 @@ var _                       = require("lodash"),
 var execute = function(schema, value, validationFns){
 
     /* jshint -W064 */
-    var result = SchemaResult(schema, value);
+    var result = SchemaResult(schema);
 
     /// get the value from the schema
     try {
         value = SchemaExecutionHelper.prepareValue(schema, value, validationFns);
-        result.setValue(value);
+        result.set(value);
     }
     catch(e){
-        result.addError(e);
+        var result = SchemaResult(schema);
+        result.set(value, { errors: e });
         return result;
     }
 
@@ -56,12 +57,12 @@ var execute = function(schema, value, validationFns){
         schema = SchemaExecutionHelper.prepareSchema(schema, value, validationFns);
     }
     catch(e){
-        result.addError(e);
+        result.set(value, { errors: e });
         return result;
     }
 
-    /// reset the result value before iterating
-    result = SchemaResult(schema, schema.isObject() ? {} : []);
+    /// after the preparation, reset the result value before iterating
+    result = SchemaResult(schema);
 
     /// recursion over the inner values of the schema
     _.each(schema.schema, function(innerSchema, key){
@@ -71,7 +72,8 @@ var execute = function(schema, value, validationFns){
 
         /// add result to errors
         if(!innerResult.isValid()){
-            result.addError(innerResult.getErrors());
+            var innerErrors = innerResult.getErrors();
+            result.set(value[key], { index: key, errors: innerErrors });
             return;
         }
 
@@ -84,7 +86,7 @@ var execute = function(schema, value, validationFns){
         }
 
         /// set the value
-        result.setValue(innerValue, { index: key });
+        result.set(innerValue, { index: key });
 
     });
 

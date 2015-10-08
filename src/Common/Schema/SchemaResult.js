@@ -13,22 +13,27 @@ var Safe                = require("../Safe"),
  * the global structure and the evaluation tree as well.
  *
  * @param {*} schema
- * @param {*} value
  *
  *
  */
-var SchemaResult = function(schema, value){
+var SchemaResult = function(schema){
 
     /// validate schema
     Assert.instanceOf(Types.SchemaDefinition)
         .assert(schema);
 
-    /// make sure its a value
-    value = Safe.value(value);
+    /// initialize result value
+    var value = null;
+    if(schema.isObject()){
+        value = {};
+    } else if(schema.isArray()){
+        value = [];
+    }
 
     /**
      *
-     * Top-down global error tracking
+     * Flat list of all the errors found. Please note the this will contain all the
+     * errors that were found so far.
      *
      * @type {ExceptionList}
      *
@@ -46,7 +51,7 @@ var SchemaResult = function(schema, value){
 
         /**
          *
-         * Get the errors
+         * Get the errors associated to with given schema.
          *
          * @return {ExceptionList}
          *
@@ -57,18 +62,7 @@ var SchemaResult = function(schema, value){
 
         /**
          *
-         * Add the given errors
-         *
-         * @param {ExceptionList} error
-         *
-         */
-        addError: function(error){
-            errors.push(error);
-        },
-
-        /**
-         *
-         * Checks if the result is valid
+         * Returns true if the schema is valid; false otherwise.
          *
          * @return {Boolean}
          *
@@ -90,13 +84,13 @@ var SchemaResult = function(schema, value){
 
         /**
          *
-         * Set the value of the given index.
+         * Set the the value and errors associated to a schema evaluation.
          *
          * @param {*} value
          * @param {Object} options
          *
          */
-        setValue: function(val, options) {
+        set: function(val, options) {
 
             /// normalize val
             val = Safe.value(val);
@@ -104,12 +98,19 @@ var SchemaResult = function(schema, value){
             /// normalize options
             options = Safe.object(options);
             options.index   = Safe.value(options.index, null);
+            options.errors  = Safe.value(options.errors, null);
 
+            /// set the value or the index value if given
             if(options.index !== null){
                 value[options.index] = val;
             }
             else {
                 value = val;
+            }
+
+            /// set the given errors
+            if(errors){
+                errors.push(options.errors);
             }
 
         }
