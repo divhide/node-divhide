@@ -7,11 +7,11 @@ var _                   = require("lodash"),
     ExceptionList       = require("../../Exception/ExceptionList"),
     Exception           = require("../../Exception/Exception"),
     Types               = require("../Types");
-    
+
 
 /**
  *
- * Prepares and validates the SchemaDefinition for the given 
+ * Prepares and validates the SchemaDefinition for the given
  * value.
  *
  * @throw {ExceptionList}
@@ -58,11 +58,11 @@ var prepareSchema = function(schema, value, validationFns){
 
 /**
  *
- * Prepares and validates the SchemaDefinition for the given 
+ * Prepares and validates the SchemaDefinition for the given
  * object.
  *
  * @throws {ExceptionList} If a validation function occurs
- * 
+ *
  * @param  {SchemaDefinition} schema
  * @param  {Object} value
  *
@@ -121,7 +121,7 @@ var prepareObject = function(schema, value){
 
 /**
  *
- * Prepares and validates the SchemaDefinition for the given 
+ * Prepares and validates the SchemaDefinition for the given
  * array.
  *
  * @throws {ExceptionList} If a validation error occurs
@@ -150,12 +150,12 @@ var prepareArray = function(schema, value){
 
         var isRepeatable = true;
 
-        /// if the value contains elements check if its divisible by 
+        /// if the value contains elements check if its divisible by
         /// the repeat count
         if(value.length > 0 && value.length != schema.schema.length){
             isRepeatable = value.length % schema.schema.length === 0;
         }
-        /// otherwise is only repeatable if the array contains no 
+        /// otherwise is only repeatable if the array contains no
         /// element
         else {
             isRepeatable = (value.length === schema.schema.length) && (value.length === 0);
@@ -163,9 +163,9 @@ var prepareArray = function(schema, value){
 
         if(!isRepeatable){
             errors.push(
-                new Exception("VALIDATION_INVALID_LIST_LENGTH_MULTIPLE_OF", { value: value.length, expected: schema.schema.length }));    
+                new Exception("VALIDATION_INVALID_LIST_LENGTH_MULTIPLE_OF", { value: value.length, expected: schema.schema.length }));
         }
-        
+
     }
 
     /// if errors exist throw them
@@ -193,19 +193,19 @@ var prepareArray = function(schema, value){
 /**
  *
  * Schema Conversion conversion methods
- * 
+ *
  * @type {Object}
- * 
+ *
  */
 var SchemaExecutionHelper = {
 
     /**
      *
-     * Get the value according to the given schema, by applying 
+     * Get the value according to the given schema, by applying
      * default values, coercing values, ...
      *
      * @throws {ExceptionList} If the validation fails
-     * 
+     *
      * @param  {SchemaDefinition} schema
      * @param  {*} value
      *
@@ -224,7 +224,7 @@ var SchemaExecutionHelper = {
         var errors = new ExceptionList();
 
         /// if not strict tries to normalize
-        /// the value (e.g. a number can be on string representation )
+        /// the value (e.g. a number can be represented by a string )
         if(!schema.strict){
             value = Safe.coerce(value, schema.schema);
         }
@@ -278,8 +278,8 @@ var SchemaExecutionHelper = {
 
     /**
      *
-     * Gets the schema for the given value. If the schema is an object it 
-     * will expand its keys regular expressions. If the schema is an array 
+     * Gets the schema for the given value. If the schema is an object it
+     * will expand its keys regular expressions. If the schema is an array
      * it will apply its properties to the given value.
      *
      * @throws {ExceptionList} If a validation error occurs
@@ -287,9 +287,9 @@ var SchemaExecutionHelper = {
      * @param  {SchemaDefinition} schema
      * @param  {*}      value
      * @param  {Object} validationFns
-     * 
+     *
      * @return {SchemaDefinition}
-     * 
+     *
      */
     prepareSchema: function(schema, value, validationFns){
 

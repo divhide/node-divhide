@@ -22,21 +22,27 @@ var SchemaResult = function(schema){
     Assert.instanceOf(Types.SchemaDefinition)
         .assert(schema);
 
-    /// initialize result value
-    var value = null;
-    if(schema.isObject()){
-        value = {};
-    } else if(schema.isArray()){
-        value = [];
-    }
+    /**
+     * The value object
+     * @type {*}
+     */
+    var value = schema.getEmptyValue();
 
     /**
-     *
-     * Flat list of all the errors found. Please note the this will contain all the
-     * errors that were found so far.
-     *
+     * Contains the debug information (errors and values) about the Schema processing.
+     * @type {*}
+     */
+    var debugValue = schema.getEmptyValue();
+
+    /**
+     * Is value a complex object flag.
+     * @type {Boolean}
+     */
+    var isComplex = Type.isArray(value) || Type.isObject(value);
+
+    /**
+     * A flat list containing all the errors
      * @type {ExceptionList}
-     *
      */
     var errors = new ExceptionList();
 
@@ -84,33 +90,49 @@ var SchemaResult = function(schema){
 
         /**
          *
-         * Set the the value and errors associated to a schema evaluation.
+         * Saves the value of a Schema evaluation. Values can be objects, Erros, ...
          *
-         * @param {*} value
-         * @param {Object} options
+         * @param {*|Error} val  The value
+         * @param {String} index The index on which to set the value
          *
          */
-        set: function(val, options) {
+        set: function(val, index) {
 
-            /// normalize val
+            // arguments normalization
             val = Safe.value(val);
+            index = Safe.coerce(index, "");
 
-            /// normalize options
-            options = Safe.object(options);
-            options.index   = Safe.value(options.index, null);
-            options.errors  = Safe.value(options.errors, null);
+            // check if the value is an Error
+            var isError = Type.instanceOf(val, Error);
 
-            /// set the value or the index value if given
-            if(options.index !== null){
-                value[options.index] = val;
+            // lazy load the debugValue ExceptionList
+            if(isError && !index && !Type.instanceOf(debugValue, ExceptionList)){
+                debugValue = new ExceptionList();
             }
-            else {
-                value = val;
+            else if(isError && index && !Type.instanceOf(debugValue[index], ExceptionList)){
+                debugValue[index] = new ExceptionList();
             }
 
-            /// set the given errors
-            if(errors){
-                errors.push(options.errors);
+            // always save the error on the error flat list
+            if(isError){
+                errors.push(val);
+            }
+
+            // set non-error and simple structures
+            if(!isError && !index){
+                debugValue = value = val;
+            }
+            // set non-error and complex structures
+            else if(!isError && index){
+                debugValue[index] = value[index] = val;
+            }
+            // set error and simple structures
+            else if(isError && !index){
+                debugValue = val;
+            }
+            // set error and complex structures
+            else if(isError && index){
+                debugValue[index] = val;
             }
 
         }

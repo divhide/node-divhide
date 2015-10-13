@@ -26,33 +26,33 @@
     "url": "git@github.com:divhide/node-divhide.git"
   },
   "devDependencies": {
-    "browserify": "9.0.7",
+    "browserify": "11.2.0",
     "browserify-istanbul": "^0.2.1",
     "expect.js": "^0.3.1",
     "grunt": "~0.4.5",
-    "grunt-browserify": "=3.8.0",
-    "grunt-bump": "0.0.16",
+    "grunt-browserify": "4.0.1",
+    "grunt-bump": "0.6.0",
     "grunt-cli": "",
     "grunt-contrib-jasmine": "*",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-watch": "*",
     "grunt-exec": "^0.4.6",
-    "grunt-http-server": "*",
-    "grunt-karma": "^0.11.1",
+    "grunt-http-server": "1.13.0",
+    "grunt-karma": "0.12.1",
     "grunt-karma-coveralls": "^2.5.3",
     "grunt-readme": "0.4.5",
     "grunt-simple-mocha": ">=0.4.0",
-    "karma": "^0.12.37",
+    "karma": "0.13.10",
     "karma-chrome-launcher": "^0.2.0",
-    "karma-coverage": "^0.4.2",
+    "karma-coverage": "0.5.2",
     "karma-jasmine": "^0.3.5",
     "karma-phantomjs-launcher": "^0.2.0",
     "karma-threshold-reporter": "^0.1.15",
-    "load-grunt-tasks": "3.0.0",
+    "load-grunt-tasks": "3.3.0",
     "phantomjs": "^1.9.17"
   },
   "dependencies": {
-    "lodash": "=3.9.3"
+    "lodash": "3.10.1"
   },
   "main": "src/Index.js",
   "engines": {

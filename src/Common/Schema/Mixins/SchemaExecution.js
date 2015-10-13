@@ -30,8 +30,7 @@ var execute = function(schema, value, validationFns){
         result.set(value);
     }
     catch(e){
-        var result = SchemaResult(schema);
-        result.set(value, { errors: e });
+        result.set(e);
         return result;
     }
 
@@ -57,7 +56,7 @@ var execute = function(schema, value, validationFns){
         schema = SchemaExecutionHelper.prepareSchema(schema, value, validationFns);
     }
     catch(e){
-        result.set(value, { errors: e });
+        result.set(e);
         return result;
     }
 
@@ -73,7 +72,7 @@ var execute = function(schema, value, validationFns){
         /// add result to errors
         if(!innerResult.isValid()){
             var innerErrors = innerResult.getErrors();
-            result.set(value[key], { index: key, errors: innerErrors });
+            result.set(innerErrors, key);
             return;
         }
 
@@ -86,7 +85,7 @@ var execute = function(schema, value, validationFns){
         }
 
         /// set the value
-        result.set(innerValue, { index: key });
+        result.set(innerValue, key);
 
     });
 

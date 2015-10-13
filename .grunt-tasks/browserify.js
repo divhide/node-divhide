@@ -120,7 +120,10 @@ var Browserify = {
                 "lodash"
             ],
 
-            postBundleCB: postBundleCB,
+            // Do not add the following code because this will
+            // break the source maps:
+            // postBundleCB: postBundleCB,
+
             browserifyOptions: {
                 standalone: "Divhide",
                 debug: true

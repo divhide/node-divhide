@@ -7,41 +7,45 @@ describe("SafeSpec", function () {
     beforeEach(function () {
         jasmine.addMatchers(window.JasmineCustomMatchers);
     });
-    
-    it("Divhide.Specs.SafeArrayExample", function () {
-        Divhide.Specs.SafeArrayExample();
-    });
 
-    it("Divhide.Specs.SafeBooleanExample", function () {
-        Divhide.Specs.SafeBooleanExample();
-    });
+    describe("Docs.Specs", function(){
 
-    it("Divhide.Specs.SafeFunctionExample", function () {
-        Divhide.Specs.SafeFunctionExample();
-    });
+        it("SafeArrayExample", function () {
+            Divhide.Specs.SafeArrayExample();
+        });
 
-    it("Divhide.Specs.SafeLengthExample", function () {
-        Divhide.Specs.SafeLengthExample();
-    });
+        it("SafeBooleanExample", function () {
+            Divhide.Specs.SafeBooleanExample();
+        });
 
-    it("Divhide.Specs.SafeNumberExample", function () {
-        Divhide.Specs.SafeNumberExample();
-    });
+        it("SafeFunctionExample", function () {
+            Divhide.Specs.SafeFunctionExample();
+        });
 
-    it("Divhide.Specs.SafeObjectExample", function () {
-        Divhide.Specs.SafeObjectExample();
-    });
+        it("SafeLengthExample", function () {
+            Divhide.Specs.SafeLengthExample();
+        });
 
-    it("Divhide.Specs.SafeRegexExample", function () {
-        Divhide.Specs.SafeRegexExample();
-    });
+        it("SafeNumberExample", function () {
+            Divhide.Specs.SafeNumberExample();
+        });
 
-    it("Divhide.Specs.SafeStringExample", function () {
-        Divhide.Specs.SafeStringExample();
-    });
+        it("SafeObjectExample", function () {
+            Divhide.Specs.SafeObjectExample();
+        });
 
-    it("Divhide.Specs.SafeValueExample", function () {
-        Divhide.Specs.SafeValueExample();
+        it("SafeRegexExample", function () {
+            Divhide.Specs.SafeRegexExample();
+        });
+
+        it("SafeStringExample", function () {
+            Divhide.Specs.SafeStringExample();
+        });
+
+        it("SafeValueExample", function () {
+            Divhide.Specs.SafeValueExample();
+        });
+
     });
 
     it(".array()", function (done) {
@@ -341,44 +345,45 @@ describe("SafeSpec", function () {
 
     });
 
+    describe(".coerce()", function () {
 
-    it(".coerce(, Boolean)", function (done) {
+        it(".coerce(, Boolean)", function () {
 
-        var Safe = Divhide.Safe;
+            var Safe = Divhide.Safe;
 
-        var value = Safe.coerce(true, Boolean());
-        expect(value)
-            .toBe(true);
+            var value = Safe.coerce(true, Boolean());
+            expect(value)
+                .toBe(true);
 
-        value = Safe.coerce(false, Boolean());
-        expect(value)
-            .toBe(false);
+            value = Safe.coerce(false, Boolean());
+            expect(value)
+                .toBe(false);
 
-        value = Safe.coerce(1, Boolean());
-        expect(value)
-            .toBe(true);
+            value = Safe.coerce(1, Boolean());
+            expect(value)
+                .toBe(true);
 
-        value = Safe.coerce(0, Boolean());
-        expect(value)
-            .toBe(false);
+            value = Safe.coerce(0, Boolean());
+            expect(value)
+                .toBe(false);
 
-        value = Safe.coerce(9999, Boolean());
-        expect(value)
-            .toBe(9999);
+            value = Safe.coerce(9999, Boolean());
+            expect(value)
+                .toBe(9999);
 
-        value = Safe.coerce("true", Boolean());
-        expect(value)
-            .toBe(true);
+            value = Safe.coerce("true", Boolean());
+            expect(value)
+                .toBe(true);
 
-        value = Safe.coerce("false", Boolean());
-        expect(value)
-            .toBe(false);
+            value = Safe.coerce("false", Boolean());
+            expect(value)
+                .toBe(false);
 
-        value = Safe.coerce("no", Boolean());
-        expect(value)
-            .toBe("no");
+            value = Safe.coerce("no", Boolean());
+            expect(value)
+                .toBe("no");
 
-        done();
+        });
 
     });
 

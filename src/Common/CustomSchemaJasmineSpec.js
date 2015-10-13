@@ -7,7 +7,7 @@ describe("CustomSchema", function () {
     beforeEach(function () {
         jasmine.addMatchers(window.JasmineCustomMatchers);
     });
-    
+
     ///
     /// .value(String) integration tests
     ///
@@ -247,7 +247,7 @@ describe("CustomSchema", function () {
         });
 
     });
-    
+
     ///
     /// .errors integration tests
     ///
@@ -400,7 +400,7 @@ describe("CustomSchema", function () {
         });
 
     });
-    
+
     ///
     /// Compile() tests
     ///
@@ -427,5 +427,5 @@ describe("CustomSchema", function () {
 
     });
 
-    
+
 });

@@ -324,10 +324,10 @@ Safe.length = function(val){
 
 /**
  *
- * Coerce the given value from the expected type
+ * Coerce the given value from the expected value
  *
- * @param  {*} value
- * @param  {*} expected
+ * @param  {*} value    The value to coerce
+ * @param  {*} expected An instance of the expected value
  * @return {*}
  *
  */
@@ -341,7 +341,7 @@ Safe.coerce = function(value, expected){
     }
 
     // Expecting a number
-    if( Type.isNumber(expected) ){
+    if(Type.isNumber(expected)){
 
         if(Type.isNumber(value)){
             return Number(value);
@@ -350,7 +350,7 @@ Safe.coerce = function(value, expected){
     }
 
     // Expecting a string
-    if( Type.isString(expected) ){
+    if(Type.isString(expected)){
 
         if(Type.isNumber(value)){
             return value.toString();
