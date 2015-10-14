@@ -47,6 +47,65 @@ var SchemaResult = function(schema){
     var errors = new ExceptionList();
 
     /**
+     * Set an Error object as a value.
+     *
+     * @param {Error}   val
+     * @param {String}  index
+     */
+    var setErrorValue = function(val, index){
+
+        // lazy load the debugValue ExceptionList
+        if(!index && !Type.instanceOf(debugValue, ExceptionList)){
+            debugValue = new ExceptionList();
+        }
+        else if(index && !Type.instanceOf(debugValue[index], ExceptionList)){
+            debugValue[index] = new ExceptionList();
+        }
+
+        // set error and simple structures
+        if(index){
+            debugValue = val;
+        }
+        // set error and complex structures
+        else {
+            debugValue[index] = val;
+        }
+
+        // always save the error on the error flat list
+        errors.push(val);
+
+    };
+
+    /**
+     * Set a SchemaResult object as a value.
+     *
+     * @param {SchemaResult}    val
+     * @param {String}          index
+     */
+    var setSchemaResultValue = function(val, index){
+        throw new Error("Not implemented exception");
+    };
+
+    /**
+     * Set a Value object as a value.
+     *
+     * @param {SchemaResult}    val
+     * @param {String}          index
+     */
+    var setValue = function(val, index){
+
+        // set non-error and simple structures
+        if(!index){
+            debugValue = value = val;
+        }
+        // set non-error and complex structures
+        else {
+            debugValue[index] = value[index] = val;
+        }
+
+    };
+
+    /**
      *
      * SchemaResult API
      *
@@ -92,7 +151,7 @@ var SchemaResult = function(schema){
          *
          * Saves the value of a Schema evaluation. Values can be objects, Erros, ...
          *
-         * @param {*|Error} val  The value
+         * @param {*|SchemaResult|Error} val  The value
          * @param {String} index The index on which to set the value
          *
          */
@@ -102,37 +161,17 @@ var SchemaResult = function(schema){
             val = Safe.value(val);
             index = Safe.coerce(index, "");
 
-            // check if the value is an Error
-            var isError = Type.instanceOf(val, Error);
-
-            // lazy load the debugValue ExceptionList
-            if(isError && !index && !Type.instanceOf(debugValue, ExceptionList)){
-                debugValue = new ExceptionList();
+            // set SchemaResult object
+            if(Type.instanceOf(val, Types.SchemaResult)){
+                setSchemaResultValue(val, index);
             }
-            else if(isError && index && !Type.instanceOf(debugValue[index], ExceptionList)){
-                debugValue[index] = new ExceptionList();
+            // set Error object
+            else if(Type.instanceOf(val, Error)){
+                setErrorValue(val, index);
             }
-
-            // always save the error on the error flat list
-            if(isError){
-                errors.push(val);
-            }
-
-            // set non-error and simple structures
-            if(!isError && !index){
-                debugValue = value = val;
-            }
-            // set non-error and complex structures
-            else if(!isError && index){
-                debugValue[index] = value[index] = val;
-            }
-            // set error and simple structures
-            else if(isError && !index){
-                debugValue = val;
-            }
-            // set error and complex structures
-            else if(isError && index){
-                debugValue[index] = val;
+            // set Value object
+            else {
+                setValue(val, index);
             }
 
         }
