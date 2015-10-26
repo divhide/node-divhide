@@ -32,6 +32,7 @@ var SchemaResult = function(schema){
 
     /**
      * Contains the debug information (errors and values) about the Schema processing.
+     * Every exception will be represented by an ExceptionList instance.
      * @type {*}
      */
     var debugValue = schema.getEmptyValue();
@@ -112,16 +113,23 @@ var SchemaResult = function(schema){
                 return;
             }
 
-            value[index] = innerValue;
-
-            // set the current debug value to
-            debugValue[index] = schemaResult.getDebugValue();
+            // if there are no previous errors set the value
+            if(value != null){
+                value[index] = innerValue;
+            }
 
         }
         // set errors if schemaResult is not valid
         else {
+            // set the value to null if an inner error happened
+            value = null;
+            // propagate the inner errors
             errors.push(schemaResult.getErrors());
         }
+
+        // set the debug value to the given one. This can be a value or an
+        // ExceptionList in the case of an exception.
+        debugValue[index] = schemaResult.getDebugValue();
 
     };
 
@@ -166,7 +174,7 @@ var SchemaResult = function(schema){
 
         /**
          *
-         * Get the value object of all valid values.
+         * Get the value object of all valid values, or null if the validation failed.
          *
          * @return {*}
          *
@@ -180,7 +188,10 @@ var SchemaResult = function(schema){
          * Get the debug value. This object contain values and errors
          * all together.
          *
-         * @return {*}
+         * In the case of an exception this will be an ExceptionList
+         * instance.
+         *
+         * @return {*|ExceptionList}
          *
          */
         getDebugValue: function(){

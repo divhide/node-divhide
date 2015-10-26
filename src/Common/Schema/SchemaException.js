@@ -19,10 +19,10 @@ var SchemaException = function(message, messageData, originalValue){
     Exception.apply(this, [message, messageData]);
 
     /**
-     * Returns the original value that originated the schema evaluation error.
+     * Returns the value that originated the schema evaluation error.
      * @return {*}
      */
-    this.getOriginalValue = function(){
+    this.getValue = function(){
         return originalValue;
     };
 

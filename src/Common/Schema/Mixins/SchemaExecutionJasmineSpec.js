@@ -39,10 +39,14 @@ describe("Schema.Mixins.SchemaExecution", function () {
 
             /// test default value
             var result = schema.execute({});
-            expect(result.getValue()).equals(null);
 
-            expect(result.isValid()).equals(false);
-            expect(result.getErrors().length).equals(1);
+            expect(result.getValue())
+                .equals(null);
+
+            expect(result.isValid())
+                .equals(false);
+            expect(result.getErrors().length)
+                .equals(1);
 
             expect(result.getDebugValue() instanceof ExceptionList)
                 .equals(true);
@@ -50,7 +54,7 @@ describe("Schema.Mixins.SchemaExecution", function () {
                 .equals(1);
             expect(result.getDebugValue().items[0] instanceof SchemaException)
                 .equals(true);
-            expect(result.getDebugValue().items[0].getOriginalValue())
+            expect(result.getDebugValue().items[0].getValue())
                 .equals({});
             expect(result.getDebugValue().items[0].toString())
                 .toMatch("'string' was expected but found 'object' instead.");
@@ -216,6 +220,43 @@ describe("Schema.Mixins.SchemaExecution", function () {
 
         });
 
+        it("invalid type should return SchemaException", function () {
+
+            var schema = new SchemaDefinition({
+                schema : {
+                    "firstname": new SchemaDefinition({ schema: "", required: true }),
+                    "lastname": new SchemaDefinition({ schema: "", required: true }),
+                },
+                required: true
+            });
+
+            /// test result
+            var result = schema.execute({
+                "firstname": "oscar",
+                "lastname": {}
+            });
+
+            expect(result.getValue())
+                .equals(null);
+
+            expect(result.isValid())
+                .equals(false);
+            expect(result.getErrors() instanceof ExceptionList)
+                .equals(true);
+            expect(result.getErrors().items[0] instanceof SchemaException)
+                .equals(true);
+
+            expect(result.getDebugValue().firstname)
+                .equals("oscar");
+            expect(result.getDebugValue().lastname instanceof ExceptionList)
+                .equals(true);
+            expect(result.getDebugValue().lastname.items[0].getValue())
+                .equals({});
+            expect(result.getDebugValue().lastname.items[0].toString())
+                .equals("'string' was expected but found 'object' instead.");
+
+        });
+
     });
 
 
@@ -303,13 +344,12 @@ describe("Schema.Mixins.SchemaExecution", function () {
                 .equals(1);
             expect(result.getDebugValue().items[0] instanceof SchemaException)
                 .equals(true);
-            expect(result.getDebugValue().items[0].getOriginalValue())
+            expect(result.getDebugValue().items[0].getValue())
                 .equals([]);
             expect(result.getDebugValue().items[0].toString())
                 .toMatch("Expected list length to be multiple of 2 but found length of 0.");
 
         });
-
 
         it("with optional items should return null on them", function () {
 
@@ -326,6 +366,42 @@ describe("Schema.Mixins.SchemaExecution", function () {
             expect(result.getDebugValue()).equals([ null, "a" ]);
             expect(result.isValid()).equals(true);
             expect(result.getErrors().length).equals(0);
+
+        });
+
+        it("invalid type should return SchemaException", function () {
+
+            var schema = new SchemaDefinition({
+                schema : [
+                    new SchemaDefinition({ schema: "", required: true }),
+                    new SchemaDefinition({ schema: "", required: true })
+                ],
+                required: true
+            });
+
+            /// test null (will fail on required)
+            var result = schema.execute([ 1, {} ]);
+
+            expect(result.getValue())
+                .equals(null);
+            expect(result.isValid())
+                .equals(false);
+
+            expect(result.getErrors() instanceof ExceptionList)
+                .equals(true);
+            expect(result.getErrors().length)
+                .equals(1);
+
+            expect(result.getDebugValue()[0])
+                .equals('1');
+            expect(result.getDebugValue()[1] instanceof ExceptionList)
+                .equals(true);
+            expect(result.getDebugValue()[1].items[0] instanceof SchemaException)
+                .equals(true);
+            expect(result.getDebugValue()[1].items[0].getValue())
+                .equals({});
+            expect(result.getDebugValue()[1].items[0].toString())
+                .equals("'string' was expected but found 'object' instead.");
 
         });
 
