@@ -5,7 +5,7 @@ var _                   = require("lodash"),
     Type                = require("../../Type"),
     Assert              = require("../../Assert"),
     ExceptionList       = require("../../Exception/ExceptionList"),
-    Exception           = require("../../Exception/Exception"),
+    SchemaException     = require("../SchemaException"),
     Types               = require("../Types");
 
 
@@ -35,7 +35,7 @@ var prepareSchema = function(schema, value, validationFns){
     /* jshint -W041 */
     if(schema.required && value == null){
         errors.push(
-            new Exception("VALIDATION_REQUIRED"));
+            new SchemaException("VALIDATION_REQUIRED", {}, value));
     }
     /* jshint -W041 */
     else if(!schema.required && value == null){
@@ -44,7 +44,7 @@ var prepareSchema = function(schema, value, validationFns){
     /// check for compatibility of types if any flag is not used
     else if(!schema.any && Type.of(schema.schema) !== Type.of(value)){
         errors.push(
-            new Exception("VALIDATION_TYPE", { expected: Type.of(schema.schema), value: Type.of(value) }));
+            new SchemaException("VALIDATION_TYPE", { expected: Type.of(schema.schema), value: Type.of(value) }, value));
     }
 
     /// if there's error throw them
@@ -143,7 +143,9 @@ var prepareArray = function(schema, value){
 
     if( !schema.repeatable && schema.schema.length != value.length ){
         errors.push(
-            new Exception("VALIDATION_INVALID_LIST_LENGTH", { value: value.length, expected: schema.schema.length }));
+            new SchemaException("VALIDATION_INVALID_LIST_LENGTH",
+                { value: value.length, expected: schema.schema.length },
+                value));
     }
 
     if(schema.repeatable){
@@ -163,7 +165,9 @@ var prepareArray = function(schema, value){
 
         if(!isRepeatable){
             errors.push(
-                new Exception("VALIDATION_INVALID_LIST_LENGTH_MULTIPLE_OF", { value: value.length, expected: schema.schema.length }));
+                new SchemaException("VALIDATION_INVALID_LIST_LENGTH_MULTIPLE_OF",
+                    { value: value.length, expected: schema.schema.length },
+                    value));
         }
 
     }
@@ -233,7 +237,7 @@ var SchemaExecutionHelper = {
         /* jshint -W041 */
         if(schema.required && value == null){
             errors.push(
-                new Exception("VALIDATION_REQUIRED"));
+                new SchemaException("VALIDATION_REQUIRED", {}, value));
         }
         else if(!schema.required && value == null){
             /// ignore, and not fallback on the other else's
@@ -241,7 +245,9 @@ var SchemaExecutionHelper = {
         /// if a value exists find out if types are compatible
         else if(!schema.any && Type.of(schema.schema) !== Type.of(value)){
             errors.push(
-                new Exception("VALIDATION_TYPE", { expected: Type.of(schema.schema), value: Type.of(value) }));
+                new SchemaException("VALIDATION_TYPE",
+                    { expected: Type.of(schema.schema), value: Type.of(value) },
+                    value));
         }
 
         /// always run if value is required or value is specified.
@@ -259,7 +265,7 @@ var SchemaExecutionHelper = {
                     try{
                         fn.apply({}, [value].concat(args));
                     }catch(e){
-                        var error = new Exception(e.message);
+                        var error = new SchemaException(e.message, {}, value);
                         errors.push(error);
                     }
 

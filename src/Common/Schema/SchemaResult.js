@@ -1,10 +1,12 @@
 "use strict";
 
-var Safe                = require("../Safe"),
+var _                   = require("lodash"),
+    Safe                = require("../Safe"),
     Type                = require("../Type"),
     Assert              = require("../Assert"),
-    ExceptionList       = require("../Exception/ExceptionList"),
-    Types               = require("./Types");
+    Types               = require("./Types"),
+    SchemaResult        = require("./SchemaResult"),
+    ExceptionList       = require("../Exception/ExceptionList");
 
 /**
  *
@@ -12,7 +14,7 @@ var Safe                = require("../Safe"),
  * Stores the result of a schema evaluation. It will keep reference to
  * the global structure and the evaluation tree as well.
  *
- * @param {*} schema
+ * @param {*} schema    The Schema object
  *
  *
  */
@@ -49,41 +51,78 @@ var SchemaResult = function(schema){
     /**
      * Set an Error object as a value.
      *
-     * @param {Error}   val
-     * @param {String}  index
+     * @param {Error}   error The schema evaluation error
+     * @param {String}  index The index of the value, if complex structure
+     *
      */
-    var setErrorValue = function(val, index){
+    var setErrorValue = function(error, index){
 
-        // lazy load the debugValue ExceptionList
-        if(!index && !Type.instanceOf(debugValue, ExceptionList)){
-            debugValue = new ExceptionList();
-        }
-        else if(index && !Type.instanceOf(debugValue[index], ExceptionList)){
-            debugValue[index] = new ExceptionList();
-        }
+        // always save the error at the structure level
+        errors.push(error);
 
-        // set error and simple structures
+        // in the case of an index is provided save the error
+        // at the index level
         if(index){
-            debugValue = val;
-        }
-        // set error and complex structures
-        else {
-            debugValue[index] = val;
-        }
 
-        // always save the error on the error flat list
-        errors.push(val);
+            // lazy initialization of the exception list
+            if(!Type.instanceOf(debugValue[index], ExceptionList)){
+                debugValue[index] = new ExceptionList();
+            }
+
+            debugValue[index].push(error);
+
+        }
+        else {
+
+            // lazy initialization of the exception list
+            if(!Type.instanceOf(debugValue, ExceptionList)){
+                debugValue = new ExceptionList();
+            }
+
+            debugValue.push(error);
+
+        }
 
     };
 
     /**
-     * Set a SchemaResult object as a value.
+     * Set a SchemaResult object as a value. The given inner SchemaResult
+     * is merged with the current result.
      *
-     * @param {SchemaResult}    val
+     * @param {SchemaResult}    schemaResult
      * @param {String}          index
      */
-    var setSchemaResultValue = function(val, index){
-        throw new Error("Not implemented exception");
+    var setInnerSchemaResultValue = function(schemaResult, index){
+
+        if(!index){
+            throw new Error("index must be defined");
+        }
+
+        // set inner value if schemaResult is valid
+        if(schemaResult.isValid()){
+
+            // set the given value if is valid
+            var innerValue = schemaResult.getValue(),
+                innerSchema = schemaResult.getSchema(),
+                isOptional = schema.isObject() && !innerSchema.required;
+
+            // skip is the value is optional and is not defined
+            /* jshint -W041 */
+            if(isOptional && innerValue == null){
+                return;
+            }
+
+            value[index] = innerValue;
+
+            // set the current debug value to
+            debugValue[index] = schemaResult.getDebugValue();
+
+        }
+        // set errors if schemaResult is not valid
+        else {
+            errors.push(schemaResult.getErrors());
+        }
+
     };
 
     /**
@@ -116,6 +155,40 @@ var SchemaResult = function(schema){
 
         /**
          *
+         * Get the schema that is being used.
+         *
+         * @return {*}
+         *
+         */
+        getSchema: function(){
+            return schema;
+        },
+
+        /**
+         *
+         * Get the value object of all valid values.
+         *
+         * @return {*}
+         *
+         */
+        getValue: function(){
+            return value;
+        },
+
+        /**
+         *
+         * Get the debug value. This object contain values and errors
+         * all together.
+         *
+         * @return {*}
+         *
+         */
+        getDebugValue: function(){
+            return debugValue;
+        },
+
+        /**
+         *
          * Get the errors associated to with given schema.
          *
          * @return {ExceptionList}
@@ -138,21 +211,12 @@ var SchemaResult = function(schema){
 
         /**
          *
-         * Get the value result.
-         *
-         * @return {*}
-         *
-         */
-        getValue: function(){
-            return value;
-        },
-
-        /**
-         *
          * Saves the value of a Schema evaluation. Values can be objects, Erros, ...
          *
          * @param {*|SchemaResult|Error} val  The value
          * @param {String} index The index on which to set the value
+         *
+         * @return {SchemaResult} The current SchemaResult instance
          *
          */
         set: function(val, index) {
@@ -163,7 +227,7 @@ var SchemaResult = function(schema){
 
             // set SchemaResult object
             if(Type.instanceOf(val, Types.SchemaResult)){
-                setSchemaResultValue(val, index);
+                setInnerSchemaResultValue(val, index);
             }
             // set Error object
             else if(Type.instanceOf(val, Error)){
@@ -173,6 +237,8 @@ var SchemaResult = function(schema){
             else {
                 setValue(val, index);
             }
+
+            return new Types.SchemaResult(self);
 
         }
 

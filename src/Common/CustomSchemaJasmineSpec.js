@@ -371,7 +371,6 @@ describe("CustomSchema", function () {
                 .equals({ "one": 1, "two": "two" });
 
             /// assertion with exception
-
             expect(function(){
                 schema.value({ "one": 1, "two": "long string" });
             }).toThrowError("The maximum value allowed is 5.");

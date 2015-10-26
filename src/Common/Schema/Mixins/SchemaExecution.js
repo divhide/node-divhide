@@ -1,53 +1,56 @@
 "use strict";
 
-var _                       = require("lodash"),
-    Safe                    = require("../../Safe"),
-    Type                    = require("../../Type"),
-    Assert                  = require("../../Assert"),
-    Exception               = require("../../Exception/Exception"),
-    Types                   = require("../Types"),
-    SchemaResult            = require("../SchemaResult"),
-    SchemaExecutionHelper   = require("./SchemaExecutionHelper");
+var _                           = require("lodash"),
+    Safe                        = require("../../Safe"),
+    Type                        = require("../../Type"),
+    Assert                      = require("../../Assert"),
+    Exception                   = require("../../Exception/Exception"),
+    Types                       = require("../Types"),
+    SchemaResult                = require("../SchemaResult"),
+    SchemaException             = require("../SchemaException"),
+    SchemaExecutionHelper       = require("./SchemaExecutionHelper");
 
 /**
  *
  * Iterate over the complex value
  *
- * @param  {SchemaDefinition} schema
- * @param  {*} value
+ * @param  {SchemaDefinition}   schema          The SchemaDefinition to evaluate
+ * @param  {*}                  originalValue   The value to evaluate
+ * @param  {Object}             validationFns   The custom validation functions
  *
  * @return {SchemaResult}
  *
  */
-var execute = function(schema, value, validationFns){
+var execute = function(schema, originalValue, validationFns){
 
-    /* jshint -W064 */
-    var result = SchemaResult(schema);
+    var value = originalValue;
 
     /// get the value from the schema
     try {
         value = SchemaExecutionHelper.prepareValue(schema, value, validationFns);
-        result.set(value);
     }
     catch(e){
-        result.set(e);
-        return result;
+        /* jshint -W064 */
+        return SchemaResult(schema).set(e);
     }
 
     /// if value is null there's no need to iterate
     /* jshint -W041 */
     if(value == null){
-        return result;
+        /* jshint -W064 */
+        return SchemaResult(schema).set(value);
     }
 
     /// if is expecting any value return it straight away
     if(schema.any){
-        return result;
+        /* jshint -W064 */
+        return SchemaResult(schema).set(value);
     }
 
     /// if is not a complex value return the value
     if(!schema.isArray() && !schema.isObject()){
-        return result;
+        /* jshint -W064 */
+        return SchemaResult(schema).set(value);
     }
 
     /// prepare the schema for execution against the value. This will expand
@@ -56,12 +59,11 @@ var execute = function(schema, value, validationFns){
         schema = SchemaExecutionHelper.prepareSchema(schema, value, validationFns);
     }
     catch(e){
-        result.set(e);
-        return result;
+        return SchemaResult(schema).set(e);
     }
 
     /// after the preparation, reset the result value before iterating
-    result = SchemaResult(schema);
+    var result = SchemaResult(schema);
 
     /// recursion over the inner values of the schema
     _.each(schema.schema, function(innerSchema, key){
@@ -69,23 +71,8 @@ var execute = function(schema, value, validationFns){
         /// recursive execute the schema
         var innerResult = innerSchema.execute(value[key], validationFns);
 
-        /// add result to errors
-        if(!innerResult.isValid()){
-            var innerErrors = innerResult.getErrors();
-            result.set(innerErrors, key);
-            return;
-        }
-
-        /// get the inner result value
-        var innerValue = innerResult.getValue();
-
-        /// if is an object and value is not required ignore!
-        if(schema.isObject() && innerValue == null && !innerSchema.required){
-            return;
-        }
-
-        /// set the value
-        result.set(innerValue, key);
+        /// merge the innerResult
+        result.set(innerResult, key);
 
     });
 
