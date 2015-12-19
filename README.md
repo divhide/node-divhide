@@ -1354,7 +1354,6 @@ Object facility provides some utility function to use on Objects.
 <br />
 Returns an array with all the keys that match the __filter__.
 
-
 **Example**
 
 ```js
@@ -1377,6 +1376,15 @@ expect(results)
 
 
 ```
+
+* `stringify(...)`
+<br />
+TODO
+
+* `traverse(...)`
+<br />
+TODO
+
 
 
 ### Arr

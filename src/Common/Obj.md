@@ -7,7 +7,6 @@ Object facility provides some utility function to use on Objects.
 <br />
 Returns an array with all the keys that match the __filter__.
 
-
 **Example**
 
 ```js
@@ -15,3 +14,11 @@ Returns an array with all the keys that match the __filter__.
 {%= _.include("Obj/ObjExample.js") %}
 
 ```
+
+* `stringify(...)`
+<br />
+TODO
+
+* `traverse(...)`
+<br />
+TODO

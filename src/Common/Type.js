@@ -120,9 +120,19 @@ Type.isObject = function (value) {
  * @return {Boolean}
  */
 Type.isRegExp = function (value) {
-
     return (value instanceof RegExp);
+};
 
+/**
+ *
+ * Checks if the given value is a complex object.
+ *
+ * @param  {*}  value
+ * @return {Boolean}
+ *
+ */
+Type.isComplex = function(value){
+    return Type.isObject(value) || Type.isArray(value);
 };
 
 /**
@@ -191,26 +201,26 @@ Type.isDefined = function(value){
  *
  * @param {*} value
  * @param {*} fn
- * 
+ *
  * @return {Boolean}
- * 
+ *
  */
 Type.instanceOf = function(value, fn){
 
     /// take care of javascript quirks first!
-    
+
     if(Type.isString(value) && fn == String){
         return true;
     }
     else if(Type.isNumber(value) && fn == Number){
-        return true;   
+        return true;
     }
     else if(Type.isBoolean(value) && fn == Boolean){
         return true;
     }
 
     return (value instanceof fn);
-    
+
 };
 
 /**

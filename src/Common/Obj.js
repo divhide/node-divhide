@@ -1,8 +1,7 @@
 'use strict';
 
-var _           = require("lodash"),
-    Safe        = require("./Safe");
-
+var _     = require("lodash"),
+    Safe  = require("./Safe");
 
 var Obj = {
 
@@ -35,7 +34,27 @@ var Obj = {
             },
             []);
 
-    }
+    },
+
+    /**
+     *
+     * Traversal algorithm.
+     * See Obj/traverse.
+     *
+     * @type {Function}
+     *
+     */
+    traverse: require("./Obj/traverse"),
+
+    /**
+     *
+     * Converts any object to it's string representation.
+     * See Obj/stringify.
+     *
+     * @type {Function}
+     *
+     */
+    stringify: require("./Obj/stringify")
 
 };
 
