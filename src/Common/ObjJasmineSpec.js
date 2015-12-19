@@ -28,7 +28,7 @@ describe("Divhide.Obj", function () {
             it("String should return a valid string", function () {
 
                 var val = Divhide.Obj.stringify("Oscar");
-                expect(val).toBe("Oscar");
+                expect(val).toBe("\"Oscar\"");
 
             });
 
@@ -69,7 +69,7 @@ describe("Divhide.Obj", function () {
                     "lastName": "Brito"
                 });
 
-                expect(val).toBe("{firstName: Oscar, lastName: Brito}");
+                expect(val).toBe("{\"firstName\": \"Oscar\", \"lastName\": \"Brito\"}");
 
             });
 
@@ -84,7 +84,7 @@ describe("Divhide.Obj", function () {
                     }
                 });
 
-                expect(val).toBe("{firstName: {value: Oscar}, lastName: {value: Brito}}");
+                expect(val).toBe("{\"firstName\": {\"value\": \"Oscar\"}, \"lastName\": {\"value\": \"Brito\"}}");
 
             });
 
@@ -101,17 +101,18 @@ describe("Divhide.Obj", function () {
 
                 var val = Divhide.Obj.stringify([
                     "one",
-                    "two"
+                    "two",
+                    3
                 ]);
 
-                expect(val).toBe("[one, two]");
+                expect(val).toBe("[\"one\", \"two\", 3]");
 
             });
 
             it("complex array should return a valid string", function () {
 
                 var val = Divhide.Obj.stringify(["one", ["two"]]);
-                expect(val).toBe("[one, [two]]");
+                expect(val).toBe("[\"one\", [\"two\"]]");
 
             });
 
@@ -137,7 +138,7 @@ describe("Divhide.Obj", function () {
                     [ 5 ]
                 ]);
 
-                expect(val).toBe("[one, {2: two, 3: three, 4: [4]}, [5]]");
+                expect(val).toBe("[\"one\", {\"2\": \"two\", \"3\": \"three\", \"4\": [4]}, [5]]");
 
             });
 
@@ -151,7 +152,7 @@ describe("Divhide.Obj", function () {
                     }
                 });
 
-                expect(val).toBe("{1: 1, 2: [2], 3: {value: 3}}");
+                expect(val).toBe("{\"1\": 1, \"2\": [2], \"3\": {\"value\": \"3\"}}");
 
             });
 

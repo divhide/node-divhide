@@ -4,6 +4,26 @@ var _ = require("lodash"),
     Type = require("../Type"),
     traverse = require("./traverse");
 
+
+/**
+ *
+ * Converts the given primitive value to its string
+ * representation.
+ *
+ * @param  {*} value
+ * @return {String}
+ */
+var convertLiteralToString = function(value){
+
+    // wrap the string with quotes if it's a string.
+    if(Type.isString(value)){
+        value = "\"" + value + "\"";
+    }
+
+    return String(value);
+
+};
+
 /**
  *
  * Convert the SchemaResult to a string.
@@ -16,7 +36,7 @@ var _ = require("lodash"),
  * @return {String}
  *
  */
-var convertValueToStringCallback = function(value, info, accumulator, options){
+var stringifyCallback = function(value, info, accumulator, options){
 
     options = _.extend({
         lineBreak: "\n",
@@ -31,14 +51,10 @@ var convertValueToStringCallback = function(value, info, accumulator, options){
 
         if(Type.isString(info.index)){
 
-            resultStr = info.index + ": ";
+            resultStr = convertLiteralToString(info.index) + ": ";
 
             if(info.isFirst === true){
                 resultStr = "{" + resultStr;
-            }
-
-            if(isLiteral){
-                resultStr = resultStr + value;
             }
 
         }
@@ -48,13 +64,10 @@ var convertValueToStringCallback = function(value, info, accumulator, options){
                 resultStr = "[" + resultStr;
             }
 
-            if(isLiteral){
-                resultStr = resultStr + value;
-            }
-
         }
-        else if(!Type.isComplex(value)){
-            resultStr = resultStr + value;
+
+        if(isLiteral){
+            resultStr = resultStr + convertLiteralToString(value);
         }
 
     }
@@ -102,7 +115,7 @@ var convertValueToStringCallback = function(value, info, accumulator, options){
 var stringify = function(value, options){
     return traverse(
         value,
-        convertValueToStringCallback,
+        stringifyCallback,
         "",
         { runBefore: true, runAfter: true },
         options);
