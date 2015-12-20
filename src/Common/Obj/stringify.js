@@ -2,6 +2,7 @@
 
 var _ = require("lodash"),
     Type = require("../Type"),
+    Safe = require("../Safe"),
     traverse = require("./traverse");
 
 
@@ -38,58 +39,97 @@ var convertLiteralToString = function(value){
  */
 var stringifyCallback = function(value, info, accumulator, options){
 
-    options = _.extend({
-        lineBreak: "\n",
-        space: " "
-    }, options);
-
     var resultStr = "",
         isLiteral = !Type.isComplex(value);
 
     // callback is being run before the inner structure recursion
     if(info.isBefore){
 
+        // When the parent is an Object
         if(Type.isString(info.index)){
 
-            resultStr = convertLiteralToString(info.index) + ": ";
-
             if(info.isFirst === true){
-                resultStr = "{" + resultStr;
+                resultStr = resultStr + "{";
+                resultStr = resultStr + (options.space ? "\n" : "");
             }
 
+            resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-1) : "");
+            resultStr = resultStr + convertLiteralToString(info.index) + ":" + (options.space ? " " : "");
+
         }
+        // When the parent is an Array
         else if(Type.isNumber(info.index)){
 
             if(info.isFirst === true){
-                resultStr = "[" + resultStr;
+                resultStr = resultStr + "[";
+                resultStr = resultStr + (options.space ? "\n" : "");
+            }
+
+            // If value is not a literal apply identation after new line
+            if(!isLiteral){
+                resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-1) : "");
             }
 
         }
 
+        // if value is a literal value
         if(isLiteral){
+
+            // don't apply indentation on
+            if(!Type.isString(info.index)){
+                resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-1) : "");
+            }
+
             resultStr = resultStr + convertLiteralToString(value);
+
         }
 
     }
     // callback is being run after the inner structure recursion
     else if(info.isAfter){
 
-        if(Type.isString(info.index)){
+        // if value is empty
+        if(!isLiteral && Type.isEmpty(value)){
+
+            if(Type.isArray(value)){
+                resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-2) : "");
+                resultStr = "[]";
+            }
+            else if(Type.isObject(value)){
+                resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-2) : "");
+                resultStr = "{}";
+            }
 
             if(info.isLast === false){
-                resultStr = resultStr + ", ";
+                resultStr = resultStr + ",";
+                resultStr = resultStr + (options.space ? "\n" : "");
+            }
+
+        }
+        // if value belongs to an Object
+        else if(Type.isString(info.index)){
+
+            if(info.isLast === false){
+                resultStr = resultStr + ",";
+                resultStr = resultStr + (options.space ? "\n" : "");
             }
             else {
+                resultStr = resultStr + (options.space ? "\n" : "");
+                resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-2) : "");
                 resultStr = resultStr + "}";
             }
 
         }
+        // if value belongs to an Array
         else if(Type.isNumber(info.index)){
 
             if(info.isLast === false){
-                resultStr = resultStr + ", ";
+                resultStr = resultStr + ",";
+                resultStr = resultStr + (options.space ? "\n" : "");
             }
             else {
+                resultStr = resultStr + (options.space ? "\n" : "");
+                resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-2) : "");
                 resultStr = resultStr + "]";
             }
 
@@ -104,7 +144,8 @@ var stringifyCallback = function(value, info, accumulator, options){
 
 /**
  *
- * Converts the given value to a friendly string.
+ * Converts the given value to a friendly string. This function represents
+ * an alternative to JSON.stringify adding more options.
  *
  * @param  {*} value
  * @param  {Object} options
@@ -113,12 +154,19 @@ var stringifyCallback = function(value, info, accumulator, options){
  *
  */
 var stringify = function(value, options){
+
+    options = _.extend({
+        space: 4
+    }, options);
+
     return traverse(
         value,
         stringifyCallback,
         "",
         { runBefore: true, runAfter: true },
-        options);
+        {
+            space: _.repeat(" ", Safe.number(options.space, 0))
+        });
 };
 
 module.exports = stringify;

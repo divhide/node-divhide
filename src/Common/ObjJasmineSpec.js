@@ -28,7 +28,7 @@ describe("Divhide.Obj", function () {
             it("String should return a valid string", function () {
 
                 var val = Divhide.Obj.stringify("Oscar");
-                expect(val).toBe("\"Oscar\"");
+                expect("\"Oscar\"").toBe(val);
 
             });
 
@@ -62,14 +62,22 @@ describe("Divhide.Obj", function () {
          */
         describe("stringify(obj)", function(){
 
+            it("empty object should return a valid string", function () {
+
+                var val = Divhide.Obj.stringify({}, { space: 0 });
+                expect(val).toBe("{}");
+
+            });
+
             it("one level object should return a valid string", function () {
 
                 var val = Divhide.Obj.stringify({
                     "firstName": "Oscar",
                     "lastName": "Brito"
-                });
+                }, { space: 0 });
 
-                expect(val).toBe("{\"firstName\": \"Oscar\", \"lastName\": \"Brito\"}");
+                expect(val)
+                    .toBe("{\"firstName\":\"Oscar\",\"lastName\":\"Brito\"}");
 
             });
 
@@ -82,10 +90,28 @@ describe("Divhide.Obj", function () {
                     "lastName": {
                         "value": "Brito"
                     }
-                });
+                }, { space: 0 });
 
-                expect(val).toBe("{\"firstName\": {\"value\": \"Oscar\"}, \"lastName\": {\"value\": \"Brito\"}}");
+                expect(val)
+                    .toBe("{\"firstName\":{\"value\":\"Oscar\"},\"lastName\":{\"value\":\"Brito\"}}");
 
+            });
+
+            it("with identation should return a valid string", function () {
+
+                var val = Divhide.Obj.stringify({
+                    "other": {},
+                    "firstName": {
+                        "value": "Oscar"
+                    }
+                }, { space: 2 });
+
+                expect(val).toBe("{\n" +
+                    "  \"other\": {},\n" +
+                    "  \"firstName\": {\n" +
+                    "    \"value\": \"Oscar\"\n" +
+                    "  }\n" +
+                    "}");
             });
 
         });
@@ -97,23 +123,52 @@ describe("Divhide.Obj", function () {
          */
         describe("stringify(array)", function(){
 
+            it("empty array should return a valid string", function () {
+
+                var val = Divhide.Obj.stringify([], { space: 0 });
+                expect(val).toBe("[]");
+
+            });
+
             it("one level array should return a valid string", function () {
 
                 var val = Divhide.Obj.stringify([
                     "one",
                     "two",
                     3
-                ]);
+                ], { space: 0 });
 
-                expect(val).toBe("[\"one\", \"two\", 3]");
+                expect(val).toBe("[\"one\",\"two\",3]");
 
             });
 
             it("complex array should return a valid string", function () {
 
-                var val = Divhide.Obj.stringify(["one", ["two"]]);
-                expect(val).toBe("[\"one\", [\"two\"]]");
+                var val = Divhide.Obj.stringify(
+                    ["one", ["two"]],
+                    { space: 0 });
 
+                expect(val).toBe("[\"one\",[\"two\"]]");
+
+            });
+
+            it("with identation should return a valid string", function () {
+
+                var val = Divhide.Obj.stringify([
+                    1,
+                    [],
+                    [ 2, 3 ],
+                ], { space: 2 });
+
+                expect(val).toBe(
+                    "[\n" +
+                    "  1,\n" +
+                    "  [],\n" +
+                    "  [\n" +
+                    "    2,\n" +
+                    "    3\n" +
+                    "  ]\n" +
+                    "]");
             });
 
         });
@@ -136,9 +191,10 @@ describe("Divhide.Obj", function () {
                         4: [4]
                     },
                     [ 5 ]
-                ]);
+                ], { space: 0 });
 
-                expect(val).toBe("[\"one\", {\"2\": \"two\", \"3\": \"three\", \"4\": [4]}, [5]]");
+                expect(val)
+                    .toBe("[\"one\",{\"2\":\"two\",\"3\":\"three\",\"4\":[4]},[5]]");
 
             });
 
@@ -150,10 +206,42 @@ describe("Divhide.Obj", function () {
                     3: {
                         "value": "3"
                     }
-                });
+                }, { space: 0 });
 
-                expect(val).toBe("{\"1\": 1, \"2\": [2], \"3\": {\"value\": \"3\"}}");
+                expect(val)
+                    .toBe("{\"1\":1,\"2\":[2],\"3\":{\"value\":\"3\"}}");
 
+            });
+
+            it("array with identation should return a valid string", function () {
+
+                var val = Divhide.Obj.stringify([
+                    {
+                        name: "Oscar",
+                        age: 30,
+                        tags: [ "tag1", "tag2" ]
+                    },
+                    {
+                        name: "Filipe",
+                        age: 31
+                    },
+                ], { space: 2 });
+
+                expect(val).toBe(
+                    "[\n" +
+                    "  {\n" +
+                    "    \"name\": \"Oscar\",\n" +
+                    "    \"age\": 30,\n" +
+                    "    \"tags\": [\n" +
+                    "      \"tag1\",\n" +
+                    "      \"tag2\"\n" +
+                    "    ]\n" +
+                    "  },\n" +
+                    "  {\n" +
+                    "    \"name\": \"Filipe\",\n" +
+                    "    \"age\": 31\n" +
+                    "  }\n" +
+                    "]");
             });
 
         });

@@ -19,8 +19,8 @@ var _ = require("lodash"),
  */
 var recursiveTraversal = function(value, callback, accumulator, options, info){
 
-    var extraArgs = arguments.length > 4 ?
-        _(arguments).splice(4) : [];
+    var extraArgs = arguments.length > 5 ?
+        _.slice(arguments, 5) : [];
 
     callback = Safe.function(callback);
     accumulator = Safe.value(accumulator);
@@ -62,7 +62,9 @@ var recursiveTraversal = function(value, callback, accumulator, options, info){
                 isFirst: loopIndex === 0
             };
 
-            accumulator = recursiveTraversal(val, callback, accumulator, options, info);
+            accumulator = accumulator = recursiveTraversal.apply(
+                {}, [ val, callback, accumulator, options, info ].concat(extraArgs) );
+
             loopIndex++;
 
         });
@@ -94,11 +96,11 @@ var recursiveTraversal = function(value, callback, accumulator, options, info){
  */
 var traversal = function(value, callback, accumulator, options){
 
-    var args = arguments.length > 3 ?
-        _(arguments).splice(3) : [];
+    var extraArgs = arguments.length > 4 ?
+        _.slice(arguments, 4) : [];
 
     return recursiveTraversal.apply(
-        {}, [ value, callback, accumulator, options ].concat(args));
+        {}, [ value, callback, accumulator, options, null ].concat(extraArgs));
 
 };
 
