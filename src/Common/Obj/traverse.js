@@ -9,26 +9,19 @@ var _ = require("lodash"),
  * Traverse the structure using a top-down strategy.
  *
  * @param  {*}          value
- * @param  {Function}   callback
- * @param  {Object}     accumulator
  * @param  {Object}     options
+ * @param  {Object}     accumulator
  * @param  {Object}     info
  *
  * @return {*} The accumulator
  *
  */
-var recursiveTraversal = function(value, callback, accumulator, options, info){
+var recursiveTraversal = function(value, options, accumulator, info){
 
-    var extraArgs = arguments.length > 5 ?
-        _.slice(arguments, 5) : [];
+    var extraArgs = arguments.length > 4 ?
+        _.slice(arguments, 4) : [];
 
-    callback = Safe.function(callback);
     accumulator = Safe.value(accumulator);
-
-    options = _.extend({
-        runBefore: true,
-        runAfter: false
-    }, options);
 
     info = _.extend({
         parent: null,
@@ -39,10 +32,9 @@ var recursiveTraversal = function(value, callback, accumulator, options, info){
     }, info);
 
     // call callback before iteration
-    if(options.runBefore){
-        info = _.extend({}, info, { isBefore: true, isAfter: false });
-        accumulator = callback.apply(
-            {}, [ value, info, accumulator ].concat(extraArgs) );
+    if(options.callback){
+        accumulator = options.callback.apply(
+            {}, [ value, _.clone(info), accumulator ].concat(extraArgs) );
     }
 
     // iterate over the inner elements of complex structures
@@ -63,7 +55,7 @@ var recursiveTraversal = function(value, callback, accumulator, options, info){
             };
 
             accumulator = accumulator = recursiveTraversal.apply(
-                {}, [ val, callback, accumulator, options, info ].concat(extraArgs) );
+                {}, [ val, options, accumulator, info ].concat(extraArgs) );
 
             loopIndex++;
 
@@ -72,10 +64,9 @@ var recursiveTraversal = function(value, callback, accumulator, options, info){
     }
 
     // call callback after iteration
-    if(options.runAfter){
-        info = _.extend({}, info, { isBefore: false, isAfter: true });
-        accumulator = callback.apply(
-            {}, [ value, info, accumulator ].concat(extraArgs) );
+    if(options.callbackAfter){
+        accumulator = options.callbackAfter.apply(
+            {}, [ value, _.clone(info), accumulator ].concat(extraArgs) );
     }
 
     return accumulator;
@@ -88,19 +79,26 @@ var recursiveTraversal = function(value, callback, accumulator, options, info){
  * given callback before (top-down) and/or after (bottom-up).
  *
  * @param  {*}          value
- * @param  {Function}   callback
+ * @param  {Object}     options
  * @param  {*}          accumulator
  *
  * @return {*} The accumulator result
  *
  */
-var traversal = function(value, callback, accumulator, options){
+var traversal = function(value, options, accumulator){
 
-    var extraArgs = arguments.length > 4 ?
-        _.slice(arguments, 4) : [];
+    var extraArgs = arguments.length > 3 ?
+        _.slice(arguments, 3) : [];
+
+    var tOptions = {
+        // callback called on item traversal (top-down)
+        callback: Safe.function(options.callback, null),
+        // callback called after item traversal (bottom-up)
+        callbackAfter: Safe.function(options.callbackAfter, null),
+    };
 
     return recursiveTraversal.apply(
-        {}, [ value, callback, accumulator, options, null ].concat(extraArgs));
+        {}, [ value, tOptions, accumulator, null ].concat(extraArgs));
 
 };
 

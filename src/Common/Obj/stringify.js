@@ -27,7 +27,8 @@ var convertLiteralToString = function(value){
 
 /**
  *
- * Convert the SchemaResult to a string.
+ * Structure callback called before the structure is traversed ( top-down ).
+ * This changes the traversal accumulator, returning it.
  *
  * @param {*}       value
  * @param {Object}  info
@@ -42,97 +43,111 @@ var stringifyCallback = function(value, info, accumulator, options){
     var resultStr = "",
         isLiteral = !Type.isComplex(value);
 
-    // callback is being run before the inner structure recursion
-    if(info.isBefore){
+    // When the parent is an Object
+    if(Type.isString(info.index)){
 
-        // When the parent is an Object
-        if(Type.isString(info.index)){
+        if(info.isFirst === true){
+            resultStr = resultStr + "{";
+            resultStr = resultStr + (options.space ? "\n" : "");
+        }
 
-            if(info.isFirst === true){
-                resultStr = resultStr + "{";
-                resultStr = resultStr + (options.space ? "\n" : "");
-            }
+        resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-1) : "");
+        resultStr = resultStr + convertLiteralToString(info.index) + ":" + (options.space ? " " : "");
 
+    }
+    // When the parent is an Array
+    else if(Type.isNumber(info.index)){
+
+        if(info.isFirst === true){
+            resultStr = resultStr + "[";
+            resultStr = resultStr + (options.space ? "\n" : "");
+        }
+
+        // If value is not a literal apply identation after new line
+        if(!isLiteral){
             resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-1) : "");
-            resultStr = resultStr + convertLiteralToString(info.index) + ":" + (options.space ? " " : "");
-
-        }
-        // When the parent is an Array
-        else if(Type.isNumber(info.index)){
-
-            if(info.isFirst === true){
-                resultStr = resultStr + "[";
-                resultStr = resultStr + (options.space ? "\n" : "");
-            }
-
-            // If value is not a literal apply identation after new line
-            if(!isLiteral){
-                resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-1) : "");
-            }
-
-        }
-
-        // if value is a literal value
-        if(isLiteral){
-
-            // don't apply indentation on
-            if(!Type.isString(info.index)){
-                resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-1) : "");
-            }
-
-            resultStr = resultStr + convertLiteralToString(value);
-
         }
 
     }
-    // callback is being run after the inner structure recursion
-    else if(info.isAfter){
 
-        // if value is empty
-        if(!isLiteral && Type.isEmpty(value)){
+    // if value is a literal value
+    if(isLiteral){
 
-            if(Type.isArray(value)){
-                resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-2) : "");
-                resultStr = "[]";
-            }
-            else if(Type.isObject(value)){
-                resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-2) : "");
-                resultStr = "{}";
-            }
-
-            if(info.isLast === false){
-                resultStr = resultStr + ",";
-                resultStr = resultStr + (options.space ? "\n" : "");
-            }
-
+        // don't apply indentation on
+        if(!Type.isString(info.index)){
+            resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-1) : "");
         }
-        // if value belongs to an Object
-        else if(Type.isString(info.index)){
 
-            if(info.isLast === false){
-                resultStr = resultStr + ",";
-                resultStr = resultStr + (options.space ? "\n" : "");
-            }
-            else {
-                resultStr = resultStr + (options.space ? "\n" : "");
-                resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-2) : "");
-                resultStr = resultStr + "}";
-            }
+        resultStr = resultStr + convertLiteralToString(value);
 
+    }
+
+    // append the result to the accumulator
+    return accumulator + resultStr;
+
+};
+
+/**
+ *
+ * Structure callback called after the structure is traversed ( bottom-up ).
+ * This changes the traversal accumulator, returning it.
+ *
+ * @param {*}       value
+ * @param {Object}  info
+ * @param {String}  accumulator
+ * @param {Object}  options
+ *
+ * @return {String}
+ *
+ */
+var stringifyCallbackAfter = function(value, info, accumulator, options){
+
+    var resultStr = "",
+        isLiteral = !Type.isComplex(value);
+
+    // if value is empty
+    if(!isLiteral && Type.isEmpty(value)){
+
+        if(Type.isArray(value)){
+            resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-2) : "");
+            resultStr = "[]";
         }
-        // if value belongs to an Array
-        else if(Type.isNumber(info.index)){
+        else if(Type.isObject(value)){
+            resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-2) : "");
+            resultStr = "{}";
+        }
 
-            if(info.isLast === false){
-                resultStr = resultStr + ",";
-                resultStr = resultStr + (options.space ? "\n" : "");
-            }
-            else {
-                resultStr = resultStr + (options.space ? "\n" : "");
-                resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-2) : "");
-                resultStr = resultStr + "]";
-            }
+        if(info.isLast === false){
+            resultStr = resultStr + ",";
+            resultStr = resultStr + (options.space ? "\n" : "");
+        }
 
+    }
+    // if value belongs to an Object
+    else if(Type.isString(info.index)){
+
+        if(info.isLast === false){
+            resultStr = resultStr + ",";
+            resultStr = resultStr + (options.space ? "\n" : "");
+        }
+        else {
+            resultStr = resultStr + (options.space ? "\n" : "");
+            resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-2) : "");
+            resultStr = resultStr + "}";
+        }
+
+    }
+    // if value belongs to an Array
+    else if(Type.isNumber(info.index)){
+
+        if(info.isLast === false){
+            resultStr = resultStr + ",";
+            resultStr = resultStr + (options.space ? "\n" : "");
+        }
+        else {
+            resultStr = resultStr + (options.space ? "\n" : "");
+            resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-2) : "");
+            resultStr = resultStr + "]";
         }
 
     }
@@ -159,14 +174,19 @@ var stringify = function(value, options){
         space: 4
     }, options);
 
+    // convert the given identation number into a repeatable string
+    var identationSpaces = _.repeat(" ", Safe.number(options.space, 0));
+
     return traverse(
         value,
-        stringifyCallback,
-        "",
-        { runBefore: true, runAfter: true },
+        // traverse options
         {
-            space: _.repeat(" ", Safe.number(options.space, 0))
-        });
+            callback: stringifyCallback,
+            callbackAfter: stringifyCallbackAfter
+        },
+        "",
+        // callback options
+        { space: identationSpaces });
 };
 
 module.exports = stringify;
