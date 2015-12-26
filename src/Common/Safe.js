@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+ * @module Divhide/Safe
+ */
 
 var _       = require('lodash'),
     Type    = require('./Type');

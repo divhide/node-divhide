@@ -2,7 +2,13 @@
 node_modules/
 bower_components/
 .grunt
-.sass-cache/
+
+# ignore test files
 test/
-dist/
+
+# ignore generated distribution files
+dist/divhide*.js
+dist/doc/
+
+# ignore npm generated packages
 divhide-*.tgz

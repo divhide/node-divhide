@@ -5,6 +5,10 @@ var _ = require("lodash"),
     Safe = require("../Safe");
 
 /**
+ * @namespace Divhide/Obj/traverse
+ */
+
+/**
  *
  * Traverse the structure using a top-down strategy.
  *
@@ -74,15 +78,27 @@ var recursiveTraversal = function(value, options, accumulator, info){
 };
 
 /**
+ * This callback is displayed as part of the Requester class.
+ * @callback Divhide/Obj/traverse~callback
+ * @param {number} responseCode
+ * @param {string} responseMessage
+ */
+
+/**
  *
  * Perform a traversal of the given structure calling the
  * given callback before (top-down) and/or after (bottom-up).
  *
- * @param  {*}          value
- * @param  {Object}     options
- * @param  {*}          accumulator
+ * @alias module:Divhide/Obj/traverse
+ * @type {Function}
  *
- * @return {*} The accumulator result
+ * @param  {Any} value
+ * @param  {Object} options
+ * @param  {Divhide/Obj/traverse~callback} options.callback Function to be called before inner structure traversal (top-down).
+ * @param  {Divhide/Obj/traverse~callback} options.callbackAfter Function to be called after inner structure traversal (bottom-down).
+ * @param  {Any} accumulator
+ *
+ * @return {Any} The accumulator result
  *
  */
 var traversal = function(value, options, accumulator){

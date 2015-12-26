@@ -10,9 +10,10 @@ var _                   = require("lodash"),
 
 /**
  *
- * @class
  * Stores the result of a schema evaluation. It will keep reference to
  * the global structure and the evaluation tree as well.
+ *
+ * @protected
  *
  * @param {*} schema    The Schema object
  *

@@ -1,5 +1,9 @@
 'use strict';
 
+/**
+ * @module Divhide/Type
+ */
+
 var Internal = {};
 
 /**

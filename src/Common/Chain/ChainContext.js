@@ -10,7 +10,6 @@ var _    = require("lodash"),
 /**
  *
  * A chain context keeps track of the current chainable state
- * @class
  *
  * @param {Object} options
  *
@@ -28,7 +27,7 @@ var ChainContext = function(options){
     /**
      * The context registered functions
      *
-     * @type { [Internal.AssertionFunction] }
+     * @type {Array}
      *
      */
     this.fns = [];

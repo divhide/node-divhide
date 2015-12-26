@@ -1,15 +1,17 @@
 'use strict';
 
+/**
+ * @module Divhide/Url
+ */
+
 var _           = require("lodash"),
     UrlParser   = require("./Url/Parser");
 
 
 /**
+ * Provides simple Url manipulation functionalities.
  *
- * @class
- * The Url object
- *
- * @param {[type]} url The Url
+ * @param {String} url The Url
  *
  */
 var Url = function(url){
@@ -20,6 +22,9 @@ var Url = function(url){
 
         /**
          * Tests if the url is absolute
+         *
+         * @method isAbsolute
+         * @for Divhide.Url
          *
          * @return {Boolean}
          *
@@ -99,8 +104,8 @@ var Url = function(url){
         },
 
         /**
-         *
-         * @return {[type]} [description]
+         * Get the URL string representation
+         * @return {String}
          */
         toString: function(){
             return UrlParser.normalize(url);

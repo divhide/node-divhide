@@ -159,13 +159,17 @@ var stringifyCallbackAfter = function(value, info, accumulator, options){
 
 /**
  *
- * Converts the given value to a friendly string. This function represents
- * an alternative to JSON.stringify adding more options.
+ * Converts the given value to a friendly string.
+ * This function represents an alternative to JSON.stringify adding more options.
  *
- * @param  {*} value
+ * @method stringify
+ * @for Divhide.Obj
+ *
+ * @param  {Any} value The value to stringify
  * @param  {Object} options
+ * @param  {Number} options.space The identation level
  *
- * @return {String}
+ * @return {String} The string representation of the value.
  *
  */
 var stringify = function(value, options){

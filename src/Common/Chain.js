@@ -1,11 +1,13 @@
 'use strict';
 
+/**
+ * @module Divhide/Chain
+ */
+
 var _    = require("lodash"),
     Type = require("./Type"),
     Safe = require("./Safe"),
     ChainContext    = require("./Chain/ChainContext");
-
-
 
 /**
  *
@@ -187,7 +189,6 @@ Internal.getChainFunctions = function(context, chainableFns, evaluationFns, opti
 /**
  *
  * Chain constructor
- * @class
  *
  * @param {Object}          chainableFns
  * @param {Object}          evaluationFns

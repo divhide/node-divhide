@@ -9,7 +9,8 @@ var watch = {
         ],
         tasks: [
           "browserify:test",
-          "jasmine:test:build"
+          "jasmine:test:build",
+          "jsdoc"
         ],
         options: {
             interrupt: true,

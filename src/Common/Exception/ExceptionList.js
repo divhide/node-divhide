@@ -127,8 +127,6 @@ var ExceptionList = function() {
      *
      * Clear the error list
      *
-     * @return
-     *
      */
     this.clear = function(){
         while(items.length) items.pop();

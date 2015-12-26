@@ -1,14 +1,30 @@
 'use strict';
 
+/**
+ * @module Divhide/Obj
+ */
+
 var _     = require("lodash"),
     Safe  = require("./Safe");
 
+/**
+ *
+ * Provides a set of utilities to use with Object type instances.
+ *
+ * @static
+ * @type Object
+ * @alias module:Divhide/Obj
+ * @borrows module:Divhide/Obj/traverse as traverse
+ *
+ */
 var Obj = {
 
     /**
      *
      * Get the object keys. If a filter is specified it returns the keys
      * that match the filter regular expression.
+     *
+     * @method filter
      *
      * @param {Object}          obj
      * @param {String|RegExp}   filter
@@ -37,22 +53,15 @@ var Obj = {
     },
 
     /**
-     *
      * Traversal algorithm.
-     * See Obj/traverse.
-     *
-     * @type {Function}
-     *
+     * @ignore
      */
     traverse: require("./Obj/traverse"),
 
     /**
-     *
      * Converts any object to it's string representation.
      * See Obj/stringify.
-     *
-     * @type {Function}
-     *
+     * @method stringify
      */
     stringify: require("./Obj/stringify")
 

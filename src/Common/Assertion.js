@@ -1,10 +1,13 @@
 'use strict';
 
+/**
+ * @module Divhide/Assertion
+ */
+
 var _               = require("lodash"),
     Safe            = require("./Safe"),
     Chain           = require("./Chain"),
     ChainContext    = require("./Chain/ChainContext");
-
 
 /**
  *
@@ -68,10 +71,9 @@ AssertionFns.assert = function(result, err){
 /**
  *
  * Construct a new Assertion provider. This can have some custom actions.
- * @class
+ * @protected
  *
  * @param {Object} fns
- *
  * @return {Object}
  *
  * @example

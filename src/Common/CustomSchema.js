@@ -1,5 +1,9 @@
 'use strict';
 
+/**
+ * @module Divhide/CustomSchema
+ */
+
 var _                        = require("lodash"),
     Type                     = require("./Type"),
     Safe                     = require("./Safe"),
@@ -41,7 +45,7 @@ Internal.wrapValidationFunction = function(name){
 
         /// first argument is the eval object, so discard it.
         args.shift();
-        
+
         /// last argument is the chain argument option, so discard it
         args.pop();
 
@@ -60,26 +64,26 @@ Internal.wrapValidationFunction = function(name){
  * SchemaDefinition compile options.
  *
  * @type {Object}
- * 
+ *
  */
 Internal.compileOptions = {
 
     /**
      *
-     * Prepare the given value for the SchemaDefinition 
-     * conversion. If the value is instance of Schema get 
+     * Prepare the given value for the SchemaDefinition
+     * conversion. If the value is instance of Schema get
      * its SchemaDefinition value for the conversions
      *
      * @param  {*} val
-     * 
+     *
      * @return {*}
-     * 
+     *
      */
     prepare: function(val){
 
         if(Type.instanceOf(val, Types.Schema)){
             var schemaData = val.serialize();
-            val = new SchemaDefinition(schemaData, { 
+            val = new SchemaDefinition(schemaData, {
                 prepare: function(val){
                     return new SchemaDefinition(val, { compile: false });
                 }

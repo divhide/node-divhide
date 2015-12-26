@@ -20,7 +20,7 @@ var UrlParser = {
      * @return{String} the current url
      */
     normalize: function(url) {
-    
+
         if(!url) return "";
 
         /// replace all //// to a single slash
@@ -34,9 +34,9 @@ var UrlParser = {
 
     /**
      * Test if the url is absolute
-     * 
+     *
      * @return {Boolean}
-     * 
+     *
      */
     isAbsolute: function(url){
 
@@ -46,8 +46,8 @@ var UrlParser = {
     },
 
     /**
-     * Gets the protocol of the url 
-     * 
+     * Gets the protocol of the url
+     *
      * @param  {String} url
      * @return {String}
      */
@@ -56,14 +56,14 @@ var UrlParser = {
         var regex = new RegExp(ProtocolRegExStr, "gi");
         var result = regex.exec(url);
         if(result) return result[1];
-        
+
         return "";
 
     },
 
     /**
      * Returns the baseUrl for the given url
-     * 
+     *
      * @param  {String} url
      * @return {String}
      */
@@ -85,7 +85,7 @@ var UrlParser = {
 
     /**
      * Get the path of the url
-     * 
+     *
      * @param  {String} url
      * @return {String}
      */
@@ -103,7 +103,7 @@ var UrlParser = {
         var urlParts = url.split("/");
         urlParts.pop();
         urlParts.push("");
-        
+
         // join all
         url = urlParts.join("/");
 
@@ -112,9 +112,7 @@ var UrlParser = {
 
     /**
      * Get the file name
-     * 
-     * @return {[type]} [description]
-     * 
+     * @return {String}
      */
     filename: function(url){
 
@@ -122,9 +120,9 @@ var UrlParser = {
         url = url || "";
 
         var urlParts = url.split("/");
-        
+
         var filename = urlParts.pop().replace(/\?.*$/, "");
-        
+
         return filename;
 
     },
@@ -132,15 +130,15 @@ var UrlParser = {
 
     /**
      * Gets the entire File Path
-     * 
+     *
      * @param  {String} url
      * @return {String}
      */
-    filepath: function(url){ 
+    filepath: function(url){
 
         return UrlParser.normalize(
-            UrlParser.baseUrl(url) + 
-            UrlParser.path(url) + 
+            UrlParser.baseUrl(url) +
+            UrlParser.path(url) +
             UrlParser.filename(url));
 
     },
@@ -158,9 +156,9 @@ var UrlParser = {
         separator = separator || '?';
 
         var hrefSplit = href.split(separator) || [];
-        
+
         if(hrefSplit.length > 1){
-            
+
             // query strin can be malformed like ?a=1&?b=2
             // we can fix this
             var qStringPart = hrefSplit.splice(1, hrefSplit.length-1);
@@ -182,7 +180,7 @@ var UrlParser = {
      * @return An hash with all the query string key/value's
      */
     queryStringObj: function(href, separator) {
-    
+
         href = href || "";
 
         var qString = UrlParser.queryString(href, separator),
@@ -193,16 +191,16 @@ var UrlParser = {
             qString.split("&"),
             function(keyValue){
 
-                // ignore if 
+                // ignore if
                 if(!keyValue) return;
 
                 var pair = keyValue.split("=");
-                
+
                 if(pair.length>1)
                     values[pair[0]] = pair[1];
                 else
                     values[pair[0]] = true; // it's more easy to use on conditions
-                    
+
 
             });
 

@@ -64,7 +64,7 @@ Internal.getStackTrace = function(){
 
 /**
  *
- * @class Error Class
+ * Error Class
  *
  * @param {String|I18NString} message
  *

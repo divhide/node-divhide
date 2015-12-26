@@ -13,42 +13,27 @@ var _ = require("lodash");
 var Types = {
 
     /**
-     *
-     * @class
      * Schema
-     *
      */
     Schema: function Schema(options){ _.extend(this, options); },
 
     /**
-     *
-     * @class
-     * Schema
-     *
+     * SchemaDefinition
      */
     SchemaDefinition: function SchemaDefinition(options){ _.extend(this, options); },
 
     /**
-     *
-     * @class
      * SchemaEvaluator
-     *
      */
     SchemaEvaluator: function SchemaEvaluator(options){ _.extend(this, options); },
 
     /**
-     *
-     * @class
      * SchemaResult
-     *
      */
     SchemaResult: function SchemaResult(options){ _.extend(this, options); },
 
     /**
-     *
-     * @class
      * SchemaResultNode
-     *
      */
     SchemaResultNode: function SchemaResultNode(options){ _.extend(this, options); }
 

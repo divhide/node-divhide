@@ -10,9 +10,10 @@ var _                       = require("lodash"),
 
 /**
  *
- * @class
  * The schema evaluator facade. This will serve as interface to the Schema
  * execution.
+ *
+ * @protected
  *
  * @param {*}       schema
  * @param {Object}  validationFns
@@ -27,7 +28,7 @@ var SchemaEvaluator = function(schema, validationFns, cOptions){
      * The compiled schema
      *
      * @type {SchemaDefinition}
-     * 
+     *
      */
     schema = SchemaDefinition(schema, cOptions);
 
@@ -56,7 +57,7 @@ var SchemaEvaluator = function(schema, validationFns, cOptions){
          * @param  {*}      value
          * @param  {Object} validationFns
          *
-         * @return {[Error]}
+         * @return {Error}
          *
          */
         errors: function(value){
@@ -127,20 +128,20 @@ var SchemaEvaluator = function(schema, validationFns, cOptions){
          */
         deserialize: function(value){
 
-            /// use a prepare option that builds the SchemaDefinition to 
+            /// use a prepare option that builds the SchemaDefinition to
             /// avoid fallback on the Default object builder
             var cOptions = {
                 prepare: function(val){
-                    
+
                     /// make sure that that the return value is a SchemaDefinition
-                    /// NOTE: don't compile the inner structures because the SchemaEvaluator will 
+                    /// NOTE: don't compile the inner structures because the SchemaEvaluator will
                     /// do it
                     if(!Type.instanceOf(val, Types.SchemaDefinition)){
-                        return SchemaDefinition(val, { compile: false });    
+                        return SchemaDefinition(val, { compile: false });
                     }
 
                     return val;
-                    
+
                 }
             };
 

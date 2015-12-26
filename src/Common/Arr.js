@@ -1,9 +1,12 @@
 'use strict';
 
+/**
+ * @module Divhide/Arr
+ */
+
 var _           = require("lodash"),
     Type        = require("./Type"),
     Safe        = require("./Safe");
-
 
 
 var Arr = {

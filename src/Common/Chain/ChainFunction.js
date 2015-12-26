@@ -5,7 +5,6 @@ var _    = require("lodash"),
     Safe = require("../Safe");
 
 /**
- * @class
  * The ChainFunction wraps the functionality of a function executed
  * on a chain context.
  *

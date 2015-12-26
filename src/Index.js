@@ -1,58 +1,53 @@
 'use strict';
 
+/**
+ * @namespace Divhide
+ * @module Divhide
+ *
+ */
+
+/**
+ *
+ * Divhide Library - An isomorphic library for you to use on javascript supported
+ * devices.
+ *
+ * @type Object
+ * @alias module:Divhide
+ * @enum generators
+ */
 var Common = {
 
     /**
-     *
      * Type utility
-     *
-     * @type {Object}
-     *
+     * @type {module:Divhide/Type}
      */
     Type: require("./Common/Type"),
 
     /**
-     *
      * Safe utility
-     *
-     * @type {Object}
-     *
+     * @type {module:Divhide/Safe}
      */
     Safe: require("./Common/Safe"),
 
     /**
-     *
      * Array utility
-     *
-     * @type {Object}
-     *
+     * @type {module:Divhide/Arr}
      */
     Arr: require("./Common/Arr"),
 
     /**
-     *
-     * Object utility
-     *
-     * @type {Object}
-     *
+     * Object helper
+     * @type {module:Divhide/Obj}
      */
     Obj: require("./Common/Obj"),
 
     /**
-     *
      * I18N utility
-     *
-     * @type {Object}
-     *
      */
     I18N: {
 
         /**
-         *
          * I18NString utility
-         *
-         * @type {I18NString}
-         *
          */
         String: require("./Common/I18N/String"),
 
@@ -62,86 +57,57 @@ var Common = {
      *
      * Exceptions package
      *
-     * @type {Object}
-     *
      */
     Exception: {
 
         /**
-         *
          * Exception Class
-         *
-         * @type {Exception}
-         *
          */
         Exception: require("./Common/Exception/Exception"),
 
         /**
-         *
          * ExceptionList
-         *
-         * @type {ExceptionList}
-         *
          */
         ExceptionList: require("./Common/Exception/ExceptionList"),
 
     },
 
     /**
-     *
      * Url utility
-     *
-     * @type {Function}
-     *
+     * @type {module:Divhide/Url}
      */
     Url: require("./Common/Url"),
 
     /**
-     *
      * Chain facility
-     *
-     * @type {Object}
-     *
+     * @type {module:Divhide/Chain}
      */
     Chain: require("./Common/Chain"),
 
     /**
-     *
      * Default Assertion instance utility. This provides access to the default
      * Assert functions.
-     *
-     * @type {Object}
-     *
+     * @type {module:Divhide/Assert}
      */
     Assert: require("./Common/Assert"),
 
     /**
-     *
      * Assertion utility
-     *
-     * @type {Function}
-     *
+     * @type {module:Divhide/Assertion}
      */
     Assertion: require("./Common/Assertion"),
 
     /**
-     *
      * Schema utility
-     *
-     * @type {Object}
-     *
+     * @type {module:Divhide/Schema}
      */
     Schema: require("./Common/Schema"),
 
     /**
-     *
      * Custom Schema
-     *
-     * @type {Object}
-     *
+     * @type {module:Divhide/CustomSchema}
      */
     CustomSchema: require("./Common/CustomSchema"),
-
 
 };
 

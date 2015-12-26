@@ -4,6 +4,8 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
 
+        'pkg': grunt.file.readJSON('package.json'),
+
         'jshint'            : require("./.grunt-tasks/jshint.js"),
 
         'browserify'        : require("./.grunt-tasks/browserify.js"),
@@ -24,7 +26,9 @@ module.exports = function(grunt) {
 
         'exec'              : require("./.grunt-tasks/exec.js"),
 
-        'coveralls'         : require("./.grunt-tasks/coveralls.js")
+        'coveralls'         : require("./.grunt-tasks/coveralls.js"),
+
+        'jsdoc'             : require("./.grunt-tasks/jsdoc.js")
 
     });
 
@@ -36,6 +40,7 @@ module.exports = function(grunt) {
         [
             'browserify:test-libs',
             'browserify:test',
+            'jsdoc',
             'http-server',
             'watch',
         ]);
@@ -45,6 +50,7 @@ module.exports = function(grunt) {
         [
             'readme',
             'jshint',
+            'jsdoc',
             'browserify',
             'simplemocha',
             'karma'

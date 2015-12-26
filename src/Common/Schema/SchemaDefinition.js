@@ -117,12 +117,13 @@ var Defaults = {
 
 /**
  *
- * Normalize the schema value in order to avoid storing unnecessary 
+ * Normalize the schema value in order to avoid storing unnecessary
  * data and keep the values consistent across usages.
- * 
+ *
+ * @protected
  * @param  {String} value
  * @return {*}
- * 
+ *
  */
 var normalizeSchemaValue = function(value){
 
@@ -146,7 +147,7 @@ var normalizeSchemaValue = function(value){
 
 /**
  *
- * Compile the given schema definition or compatible 
+ * Compile the given schema definition or compatible
  * structure.
  *
  * @param {*}       schema
@@ -157,11 +158,11 @@ var normalizeSchemaValue = function(value){
  */
 var compile = function(schema, options){
 
-    /// extensibility point - prepare the value before the 
+    /// extensibility point - prepare the value before the
     /// compilation
     schema = options.prepare(schema);
 
-    /// apply the defaults and create the SchemaDefinition if an object 
+    /// apply the defaults and create the SchemaDefinition if an object
     /// has been provided
     if(!Type.instanceOf(schema, Types.SchemaDefinition)){
         schema = Defaults.object(schema) || Defaults.array(schema) ||
@@ -202,9 +203,9 @@ var SchemaDefinition = function(options){
     /**
      *
      * SchemaDefinition module API
-     * 
+     *
      * @type {Object}
-     * 
+     *
      */
     var self = {
 
@@ -279,13 +280,12 @@ var SchemaDefinition = function(options){
 
 /**
  *
- * @class
- * A SchemaDefinition compiled class. This represents a fully compiled 
+ * A SchemaDefinition compiled class. This represents a fully compiled
  * instance of all inner structures that represents a Schema.
  *
  * A full iteration over the entire schema structure will be performed.
- * 
- * @param {Object} options  The SchemaDefinition data 
+ *
+ * @param {Object} options  The SchemaDefinition data
  * @param {Object} cOptions The compilation options
  *
  */
@@ -301,9 +301,9 @@ var CompiledSchemaDefinition = function(options, cOptions){
 
     /// traverse the schema structure compiling its inner elements
     if(cOptions.compile){
-        return compile(schema, cOptions);    
+        return compile(schema, cOptions);
     }
-    
+
     return schema;
 
 };
