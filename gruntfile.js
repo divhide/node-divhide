@@ -35,40 +35,38 @@ module.exports = function(grunt) {
     // load libs
     require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask(
-        'default',
-        [
-            'browserify:test-libs',
-            'browserify:test',
-            'jsdoc',
-            'http-server',
-            'watch',
-        ]);
+    grunt.registerTask('build', [
+        'exec:clean',
+        'readme',
+        'jshint',
+        'jsdoc',
+        'browserify',
+        'simplemocha',
+        'karma'
+    ]);
 
-    grunt.registerTask(
+    grunt.registerTask('dev', [
+        'browserify:test-libs',
+        'browserify:test',
+        'jasmine:test:build',
+        'jsdoc',
+        'http-server',
+        'watch',
+    ]);
+
+    grunt.registerTask('default', [
+        'build'
+    ]);
+
+    grunt.registerTask('travis', [
         'build',
-        [
-            'readme',
-            'jshint',
-            'jsdoc',
-            'browserify',
-            'simplemocha',
-            'karma'
-        ]);
+        'coveralls'
+    ]);
 
-    grunt.registerTask(
+    grunt.registerTask('publish', [
         'travis',
-        [
-            'build',
-            'coveralls'
-        ]);
-
-    grunt.registerTask(
-        'publish',
-        [
-            'travis',
-            'exec:npm-publish',
-            'exec:bower-publish'
-        ]);
+        'exec:npm-publish',
+        'exec:bower-publish'
+    ]);
 
 };

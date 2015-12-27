@@ -7,7 +7,7 @@ var jsdoc = {
             'src/Common/**/*.js'
         ],
         options: {
-            destination: 'dist/doc/',
+            destination: 'out/doc/',
             recurse: true,
             debug: true
         }

@@ -8,9 +8,11 @@ var watch = {
             ".readme/**/*.js",
         ],
         tasks: [
-          "browserify:test",
-          "jasmine:test:build",
-          "jsdoc"
+            "exec:clean",
+            "browserify:test-libs",
+            "browserify:test",
+            "jasmine:test:build",
+            "jsdoc"
         ],
         options: {
             interrupt: true,

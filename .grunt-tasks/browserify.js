@@ -52,7 +52,7 @@ var Browserify = {
     dist: {
 
         files: {
-            'dist/divhide.js': [
+            'out/divhide.js': [
                 'src/Index.js'
             ]
         },
@@ -80,7 +80,7 @@ var Browserify = {
     "test-libs": {
 
         files: {
-            'test/divhide-libs.js': []
+            'out/jasmine/divhide-libs.js': []
         },
 
         options: {
@@ -107,7 +107,7 @@ var Browserify = {
     "test": {
 
         files: {
-            'test/divhide.js': [
+            'out/jasmine/divhide.js': [
                 'src/SpecIndex.js'
             ]
         },
@@ -143,7 +143,7 @@ var Browserify = {
     "coverage": {
 
         files: {
-            'test/divhide-coverage.js': [
+            'out/jasmine/divhide-coverage.js': [
                 'src/SpecIndex.js'
             ]
         },

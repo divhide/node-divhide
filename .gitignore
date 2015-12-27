@@ -3,12 +3,8 @@ node_modules/
 bower_components/
 .grunt
 
-# ignore test files
-test/
-
 # ignore generated distribution files
-dist/divhide*.js
-dist/doc/
+out/
 
 # ignore npm generated packages
 divhide-*.tgz

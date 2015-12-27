@@ -4,7 +4,7 @@ module.exports = {
 
     options: {
         debug: true,
-        coverageDir: 'test/',
+        coverageDir: 'out/jasmine/',
         dryRun: false,
         force: false,
         recursive: true

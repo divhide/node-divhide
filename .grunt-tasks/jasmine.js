@@ -2,12 +2,12 @@
 var jasmine = {
 
     test: {
-        
+
         options: {
 
             vendor: [
-                "test/divhide-libs.js",
-                "test/divhide.js"
+                "out/jasmine/divhide-libs.js",
+                "out/jasmine/divhide.js"
             ],
 
             specs: [
@@ -15,7 +15,7 @@ var jasmine = {
                 'src/**/*JasmineSpec.js'
             ],
 
-            outfile: 'test/index.html',
+            outfile: 'out/jasmine/index.html',
             keepRunner: true
 
         }

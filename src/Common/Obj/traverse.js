@@ -78,10 +78,18 @@ var recursiveTraversal = function(value, options, accumulator, info){
 };
 
 /**
- * This callback is displayed as part of the Requester class.
+ * Structure traversal callback signature. This function is called for every structure
+ * value.
+ *
  * @callback Divhide/Obj/traverse~callback
- * @param {number} responseCode
- * @param {string} responseMessage
+ * @param {Any} value
+ * @param {Object} info Traversal information
+ * @param {Any} info.parent The parent object of the value
+ * @param {String|Number} info.index The index of the value (in relation to the parent)
+ * @param {Number} info.level The traversal level ( >= 1 )
+ * @param {Boolean} info.isFirst Flag to tell if value is the parent's first child
+ * @param {Boolean} info.isLast Flag to tell if value is the parent's last child
+ * @param {Any} accumulator The traversal accumulator
  */
 
 /**

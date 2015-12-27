@@ -1,20 +1,25 @@
 "use strict";
 
 module.exports = function(config) {
-  
+
     config.set({
-    
+
         basePath : './',
 
-        frameworks : [ 
+        frameworks : [
             "jasmine"
         ],
 
-        reporters: ['progress', 'dots', 'coverage', 'threshold'],
+        reporters: [
+            'progress',
+            'dots',
+            'coverage',
+            'threshold'
+        ],
 
         files : [
-            'test/divhide-libs.js',
-            'test/divhide-coverage.js',
+            'out/jasmine/divhide-libs.js',
+            'out/jasmine/divhide-coverage.js',
             'src/**/*JasmineSpec.js',
         ],
 
@@ -25,7 +30,7 @@ module.exports = function(config) {
         singleRun: true,
 
         coverageReporter: {
-            dir: 'test/',
+            dir: 'out/jasmine/',
             reporters: [
                 { type: 'text-summary' },
                 { type: 'lcov', subdir: './' }
