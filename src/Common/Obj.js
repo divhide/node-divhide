@@ -1,9 +1,5 @@
 'use strict';
 
-/**
- * @module Divhide/Obj
- */
-
 var _     = require("lodash"),
     Safe  = require("./Safe");
 
@@ -13,7 +9,7 @@ var _     = require("lodash"),
  *
  * @static
  * @type Object
- * @alias module:Divhide/Obj
+ * @namespace Divhide/Obj
  * @borrows module:Divhide/Obj/traverse as traverse
  *
  */
@@ -24,6 +20,7 @@ var Obj = {
      * Get the object keys. If a filter is specified it returns the keys
      * that match the filter regular expression.
      *
+     * @memberOf Divhide/Obj
      * @method filter
      *
      * @param {Object}          obj
@@ -61,7 +58,12 @@ var Obj = {
     /**
      * Converts any object to it's string representation.
      * See Obj/stringify.
+     *
+     * @memberOf Divhide/Obj
      * @method stringify
+     *
+     * @param {Any} value
+     *
      */
     stringify: require("./Obj/stringify")
 

@@ -16,18 +16,15 @@ module.exports = {
         ],
 
         options: {
-
+            globalstrict: true,
             ignores: [
                 'src/**/*JasmineSpec.js',
                 'src/**/*MochaSpec.js'
             ],
-
-            globalstrict: true,
             predef: [
                 "require",
                 "module"
             ]
-
         }
 
     },

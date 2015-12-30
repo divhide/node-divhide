@@ -13,7 +13,7 @@ describe("Divhide.Obj", function () {
 
     /**
      *
-     * Tests related to Obj.stringify() function
+     * Tests for Obj.stringify()
      *
      */
     describe("stringify", function () {
@@ -248,5 +248,66 @@ describe("Divhide.Obj", function () {
 
     });
 
+    /**
+     *
+     * Tests for Obj.traverse()
+     *
+     */
+    describe("traverse", function(){
+
+        it("object with circular structure should throw an Error", function () {
+
+            // setup circular structure
+            var a = {};
+            var b = {
+                "c": a,
+                "d": 1
+            };
+            a.b = b;
+
+            var indexes = [],
+                circularReferences = [];
+
+            Divhide.Obj.traverse(a, {
+                callback: function(val, info){
+                    indexes.push(info.index);
+                    circularReferences.push(info.isCircularReference);
+                }
+            });
+
+            expect(indexes)
+                .toEqual([null, "b", "c", "b", "d"]);
+
+            expect(circularReferences)
+                .toEqual([false, false, false, true, false]);
+
+        });
+
+        it("array with circular structure should throw an Error", function () {
+
+            // setup circular structure
+            var a = [];
+            var b = [ a ];
+            a.push(b);
+
+            var indexes = [],
+                circularReferences = [];
+
+            Divhide.Obj.traverse(a, {
+                callback: function(val, info){
+                    indexes.push(info.index);
+                    circularReferences.push(info.isCircularReference);
+                }
+            });
+
+            expect(indexes)
+                .toEqual([null, 0, 0, 0]);
+
+            expect(circularReferences)
+                .toEqual([false, false, false, true]);
+
+        });
+
+    });
 
 });

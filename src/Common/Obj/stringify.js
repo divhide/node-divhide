@@ -5,6 +5,9 @@ var _ = require("lodash"),
     Safe = require("../Safe"),
     traverse = require("./traverse");
 
+/**
+ * @module Divhide/Obj/stringify
+ */
 
 /**
  *
@@ -162,8 +165,9 @@ var stringifyCallbackAfter = function(value, info, accumulator, options){
  * Converts the given value to a friendly string.
  * This function represents an alternative to JSON.stringify adding more options.
  *
- * @method stringify
- * @for Divhide.Obj
+ * @alias module:Divhide/Obj/stringify
+ * @type {Function}
+ * @protected
  *
  * @param  {Any} value The value to stringify
  * @param  {Object} options
