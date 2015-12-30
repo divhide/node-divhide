@@ -4,8 +4,15 @@ var Type        = require("../Type"),
     Exception   = require("../Exception/Exception");
 
 /**
+ * @module Divhide/Assert/Number
+ */
+
+/**
  *
  * Test if value is a number
+ *
+ * @function Number
+ * @memberOf module:Divhide/Assert/Number
  *
  * @throws {Exception}
  *

@@ -6,14 +6,24 @@ var _           = require("lodash"),
     Exception   = require("../Exception/Exception");
 
 /**
+ * @module Divhide/Assert/Regex
+ */
+
+/**
  *
- * Test the regex
+ * Assertion method that tests if the given value matches the regular expression.
+ * An exception is thrown is the assertion fails!
+ *
+ * @function Regex
+ * @memberOf module:Divhide/Assert/Regex
+ *
+ * @ignore
  *
  * @throws {Exception}
  *
- * @param {*}               val
- * @param {String|Regex}    regex
- * @return {*}
+ * @param {Any} val
+ * @param {String|Regex} regex The Regex object or a string thar contains a regular expression pattern.
+ * @return {Any}
  *
  */
 var Regex = function(val, regex){

@@ -4,12 +4,20 @@ var Type        = require("../Type"),
     Exception   = require("../Exception/Exception");
 
 /**
+ * @module Divhide/Assert/Object
+ */
+
+/**
  *
- * Test if value is an object
+ * Assertion method that tests if the given value is an object.
+ * An exception is thrown is the assertion fails!
+ *
+ * @function Object
+ * @memberOf module:Divhide/Assert/Object
  *
  * @throws {Exception}
  *
- * @param {*} val
+ * @param {Any} val
  * @return {Object}
  *
  */

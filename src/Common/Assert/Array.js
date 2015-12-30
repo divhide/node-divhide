@@ -4,12 +4,20 @@ var Type        = require("../Type"),
     Exception   = require("../Exception/Exception");
 
 /**
+ * @module Divhide/Assert/Array
+ */
+
+/**
  *
- * Test if value is an array
+ * Assertion method that tests if the given value in an Array.
+ * An exception is thrown is the assertion fails!
  *
+ * @function Array
+ * @memberOf module:Divhide/Assert/Array
+ *
+ * @param {Any} val
  * @throws {Exception}
  *
- * @param {*} val
  * @return {Array}
  *
  */

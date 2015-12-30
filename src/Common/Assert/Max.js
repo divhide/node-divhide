@@ -5,16 +5,22 @@ var _           = require("lodash"),
     Safe        = require("../Safe"),
     Exception   = require("../Exception/Exception");
 
-
+/**
+ * @module Divhide/Assert/Max
+ */
 
 /**
  *
- * Test the max length of any kind of object
+ * Assertion method that tests if the given value is higher than the given maximum.
+ * An exception is thrown is the assertion fails!
+ *
+ * @function Max
+ * @memberOf module:Divhide/Assert/Max
  *
  * @throws {Exception}
  *
- * @param {*} val
- * @return {*}
+ * @param {Any} val
+ * @return {Any}
  *
  */
 var Max = function(val, max){

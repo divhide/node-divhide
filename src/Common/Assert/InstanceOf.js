@@ -5,12 +5,18 @@ var _           = require("lodash"),
     Exception   = require("../Exception/Exception");
 
 /**
+ * @module Divhide/Assert/InstanceOf
+ */
+
+/**
  *
  * Get function name
- * 
+ *
+ * @ignore
+ *
  * @param  {Function} fn
  * @return {String}
- * 
+ *
  */
 var getFnName = function(fun) {
 
@@ -24,21 +30,25 @@ var getFnName = function(fun) {
 
 /**
  *
- * InstanceOf assertion. 
+ * Assertion method that tests if the given value in an instance of the given type.
+ * An exception is thrown is the assertion fails!
+ *
+ * @function InstanceOf
+ * @memberOf module:Divhide/Assert/InstanceOf
  *
  * @throws {Exception}
  *
- * @param {*} val
- * @param {*} value
- * 
- * @return {*}
+ * @param {Any} val
+ * @param {Function} expectedFn
+ *
+ * @return {Any}
  *
  */
-var InstanceOf = function(val, value){
+var InstanceOf = function(val, expectedFn){
 
 	/// test with instanceof
-	if(!Type.instanceOf(val, value)){
-		throw new Exception("VALIDATION_INSTANCEOF", { value: getFnName(value) });
+	if(!Type.instanceOf(val, expectedFn)){
+		throw new Exception("VALIDATION_INSTANCEOF", { value: getFnName(expectedFn) });
 	}
 
     return val;

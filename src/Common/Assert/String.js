@@ -4,12 +4,20 @@ var Type        = require("../Type"),
     Exception   = require("../Exception/Exception");
 
 /**
+ * @module Divhide/Assert/String
+ */
+
+/**
  *
- * Test if value is a string
+ * Assertion method that tests if the given value is an instance of a String.
+ * An exception is thrown is the assertion fails!
+ *
+ * @function String
+ * @memberOf module:Divhide/Assert/String
  *
  * @throws {Exception}
  *
- * @param {*} val
+ * @param {Any} val
  * @return {String}
  *
  */

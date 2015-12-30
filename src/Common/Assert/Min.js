@@ -6,13 +6,21 @@ var _           = require("lodash"),
     Exception   = require("../Exception/Exception");
 
 /**
+ * @module Divhide/Assert/Min
+ */
+
+/**
  *
- * Test the min length of any kind of object
+ * Assertion method that tests if the given value is lower than the given minimum.
+ * An exception is thrown is the assertion fails!
+ *
+ * @function Min
+ * @memberOf module:Divhide/Assert/Min
  *
  * @throws {Exception}
  *
- * @param {*} val
- * @return {*}
+ * @param {Any} val
+ * @return {Any}
  *
  */
 var Min = function(val, min){

@@ -4,13 +4,21 @@ var Type        = require("../Type"),
     Exception   = require("../Exception/Exception");
 
 /**
+ * @module Divhide/Assert/Required
+ */
+
+/**
  *
- * IsRequired
+ * Assertion method that tests if the given value has a valid value.
+ * An exception is thrown is the assertion fails!
+ *
+ * @function Required
+ * @memberOf module:Divhide/Assert/Required
  *
  * @throws {Exception}
  *
- * @param {*} val
- * @return {*}
+ * @param {Any} val
+ * @return {Any}
  *
  */
 var Required = function(val){
