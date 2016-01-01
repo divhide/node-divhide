@@ -74,7 +74,7 @@ var recursiveTraversal = function divhide_obj_traverse_recursiveTraversal(value,
     // call callback after iteration
     if(options.callbackAfter){
         accumulator = options.callbackAfter.apply(
-            {}, [ value, _.clone(stackInfo), accumulator ].concat(extraArgs) );
+            {}, [ value, stackInfo, accumulator ].concat(extraArgs) );
     }
 
     return accumulator;

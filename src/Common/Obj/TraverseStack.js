@@ -64,7 +64,8 @@ var TraverseStack = function(stack, indexLookup){
             parent = (parentRecord != null ? parentRecord.value : null),
             level = (stack.length + 1),
             isFirst = (parentRecord != null) ? !!options.isFirst : true,
-            isLast = (parentRecord != null) ? !!options.isLast : true;
+            isLast = (parentRecord != null) ? !!options.isLast : true,
+            data = (parentRecord != null ? parentRecord.info.data : {});
 
         return {
             value: value,
@@ -74,7 +75,8 @@ var TraverseStack = function(stack, indexLookup){
                 level: level,
                 isFirst: isFirst,
                 isLast: isLast,
-                isCircularReference: !!options.isCircularReference
+                isCircularReference: !!options.isCircularReference,
+                data: data, // shared data structure
             }
         };
 
@@ -146,8 +148,16 @@ var TraverseStack = function(stack, indexLookup){
          *
          */
         currentInfo: function divhide_obj_traversestack_currentinfo(){
+
             var last = _.last(stack);
-            return last ? _.clone(last.info) : null;
+            if(!last){
+                return null;
+            }
+
+            var info = _.clone(last.info);
+            info.tmpData = {}; // initialize tmpData to store temporary data (iteration data)
+            return info;
+
         },
 
         /**

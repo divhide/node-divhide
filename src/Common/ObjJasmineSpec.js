@@ -308,6 +308,57 @@ describe("Divhide.Obj", function () {
 
         });
 
+        it("info.data should be shared while traversal", function () {
+
+            // setup circular structure
+            var a = {
+                "b": {
+                    "c": 1
+                }
+            };
+
+            var values = [];
+
+            Divhide.Obj.traverse(a, {
+                callback: function(val, info){
+                    info.data.value = info.data.value ? info.data.value+1 : 1;
+                    values.push(info.data.value);
+                }
+            });
+
+            expect(values)
+                .toEqual([1, 2, 3]);
+
+        });
+
+        it("info.tmpData should be shared across callback and callbackAfter for the same object", function () {
+
+            // setup circular structure
+            var a = {
+                "b": {
+                    "c": 1
+                }
+            };
+
+            var cValues = [],
+                cAfterValues = [];
+
+            Divhide.Obj.traverse(a, {
+                callback: function(val, info){
+                    info.tmpData.value = info.tmpData.value ? info.tmpData.value+1 : 1;
+                    cValues.push(info.tmpData.value);
+                },
+                callbackAfter: function(val, info){
+                    info.tmpData.value = info.tmpData.value ? info.tmpData.value+1 : 1;
+                    cAfterValues.push(info.tmpData.value);
+                },
+            });
+
+            expect(cValues).toEqual([1, 1, 1]);
+            expect(cAfterValues).toEqual([2, 2, 2]);
+
+        });
+
     });
 
 });
