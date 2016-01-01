@@ -1514,6 +1514,6 @@ grunt publish
 
 
 ## License
-Copyright (c) 2015 Oscar Brito <aetheon@gmail.com>, contributors.
+Copyright (c) 2016 Oscar Brito <aetheon@gmail.com>, contributors.
 Released under the  license
 

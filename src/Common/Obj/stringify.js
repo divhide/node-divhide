@@ -46,43 +46,30 @@ var stringifyCallback = function(value, info, accumulator, options){
     var resultStr = "",
         isLiteral = !Type.isComplex(value);
 
-    // When the parent is an Object
+    // Initialization of identation and "key:"
+
     if(Type.isString(info.index)){
-
-        if(info.isFirst === true){
-            resultStr = resultStr + "{";
-            resultStr = resultStr + (options.space ? "\n" : "");
-        }
-
         resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-1) : "");
         resultStr = resultStr + convertLiteralToString(info.index) + ":" + (options.space ? " " : "");
-
     }
-    // When the parent is an Array
-    else if(Type.isNumber(info.index)){
-
-        if(info.isFirst === true){
-            resultStr = resultStr + "[";
-            resultStr = resultStr + (options.space ? "\n" : "");
-        }
-
-        // If value is not a literal apply identation after new line
-        if(!isLiteral){
-            resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-1) : "");
-        }
-
+    else if(Type.isNumber(info.index) && !isLiteral){
+        resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-1) : "");
     }
 
-    // if value is a literal value
+    // Print of the value for literal, Object and Array values
+
     if(isLiteral){
-
-        // don't apply indentation on
-        if(!Type.isString(info.index)){
-            resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-1) : "");
-        }
-
+        // don't apply identation if value is child of an Object
+        resultStr = resultStr + ((options.space && !Type.isString(info.index)) ? _.repeat(options.space, info.level-1) : "");
         resultStr = resultStr + convertLiteralToString(value);
-
+    }
+    else if(Type.isObject(value)){
+        resultStr = resultStr + "{";
+        resultStr = resultStr + (options.space && !Type.isEmpty(value) ? "\n" : "");
+    }
+    else if(Type.isArray(value)){
+        resultStr = resultStr + "[";
+        resultStr = resultStr + (options.space && !Type.isEmpty(value) ? "\n" : "");
     }
 
     // append the result to the accumulator
@@ -108,52 +95,17 @@ var stringifyCallbackAfter = function(value, info, accumulator, options){
     var resultStr = "",
         isLiteral = !Type.isComplex(value);
 
-    // if value is empty
-    if(!isLiteral && Type.isEmpty(value)){
-
-        if(Type.isArray(value)){
-            resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-2) : "");
-            resultStr = "[]";
-        }
-        else if(Type.isObject(value)){
-            resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-2) : "");
-            resultStr = "{}";
-        }
-
-        if(info.isLast === false){
-            resultStr = resultStr + ",";
-            resultStr = resultStr + (options.space ? "\n" : "");
-        }
-
+    if(Type.isObject(value)){
+        resultStr = resultStr + (options.space && !Type.isEmpty(value) ? _.repeat(options.space, info.level-1) : "");
+        resultStr = resultStr + "}";
     }
-    // if value belongs to an Object
-    else if(Type.isString(info.index)){
-
-        if(info.isLast === false){
-            resultStr = resultStr + ",";
-            resultStr = resultStr + (options.space ? "\n" : "");
-        }
-        else {
-            resultStr = resultStr + (options.space ? "\n" : "");
-            resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-2) : "");
-            resultStr = resultStr + "}";
-        }
-
+    else if(Type.isArray(value)){
+        resultStr = resultStr + (options.space && !Type.isEmpty(value) ? _.repeat(options.space, info.level-1) : "");
+        resultStr = resultStr + "]";
     }
-    // if value belongs to an Array
-    else if(Type.isNumber(info.index)){
 
-        if(info.isLast === false){
-            resultStr = resultStr + ",";
-            resultStr = resultStr + (options.space ? "\n" : "");
-        }
-        else {
-            resultStr = resultStr + (options.space ? "\n" : "");
-            resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-2) : "");
-            resultStr = resultStr + "]";
-        }
-
-    }
+    resultStr = resultStr + (info.isLast === false ? "," : "");
+    resultStr = resultStr + (options.space && info.parent ? "\n" : "");
 
     // append the result to the accumulator
     return accumulator + resultStr;
