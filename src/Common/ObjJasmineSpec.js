@@ -246,6 +246,120 @@ describe("Divhide.Obj", function () {
 
         });
 
+        /**
+         * Test stringify() annotations
+         */
+        describe("annotate", function(){
+
+            it("literal should return a valid string", function(){
+
+                var val = Divhide.Obj.stringify(1, {
+                    space: 2,
+                    annotate: function(value, info){
+                        return {
+                            before: "-> ",
+                            after: " /* A value */"
+                        };
+                    }
+                });
+
+                expect(val).toBe("-> 1 /* A value */");
+
+            });
+
+            it("object should return a valid string", function(){
+
+                var val = Divhide.Obj.stringify({
+                    name: "Oscar",
+                    age: 30
+                }, {
+                    space: 2,
+                    annotate: function(value, info){
+                        return {
+                            after: (value instanceof Object) ? " /* The one! */" : null
+                        };
+                    }
+                });
+
+                expect(val).toBe(
+                    "{\n" +
+                    "  \"name\": \"Oscar\",\n" +
+                    "  \"age\": 30\n" +
+                    "} /* The one! */");
+            });
+
+            it("object keys should return a valid string", function(){
+
+                var val = Divhide.Obj.stringify({
+                    name: "Oscar",
+                    age: 30
+                }, {
+                    space: 2,
+                    annotate: function(value, info){
+                        return {
+                            before: (value == "Oscar") ? "/* The name */ " : null,
+                            after: (value == "Oscar") ? " /* is so cool */" : null
+                        };
+                    }
+                });
+
+                expect(val).toBe(
+                    "{\n" +
+                    "  \"name\": /* The name */ \"Oscar\", /* is so cool */\n" +
+                    "  \"age\": 30\n" +
+                    "}");
+
+            });
+
+            it("array should return a valid string", function(){
+
+                var val = Divhide.Obj.stringify([{
+                    name: "Oscar",
+                    age: 30
+                }], {
+                    space: 2,
+                    annotate: function(value, info){
+                        return {
+                            after: (value instanceof Array) ? " /* The one! */" : null
+                        };
+                    }
+                });
+
+                expect(val).toBe(
+                    "[\n" +
+                    "  {\n" +
+                    "    \"name\": \"Oscar\",\n" +
+                    "    \"age\": 30\n" +
+                    "  }\n" +
+                    "] /* The one! */");
+
+            });
+
+            it("array item should return a valid string", function(){
+
+                var val = Divhide.Obj.stringify([{
+                    name: "Oscar",
+                    age: 30
+                }], {
+                    space: 2,
+                    annotate: function(value, info){
+                        return {
+                            after: (Divhide.Type.isObject(value)) ? " /* The one! */" : null
+                        };
+                    }
+                });
+
+                expect(val).toBe(
+                    "[\n" +
+                    "  {\n" +
+                    "    \"name\": \"Oscar\",\n" +
+                    "    \"age\": 30\n" +
+                    "  } /* The one! */\n" +
+                    "]");
+            });
+
+        });
+
     });
 
     /**

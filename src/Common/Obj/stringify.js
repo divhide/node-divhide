@@ -18,13 +18,40 @@ var _ = require("lodash"),
  * @return {String}
  */
 var convertLiteralToString = function(value){
-
     // wrap the string with quotes if it's a string.
     if(Type.isString(value)){
         value = "\"" + value + "\"";
     }
-
     return String(value);
+};
+
+/**
+ *
+ * Get the annotation info from the annotate callback.
+ * @ignore
+ * @param  {Function} annotateCallback
+ * @param  {Any} value
+ * @param  {Object} info
+ * @return {Comment}
+ */
+var getAnnotation = function(annotateCallback, value, info){
+
+    var annotation = {
+        before: "",
+        after: ""
+    };
+
+    if(!annotateCallback){
+        return annotation;
+    }
+
+    var res = annotateCallback.apply({}, [ value, info ]);
+    res = Safe.object(res);
+
+    annotation.before = Safe.string(res.before);
+    annotation.after = Safe.string(res.after);
+
+    return annotation;
 
 };
 
@@ -46,6 +73,10 @@ var stringifyCallback = function(value, info, accumulator, options){
     var resultStr = "",
         isLiteral = !Type.isComplex(value);
 
+    // get the annotation and save it for the stringifyCallbackAfter
+    var annotation = getAnnotation(options.annotate, value, info);
+    info.tmpData.annotation = annotation;
+
     // Initialization of identation and "key:"
 
     if(Type.isString(info.index)){
@@ -55,6 +86,9 @@ var stringifyCallback = function(value, info, accumulator, options){
     else if(Type.isNumber(info.index) && !isLiteral){
         resultStr = resultStr + (options.space ? _.repeat(options.space, info.level-1) : "");
     }
+
+    // apply annotation before the structure
+    resultStr = resultStr + (annotation.before ? annotation.before : "");
 
     // Print of the value for literal, Object and Array values
 
@@ -93,7 +127,8 @@ var stringifyCallback = function(value, info, accumulator, options){
 var stringifyCallbackAfter = function(value, info, accumulator, options){
 
     var resultStr = "",
-        isLiteral = !Type.isComplex(value);
+        isLiteral = !Type.isComplex(value),
+        annotation = info.tmpData.annotation;
 
     if(Type.isObject(value)){
         resultStr = resultStr + (options.space && !Type.isEmpty(value) ? _.repeat(options.space, info.level-1) : "");
@@ -105,6 +140,10 @@ var stringifyCallbackAfter = function(value, info, accumulator, options){
     }
 
     resultStr = resultStr + (info.isLast === false ? "," : "");
+
+    // apply annotation after the structure
+    resultStr = resultStr + (annotation.after ? annotation.after : "");
+
     resultStr = resultStr + (options.space && info.parent ? "\n" : "");
 
     // append the result to the accumulator
@@ -131,7 +170,8 @@ var stringifyCallbackAfter = function(value, info, accumulator, options){
 var stringify = function(value, options){
 
     options = _.extend({
-        space: 4
+        space: 4,
+        annotate: null
     }, options);
 
     // convert the given identation number into a repeatable string
@@ -146,7 +186,10 @@ var stringify = function(value, options){
         },
         "",
         // callback options
-        { space: identationSpaces });
+        {
+            space: identationSpaces,
+            annotate: Safe.function(options.annotate, null)
+        });
 };
 
 module.exports = stringify;
