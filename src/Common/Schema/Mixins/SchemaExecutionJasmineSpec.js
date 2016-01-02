@@ -5,7 +5,7 @@ describe("Schema.Mixins.SchemaExecution", function () {
     var ExceptionList     = Divhide.Exception.ExceptionList,
         SchemaTypes       = Divhide.SubModules.Schema.Types,
         SchemaDefinition  = Divhide.SubModules.Schema.SchemaDefinition,
-        SchemaException   = Divhide.SubModules.Schema.SchemaException;
+        SchemaException   = Divhide.SubModules.Schema.Exception.SchemaException;
 
     beforeEach(function () {
         jasmine.addMatchers(window.JasmineCustomMatchers);

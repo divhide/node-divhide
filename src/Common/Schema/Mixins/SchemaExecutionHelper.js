@@ -5,7 +5,7 @@ var _                   = require("lodash"),
     Type                = require("../../Type"),
     Assert              = require("../../Assert"),
     ExceptionList       = require("../../Exception/ExceptionList"),
-    SchemaException     = require("../SchemaException"),
+    SchemaException     = require("../Exception/SchemaException"),
     Types               = require("../Types");
 
 

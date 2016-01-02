@@ -1,7 +1,7 @@
 "use strict";
 
-var Assert      = require("../Assert"),
-    Exception   = require("../Exception/Exception");
+var Assert      = require("../../Assert"),
+    Exception   = require("../../Exception/Exception");
 
 /**
  *

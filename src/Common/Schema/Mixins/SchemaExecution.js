@@ -7,7 +7,7 @@ var _                           = require("lodash"),
     Exception                   = require("../../Exception/Exception"),
     Types                       = require("../Types"),
     SchemaResult                = require("../SchemaResult"),
-    SchemaException             = require("../SchemaException"),
+    SchemaException             = require("../Exception/SchemaException"),
     SchemaExecutionHelper       = require("./SchemaExecutionHelper");
 
 /**
