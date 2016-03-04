@@ -10,13 +10,15 @@ var _                   = require("lodash"),
 
 /**
  *
- * Stores the result of a schema evaluation. It will keep reference to
- * the global structure and the evaluation tree as well.
+ * SchemaResult is entity representation of an evaluated structure node, containing the
+ * values and errors for the given value.
+ *
+ * Errors can be accessed by a flat structure, returning all the errors for the complex
+ * structure; or by the value itself. All Errors are instances of SchemaException.
  *
  * @protected
  *
- * @param {*} schema    The Schema object
- *
+ * @param {*} schema The Schema object
  *
  */
 var SchemaResult = function(schema){
@@ -26,17 +28,11 @@ var SchemaResult = function(schema){
         .assert(schema);
 
     /**
-     * The value object
-     * @type {*}
+     * Contains the debug information (errors and values) about the Schema evaluation.
+     * Every exception will be represented by an ExceptionList instance.
+     * @type {Any}
      */
     var value = schema.getEmptyValue();
-
-    /**
-     * Contains the debug information (errors and values) about the Schema processing.
-     * Every exception will be represented by an ExceptionList instance.
-     * @type {*}
-     */
-    var debugValue = schema.getEmptyValue();
 
     /**
      * Is value a complex object flag.
@@ -67,21 +63,21 @@ var SchemaResult = function(schema){
         if(index){
 
             // lazy initialization of the exception list
-            if(!Type.instanceOf(debugValue[index], ExceptionList)){
-                debugValue[index] = new ExceptionList();
+            if(!Type.instanceOf(value[index], ExceptionList)){
+                value[index] = new ExceptionList();
             }
 
-            debugValue[index].push(error);
+            value[index].push(error);
 
         }
         else {
 
             // lazy initialization of the exception list
-            if(!Type.instanceOf(debugValue, ExceptionList)){
-                debugValue = new ExceptionList();
+            if(!Type.instanceOf(value, ExceptionList)){
+                value = new ExceptionList();
             }
 
-            debugValue.push(error);
+            value.push(error);
 
         }
 
@@ -114,23 +110,16 @@ var SchemaResult = function(schema){
                 return;
             }
 
-            // if there are no previous errors set the value
-            if(value != null){
-                value[index] = innerValue;
-            }
-
         }
         // set errors if schemaResult is not valid
         else {
-            // set the value to null if an inner error happened
-            value = null;
             // propagate the inner errors
             errors.push(schemaResult.getErrors());
         }
 
         // set the debug value to the given one. This can be a value or an
         // ExceptionList in the case of an exception.
-        debugValue[index] = schemaResult.getDebugValue();
+        value[index] = schemaResult.getValue();
 
     };
 
@@ -144,11 +133,11 @@ var SchemaResult = function(schema){
 
         // set non-error and simple structures
         if(!index){
-            debugValue = value = val;
+            value = val;
         }
         // set non-error and complex structures
         else {
-            debugValue[index] = value[index] = val;
+            value[index] = val;
         }
 
     };
@@ -166,7 +155,7 @@ var SchemaResult = function(schema){
          *
          * Get the schema that is being used.
          *
-         * @return {*}
+         * @return {SchemaDefinition}
          *
          */
         getSchema: function(){
@@ -175,28 +164,18 @@ var SchemaResult = function(schema){
 
         /**
          *
-         * Get the value object of all valid values, or null if the validation failed.
+         * Get the evaluated value. This object contain values and errors
+         * all together.
          *
-         * @return {*}
+         * The value contains every inner values and inner exceptions. Whenever an error
+         * is found the error is represented by an ExceptionList of SchemaException.
+         *
+         *
+         * @return {Any|ExceptionList}
          *
          */
         getValue: function(){
             return value;
-        },
-
-        /**
-         *
-         * Get the debug value. This object contain values and errors
-         * all together.
-         *
-         * In the case of an exception this will be an ExceptionList
-         * instance.
-         *
-         * @return {*|ExceptionList}
-         *
-         */
-        getDebugValue: function(){
-            return debugValue;
         },
 
         /**

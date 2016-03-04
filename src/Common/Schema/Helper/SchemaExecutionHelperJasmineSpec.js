@@ -3,16 +3,16 @@
 describe("Schema.Mixins.SchemaExecutionHelper", function() {
 
     var SchemaDefinition = Divhide.SubModules.Schema.SchemaDefinition,
-        Helper           = Divhide.SubModules.Schema.Mixins.SchemaExecutionHelper;
+        Helper           = Divhide.SubModules.Schema.Helper.SchemaExecutionHelper;
 
     beforeEach(function () {
         jasmine.addMatchers(window.JasmineCustomMatchers);
     });
-    
+
     ///
     /// .prepareValue() tests
     ///
-    
+
     describe(".prepareValue()", function(){
 
         it("should return the value", function() {
@@ -173,7 +173,7 @@ describe("Schema.Mixins.SchemaExecutionHelper", function() {
     ///
     /// prepareSchema()
     ///
-    
+
     describe(".prepareSchema()", function(){
 
         it("primitive should return the schema", function() {
@@ -220,7 +220,7 @@ describe("Schema.Mixins.SchemaExecutionHelper", function() {
             } catch(e){
                 errors = e;
             }
-            
+
             expect(errors.length)
                 .equals(1);
 
@@ -228,47 +228,47 @@ describe("Schema.Mixins.SchemaExecutionHelper", function() {
 
         it(".any() should accept any value", function() {
 
-            var c = new SchemaDefinition({ 
-                any: true, 
-                required: false 
+            var c = new SchemaDefinition({
+                any: true,
+                required: false
             });
 
-            var expected = new SchemaDefinition({ 
+            var expected = new SchemaDefinition({
                 schema: null,
-                any: true, 
-                required: false 
+                any: true,
+                required: false
             });
 
-            var result = Helper.prepareSchema(c, { a1: 1, a2: 2, b2: 2, c3: 3 });  
+            var result = Helper.prepareSchema(c, { a1: 1, a2: 2, b2: 2, c3: 3 });
             expect(result).equals(expected);
-            
+
             ///
-            c = new SchemaDefinition(c, { 
-                any: true, 
-                schema:"", 
-                required: false 
+            c = new SchemaDefinition(c, {
+                any: true,
+                schema:"",
+                required: false
             });
 
-            expected = new SchemaDefinition({ 
+            expected = new SchemaDefinition({
                 schema: null,
-                any: true, 
-                required: false 
+                any: true,
+                required: false
             });
 
             result = Helper.prepareSchema(c, null);
             expect(result).equals(expected);
 
             ///
-            c = new SchemaDefinition({ 
-                any: true, 
-                schema: null, 
-                required: false 
+            c = new SchemaDefinition({
+                any: true,
+                schema: null,
+                required: false
             });
 
-            expected = new SchemaDefinition({ 
-                any: true, 
-                schema: null, 
-                required: false 
+            expected = new SchemaDefinition({
+                any: true,
+                schema: null,
+                required: false
             });
 
             result = Helper.prepareSchema(c, "val");
@@ -278,10 +278,10 @@ describe("Schema.Mixins.SchemaExecutionHelper", function() {
 
         it(".any() and .required() with null should throw error", function() {
 
-            var c = new SchemaDefinition({ 
-                any: true, 
-                schema:"", 
-                required: true 
+            var c = new SchemaDefinition({
+                any: true,
+                schema:"",
+                required: true
             });
 
             var errors = null;
@@ -290,7 +290,7 @@ describe("Schema.Mixins.SchemaExecutionHelper", function() {
             } catch(e){
                 errors = e;
             }
-            
+
             expect(errors.length).equals(1);
 
         });
@@ -313,7 +313,7 @@ describe("Schema.Mixins.SchemaExecutionHelper", function() {
             expect(result).equals(expected);
 
         });
-        
+
         it(".array() .repeatable(true) should return the value's schema", function() {
 
             /// test non repeatable
@@ -329,7 +329,7 @@ describe("Schema.Mixins.SchemaExecutionHelper", function() {
 
             var result = Helper.prepareSchema(c, [1, 2, 3, 4]);
             expect(result).equals(expected);
-           
+
             /// test repeatable with two elements
             c = new SchemaDefinition({
                 schema : [ 1, 2 ],
@@ -359,11 +359,11 @@ describe("Schema.Mixins.SchemaExecutionHelper", function() {
             } catch(e){
                 errors = e;
             }
-            
+
             expect(errors.length).equals(1);
 
-            /// 
-            
+            ///
+
             c = new SchemaDefinition({
                 schema : [ 1, 2 ],
                 repeatable: true
@@ -372,15 +372,15 @@ describe("Schema.Mixins.SchemaExecutionHelper", function() {
             errors = null;
             try{
                 Helper.prepareSchema(c, [1, 2, 3, 4, 5]);
-            } 
+            }
             catch(e){
                 errors = e;
             }
-            
+
             expect(errors.length).equals(1);
 
             ///
-            
+
             c = new SchemaDefinition({
                 schema : [ 1, 2 ],
                 repeatable: true
@@ -389,13 +389,13 @@ describe("Schema.Mixins.SchemaExecutionHelper", function() {
             errors = null;
             try{
                 Helper.prepareSchema(c, []);
-            } 
+            }
             catch(e){
                 errors = e;
             }
-            
+
             expect(errors.length).equals(1);
-            
+
 
         });
 
@@ -414,7 +414,7 @@ describe("Schema.Mixins.SchemaExecutionHelper", function() {
 
             var result = Helper.prepareSchema(c, [1, 2]);
             expect(result).equals(expected);
-           
+
         });
 
         it(".array() .repeatable(false) should throw error", function() {
@@ -430,9 +430,9 @@ describe("Schema.Mixins.SchemaExecutionHelper", function() {
             } catch(e){
                 errors = e;
             }
-            
+
             expect(errors.length).equals(1);
-           
+
         });
 
     });

@@ -8,7 +8,7 @@ var _                           = require("lodash"),
     Types                       = require("../Types"),
     SchemaResult                = require("../SchemaResult"),
     SchemaException             = require("../Exception/SchemaException"),
-    SchemaExecutionHelper       = require("./SchemaExecutionHelper");
+    SchemaExecutionHelper       = require("../Helper/SchemaExecutionHelper");
 
 /**
  *
@@ -66,7 +66,7 @@ var execute = function(schema, originalValue, validationFns){
     var result = SchemaResult(schema);
 
     /// recursion over the inner values of the schema
-    _.each(schema.schema, function(innerSchema, key){
+    _.forEach(schema.schema, function(innerSchema, key){
 
         /// recursive execute the schema
         var innerResult = innerSchema.execute(value[key], validationFns);
