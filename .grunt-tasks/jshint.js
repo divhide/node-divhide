@@ -16,7 +16,7 @@ module.exports = {
         ],
 
         options: {
-            globalstrict: true,
+            strict: "global",
             ignores: [
                 'src/**/*JasmineSpec.js',
                 'src/**/*MochaSpec.js'
@@ -44,7 +44,7 @@ module.exports = {
 
         options: {
 
-            globalstrict: true,
+            strict: "global",
             predef: [
                 "require",
                 "_",
