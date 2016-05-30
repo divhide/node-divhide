@@ -3,7 +3,6 @@
 var _    = require("lodash"),
     Safe = require("../Safe"),
     Type = require("../Type"),
-
     ChainFunction   = require("./ChainFunction");
 
 
@@ -20,7 +19,7 @@ var _    = require("lodash"),
  *     pipe:
  * })
  */
-var ChainContext = function(options){
+var ChainContext = function divhide_chain_ChainContext(options){
 
     options = Safe.object(options);
 
@@ -59,7 +58,7 @@ var ChainContext = function(options){
  * @param  {Object|Function} scope
  * @return {Object}
  */
-ChainContext.prototype.setScope = function(scope){
+ChainContext.prototype.setScope = function divhide_chain_ChainContext_setScope(scope){
 
     if(Type.isDefined(scope)){
         scope = Type.isFunction(scope) ? scope() : scope;
@@ -85,7 +84,7 @@ ChainContext.prototype.setScope = function(scope){
  * @return {Internal.Chain}
  *
  */
-ChainContext.prototype.add = function(fn, args){
+ChainContext.prototype.add = function divhide_chain_ChainContext_add(fn, args){
 
     if(Type.isFunction(fn)) {
 
@@ -108,7 +107,7 @@ ChainContext.prototype.add = function(fn, args){
  * @return {*}
  **
  */
-ChainContext.prototype.exec = function(args, extraArgs, errCallback){
+ChainContext.prototype.exec = function divhide_chain_ChainContext_exec(args, extraArgs, errCallback){
 
     extraArgs   = Safe.value(extraArgs);
     errCallback = Safe.function(errCallback, function(err){ throw err; });

@@ -15,14 +15,13 @@ var _ = require("lodash"),
  * indexing the value and it's structure index/key to minimize lookup time.
  *
  * @class
- * @alias module:Divhide/Obj/TraverseStack
  * @protected
  *
  * @param {Array|null} stack The current stack array
  * @param {Object|null} indexLookup The index lookup object of the stack array
  *
  */
-var TraverseStack = function(stack, indexLookup){
+var TraverseStack = function divhide_obj_traversal_TraverseStack(stack, indexLookup){
 
     /**
      * Saves all the structure path
@@ -55,7 +54,7 @@ var TraverseStack = function(stack, indexLookup){
      * @return {Object}
      *
      */
-    var createStackRecord = function divhide_obj_traversestack_createstackrecord(value, index, options){
+    var createStackRecord = function divhide_obj_traversal_TraverseStack_createstackrecord(value, index, options){
 
         options = Safe.object(options);
 
@@ -103,13 +102,12 @@ var TraverseStack = function(stack, indexLookup){
          * @return {Boolean} False if a circular reference is detected; True otherwise.
          *
          */
-        push: function divhide_obj_traversestack_push(value, index, options){
+        push: function divhide_obj_traversal_TraverseStack_push(value, index, options){
 
             var isComplex = Type.isComplex(value),
             isCircularReference = false;
 
-            // if value is complex and there's a saved index only then
-            // search if the value exists
+            // if value is complex check if the value exists on the index lookup
             /* jshint -W041 */
             if(isComplex || index != null || indexLookup[index] != null){
                 isCircularReference = _.includes(indexLookup[index], value);
@@ -147,7 +145,7 @@ var TraverseStack = function(stack, indexLookup){
          * @return {Object} info
          *
          */
-        currentInfo: function divhide_obj_traversestack_currentinfo(){
+        currentInfo: function divhide_obj_traversal_TraverseStack_currentinfo(){
 
             var last = _.last(stack);
             if(!last){
@@ -170,7 +168,7 @@ var TraverseStack = function(stack, indexLookup){
          * @return {TraverseStack}
          *
          */
-        clone: function divhide_obj_traversestack_clone(){
+        clone: function divhide_obj_traversal_TraverseStack_clone(){
             return new TraverseStack(
                 _.clone(stack),
                 _.clone(indexLookup));

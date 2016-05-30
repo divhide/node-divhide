@@ -109,6 +109,12 @@ var Common = {
      */
     CustomSchema: require("./Common/CustomSchema"),
 
+    /**
+     * Traverse functions
+     * @type {module:Divhide/CustomSchema}
+     */
+    Traverse: require("./Common/Traverse")
+
 };
 
 module.exports = Common;

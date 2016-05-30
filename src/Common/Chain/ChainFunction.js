@@ -17,7 +17,7 @@ var _    = require("lodash"),
  * });
  *
  */
-var ChainFunction = function(options){
+var ChainFunction = function divhide_chain_ChainFunction(options){
 
     options = Safe.object(options);
 
@@ -41,7 +41,7 @@ var ChainFunction = function(options){
  * @return {*}
  *
  */
-ChainFunction.prototype.apply = function(scope, args, extraArgs) {
+ChainFunction.prototype.apply = function divhide_chain_ChainFunction_apply(scope, args, extraArgs) {
 
     scope       = Safe.object(scope);
     args        = Safe.array(args);

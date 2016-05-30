@@ -26,7 +26,7 @@ var Internal = {};
  * @return {Array}
  *
  */
-Internal.getArgumentList = function(argsObj){
+Internal.getArgumentList = function divhide_Chain_getArgumentList(argsObj){
 
     var args = [];
 
@@ -51,7 +51,7 @@ Internal.getArgumentList = function(argsObj){
  * @return {Function}
  *
  */
-Internal.wrapChainableFunction = function(context, fn, chainableFns, evaluationFns, options){
+Internal.wrapChainableFunction = function divhide_Chain_wrapChainableFunction(context, fn, chainableFns, evaluationFns, options){
 
     options = Safe.object(options);
 
@@ -87,11 +87,15 @@ Internal.wrapChainableFunction = function(context, fn, chainableFns, evaluationF
  * @param {Object}      chainableFns
  * @param {Object}      evaluationFns
  * @param {Object}      options
+ * @param {Object}      options.scope
+ * @param {Object}      options.argument
+ * @param {Boolean}     options.pipe
+ *
  *
  * @return {Function}
  *
  */
-Internal.wrapReturnableFunction = function(context, fn, chainableFns, evaluationFns, options){
+Internal.wrapReturnableFunction = function divhide_Chain_wrapReturnableFunction(context, fn, chainableFns, evaluationFns, options){
 
     options = Safe.object(options);
 
@@ -155,7 +159,7 @@ Internal.wrapReturnableFunction = function(context, fn, chainableFns, evaluation
  * @return {Object}
  *
  */
-Internal.getChainFunctions = function(context, chainableFns, evaluationFns, options){
+Internal.getChainFunctions = function divhide_Chain_getChainFunctions(context, chainableFns, evaluationFns, options){
 
     /// merge the default fns and the custom functions
     var fns = _.assign({}, chainableFns);
@@ -225,7 +229,7 @@ Internal.getChainFunctions = function(context, chainableFns, evaluationFns, opti
  *
  *
  */
-var Chain = function(chainableFns, evaluationFns, options, context){
+var Chain = function divhide_Chain(chainableFns, evaluationFns, options, context){
 
     var scope   = this;
 
@@ -240,7 +244,6 @@ var Chain = function(chainableFns, evaluationFns, options, context){
 };
 
 Chain.prototype = {};
-
 
 module.exports = Chain;
 

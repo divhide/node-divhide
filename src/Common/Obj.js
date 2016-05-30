@@ -10,7 +10,6 @@ var _     = require("lodash"),
  * @static
  * @type Object
  * @namespace Divhide/Obj
- * @borrows module:Divhide/Obj/traverse as traverse
  *
  */
 var Obj = {
@@ -48,12 +47,6 @@ var Obj = {
             []);
 
     },
-
-    /**
-     * Traversal algorithm.
-     * @ignore
-     */
-    traverse: require("./Obj/traverse"),
 
     /**
      * Converts any object to it's string representation.

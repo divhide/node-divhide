@@ -9,9 +9,9 @@ describe("CustomSchema", function () {
     });
 
     ///
-    /// .value(String) integration tests
+    /// .value(String)
     ///
-    describe('.value(String) integration tests', function(){
+    describe('.value(String)', function(){
 
         it(".default() should return default value", function () {
 
@@ -27,9 +27,9 @@ describe("CustomSchema", function () {
     });
 
     ///
-    /// .value(Object) integration tests
+    /// .value(Object)
     ///
-    describe('.value(Object) integration tests', function(){
+    describe('.value(Object)', function(){
 
         it(".required() should return value", function () {
 
@@ -92,9 +92,9 @@ describe("CustomSchema", function () {
     });
 
     ///
-    /// .value(Array) integration tests
+    /// .value(Array)
     ///
-    describe('.value(Array) integration tests', function(){
+    describe('.value(Array)', function(){
 
         it("should return value", function () {
 
@@ -122,9 +122,9 @@ describe("CustomSchema", function () {
     });
 
     ///
-    /// .value(Any) integration tests
+    /// .value(Any)
     ///
-    describe('.value(Any) integration tests', function(){
+    describe('.value(Any)', function(){
 
         it(".optional().value() should return value or null", function () {
 
@@ -170,9 +170,9 @@ describe("CustomSchema", function () {
     });
 
     ///
-    /// .value(Boolean) integration tests
+    /// .value(Boolean)
     ///
-    describe('.value(Boolean) integration tests', function(){
+    describe('.value(Boolean)', function(){
 
         it("should return a value", function () {
 
@@ -223,9 +223,9 @@ describe("CustomSchema", function () {
     });
 
     ///
-    /// .value(Boolean) integration tests
+    /// .value(Boolean)
     ///
-    describe('.value(function) integration tests', function(){
+    describe('.value(function)', function(){
 
         it(".function()", function () {
 
@@ -249,9 +249,9 @@ describe("CustomSchema", function () {
     });
 
     ///
-    /// .errors integration tests
+    /// .errors
     ///
-    describe('.errors() integration tests', function(){
+    describe('.errors()', function(){
 
         it("should return errors", function () {
 
@@ -266,9 +266,9 @@ describe("CustomSchema", function () {
     });
 
     ///
-    /// .serialize() integration tests
+    /// .serialize()
     ///
-    describe('.serialize() integration tests', function(){
+    describe('.serialize()', function(){
 
         it(".any() should return a json structure", function () {
 
@@ -293,6 +293,7 @@ describe("CustomSchema", function () {
                     args: [ 10 ]
                 }]
             });
+
 
         });
 
@@ -342,9 +343,9 @@ describe("CustomSchema", function () {
     });
 
     ///
-    /// .serialize() integration tests
+    /// .serialize()
     ///
-    describe('.deserialize() integration tests', function(){
+    describe('.deserialize()', function(){
 
         it("object() should return a Schema", function () {
 
@@ -403,7 +404,7 @@ describe("CustomSchema", function () {
     ///
     /// Compile() tests
     ///
-    describe('.compile() integration tests', function(){
+    describe('.compile()', function(){
 
         it(".value() should return a value", function () {
 

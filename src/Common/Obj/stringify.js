@@ -3,7 +3,7 @@
 var _ = require("lodash"),
     Type = require("../Type"),
     Safe = require("../Safe"),
-    traverse = require("./traverse");
+    Traverse = require("../Traverse");
 
 /**
  * @module Divhide/Obj/stringify
@@ -17,7 +17,7 @@ var _ = require("lodash"),
  * @param  {*} value
  * @return {String}
  */
-var convertLiteralToString = function(value){
+var convertLiteralToString = function divhide_obj_stringify_convertLiteralToString(value){
     // wrap the string with quotes if it's a string.
     if(Type.isString(value)){
         value = "\"" + value + "\"";
@@ -34,7 +34,7 @@ var convertLiteralToString = function(value){
  * @param  {Object} info
  * @return {Comment}
  */
-var getAnnotation = function(annotateCallback, value, info){
+var getAnnotation = function divhide_obj_stringify_getAnnotation(annotateCallback, value, info){
 
     var annotation = {
         before: "",
@@ -68,12 +68,12 @@ var getAnnotation = function(annotateCallback, value, info){
  * @return {String}
  *
  */
-var stringifyCallback = function(value, info, accumulator, options){
+var stringifyTopDownFn = function divhide_obj_stringify_stringifyTopDownFn(value, info, accumulator, options){
 
     var resultStr = "",
         isLiteral = !Type.isComplex(value);
 
-    // get the annotation and save it for the stringifyCallbackAfter
+    // get the annotation and save it for the stringifyBottomUpFn
     var annotation = getAnnotation(options.annotate, value, info);
     info.tmpData.annotation = annotation;
 
@@ -124,7 +124,7 @@ var stringifyCallback = function(value, info, accumulator, options){
  * @return {String}
  *
  */
-var stringifyCallbackAfter = function(value, info, accumulator, options){
+var stringifyBottomUpFn = function divhide_obj_stringify_stringifyBottomUpFn(value, info, accumulator, options){
 
     var resultStr = "",
         isLiteral = !Type.isComplex(value),
@@ -167,7 +167,7 @@ var stringifyCallbackAfter = function(value, info, accumulator, options){
  * @return {String} The string representation of the value.
  *
  */
-var stringify = function(value, options){
+var stringify = function divhide_obj_stringify(value, options){
 
     options = _.extend({
         space: 4,
@@ -177,19 +177,15 @@ var stringify = function(value, options){
     // convert the given identation number into a repeatable string
     var identationSpaces = _.repeat(" ", Safe.number(options.space, 0));
 
-    return traverse(
-        value,
-        // traverse options
-        {
-            callback: stringifyCallback,
-            callbackAfter: stringifyCallbackAfter
-        },
-        "",
-        // callback options
-        {
+    return Traverse
+        .topDown(stringifyTopDownFn)
+        .bottomUp(stringifyBottomUpFn)
+        .accumulator("")
+        .options({
             space: identationSpaces,
             annotate: Safe.function(options.annotate, null)
-        });
+        })
+        .traverse(value);
 };
 
 module.exports = stringify;

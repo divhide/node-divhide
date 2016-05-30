@@ -324,7 +324,7 @@ var Schema = function(customFns){
     /// Get the current ChainContext of the assertion, in order
     /// to keep the assertion state.
     var chainContext = null;
-    _.each(arguments, function(arg){
+    _.forEach(arguments, function(arg){
         if(arg instanceof ChainContext){
             chainContext = arg;
             return false;
@@ -341,7 +341,7 @@ var Schema = function(customFns){
         /// transform the custom validation functions, to use the Schema
         /// runner
         var wrappedFns = _.extend({}, CustomChainableFns, customFns);
-        _.each(wrappedFns, function(fn, name){
+        _.forEach(wrappedFns, function(fn, name){
             wrappedFns[name] = Internal.wrapValidationFunction(name);
         });
 

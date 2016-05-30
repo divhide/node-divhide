@@ -6,10 +6,6 @@ var _ = require("lodash"),
     TraverseStack = require("./TraverseStack");
 
 /**
- * @module Divhide/Obj/traverse
- */
-
-/**
  *
  * Traverse the structure using a top-down strategy.
  * @ignore
@@ -23,7 +19,7 @@ var _ = require("lodash"),
  * @return {*} The accumulator
  *
  */
-var recursiveTraversal = function divhide_obj_traverse_recursiveTraversal(value, options, accumulator, stack){
+var recursiveTraversal = function divhide_obj_traversal_topDownBottomUp_recursiveTraversal(value, options, accumulator, stack){
 
     var extraArgs = arguments.length > 4 ?
         _.slice(arguments, 4) : [];
@@ -41,9 +37,14 @@ var recursiveTraversal = function divhide_obj_traverse_recursiveTraversal(value,
     var stackInfo = stack.currentInfo();
 
     // call callback before iteration
-    if(options.callback){
-        accumulator = options.callback.apply(
-            {}, [ value, _.clone(stackInfo), accumulator ].concat(extraArgs) );
+    if(options.topDownFn){
+
+        accumulator = options.topDownFn.apply(
+            {}, [ value, _.clone(stackInfo), accumulator ].concat(extraArgs));
+
+        // if transform use the callback result
+        value = options.transform ? accumulator : value;
+
     }
 
     // iterate over the inner elements of complex structures
@@ -62,7 +63,7 @@ var recursiveTraversal = function divhide_obj_traverse_recursiveTraversal(value,
             var innerStack = stack.clone();
             var isCircularReference = innerStack.push(val, index, stackInfo);
 
-            accumulator = accumulator = recursiveTraversal.apply(
+            accumulator = recursiveTraversal.apply(
                 {}, [ val, options, accumulator, innerStack ].concat(extraArgs) );
 
             loopIndex++;
@@ -72,8 +73,8 @@ var recursiveTraversal = function divhide_obj_traverse_recursiveTraversal(value,
     }
 
     // call callback after iteration
-    if(options.callbackAfter){
-        accumulator = options.callbackAfter.apply(
+    if(options.bottomUpFn){
+        accumulator = options.bottomUpFn.apply(
             {}, [ value, stackInfo, accumulator ].concat(extraArgs) );
     }
 
@@ -102,41 +103,23 @@ var recursiveTraversal = function divhide_obj_traverse_recursiveTraversal(value,
  * Perform a traversal of the given structure calling the given callback
  * before (top-down) and/or after (bottom-up).
  *
- * <p>If a circular reference is found the iteration will not skip the structure
- * and continue.</p>
+ * If a circular reference is found the iteration will not skip the structure
+ * and continue.
  *
- * @example
- *
- * // perform a top-down traversal of the structure
- * traverse({
- *     value: 1
- * }, {
- *     callback: function(value, info, accumulator){
- *     }
- * });
- *
- * // perform a bottom-up traversal of the structure
- * traverse({
- *     value: 1
- * }, {
- *     callbackAfter: function(value, info, accumulator){
- *     }
- * });
- *
- * @alias module:Divhide/Obj/traverse
  * @type {Function}
  * @protected
  *
  * @param  {Any} value
- * @param  {Object} options
- * @param  {module:Divhide/Obj/traverse~callback} options.callback Function to be called before inner structure traversal (top-down).
- * @param  {module:Divhide/Obj/traverse~callback} options.callbackAfter Function to be called after inner structure traversal (bottom-down).
+ * @param  {Object}     options
+ * @param  {Function}   options.topDownFn   Top-Down callback
+ * @param  {Function}   options.bottomUpFn  Bottom-Up callback
+ * @param  {Boolean}    options.transform   If true use the topDownFn result as the value to iterate to
  * @param  {Any} accumulator
  *
- * @return {Any} The accumulator result
+ * @return {Any} The accumulator value
  *
  */
-var traverse = function divhide_obj_traverse(value, options, accumulator){
+var traverse = function divhide_obj_traversal_topDownBottomUp(value, options, accumulator){
 
     var extraArgs = arguments.length > 3 ?
         _.slice(arguments, 3) : [];
@@ -145,9 +128,11 @@ var traverse = function divhide_obj_traverse(value, options, accumulator){
 
     var tOptions = {
         // callback called on item traversal (top-down)
-        callback: Safe.function(options.callback, null),
+        topDownFn: Safe.function(options.topDownFn, null),
         // callback called after item traversal (bottom-up)
-        callbackAfter: Safe.function(options.callbackAfter, null),
+        bottomUpFn: Safe.function(options.bottomUpFn, null),
+        // callback called to transform the value before traversal
+        transform: Safe.boolean(options.transform, false)
     };
 
     return recursiveTraversal.apply(
