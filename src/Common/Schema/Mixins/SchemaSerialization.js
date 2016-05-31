@@ -3,36 +3,23 @@
 var _       = require("lodash"),
     Type    = require("../../Type"),
     Safe    = require("../../Safe"),
-    Obj     = require("../../Obj");
+    Obj     = require("../../Obj"),
+    Traverse    = require("../../Traverse");
 
 
 /**
  * Convert the given value to a JSON compatible object, removing function names, ...
+ *
  * @param  {Any} value
  * @return {Any}
  */
-var serializeToJSON = function schemaserialization_serializeToJSON(value){
+var convertToJSON = function divhide_schema_mixins_SchemaSerialization_serializeToJSON(value){
 
     if(Type.isObject(value)){
         return _.assign({}, value);
     }
 
     return value;
-
-};
-
-
-var recursiveMap = function(value, callback){
-
-    var result = callback(value);
-
-    if(!Type.isObject()){
-        return result;
-    }
-
-    _.forEach(value, function(val, index){
-        result[index] = recursiveMap(val);
-    });
 
 };
 
@@ -45,7 +32,7 @@ var recursiveMap = function(value, callback){
  * @type {Object}
  *
  */
-var Serialization = function(){
+var Serialization = function divhide_schema_mixins_SchemaSerialization(){
 
     /**
      *
@@ -54,8 +41,13 @@ var Serialization = function(){
      * @return {Object}
      *
      */
-    this.serialize = function(){
-        return recursiveMap(this, serializeToJSON);
+    this.serialize = function divhide_schema_mixins_SchemaSerialization_serialize(){
+
+        return Traverse
+            .each(convertToJSON)
+            .transform(true)
+            .traverse(this);
+
     };
 
     /**
@@ -65,7 +57,7 @@ var Serialization = function(){
      * @return {SchemaDefinition}
      *
      */
-    this.deserialize = function(value){
+    this.deserialize = function divhide_schema_mixins_SchemaSerialization_deserialize(value){
         return new this.constructor(value);
     };
 

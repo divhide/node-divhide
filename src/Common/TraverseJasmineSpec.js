@@ -22,7 +22,7 @@ describe("Divhide.Traverse", function () {
                 circularReferences = [];
 
             Divhide.Traverse
-                .topDown(function(val, info){
+                .each(function(val, info){
                     indexes.push(info.index);
                     circularReferences.push(info.isCircularReference);
                 })
@@ -47,7 +47,7 @@ describe("Divhide.Traverse", function () {
                 circularReferences = [];
 
             Divhide.Traverse
-                .topDown(function(val, info){
+                .each(function(val, info){
                     indexes.push(info.index);
                     circularReferences.push(info.isCircularReference);
                 })
@@ -76,10 +76,12 @@ describe("Divhide.Traverse", function () {
 
             var values = [];
 
-            Divhide.Traverse.topDown(function(val, info){
-                info.data.value = info.data.value ? info.data.value+1 : 1;
-                values.push(info.data.value);
-            }).traverse(a);
+            Divhide.Traverse
+                .each(function(val, info){
+                    info.data.value = info.data.value ? info.data.value+1 : 1;
+                    values.push(info.data.value);
+                })
+                .traverse(a);
 
             expect(values)
                 .toEqual([1, 2, 3]);
@@ -99,11 +101,11 @@ describe("Divhide.Traverse", function () {
                 cAfterValues = [];
 
             Divhide.Traverse
-                .topDown(function(val, info){
+                .each(function(val, info){
                     info.tmpData.value = info.tmpData.value ? info.tmpData.value+1 : 1;
                     cValues.push(info.tmpData.value);
                 })
-                .bottomUp(function(val, info){
+                .afterEach(function(val, info){
                     info.tmpData.value = info.tmpData.value ? info.tmpData.value+1 : 1;
                     cAfterValues.push(info.tmpData.value);
                 })

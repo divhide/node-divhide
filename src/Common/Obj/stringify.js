@@ -178,8 +178,8 @@ var stringify = function divhide_obj_stringify(value, options){
     var identationSpaces = _.repeat(" ", Safe.number(options.space, 0));
 
     return Traverse
-        .topDown(stringifyTopDownFn)
-        .bottomUp(stringifyBottomUpFn)
+        .each(stringifyTopDownFn)
+        .afterEach(stringifyBottomUpFn)
         .accumulator("")
         .options({
             space: identationSpaces,

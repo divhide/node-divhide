@@ -37,14 +37,14 @@ var recursiveTraversal = function divhide_obj_traversal_topDownBottomUp_recursiv
     var stackInfo = stack.currentInfo();
 
     // call callback before iteration
-    if(options.topDownFn){
-
-        accumulator = options.topDownFn.apply(
+    if(options.eachFn){
+        accumulator = options.eachFn.apply(
             {}, [ value, _.clone(stackInfo), accumulator ].concat(extraArgs));
+    }
 
-        // if transform use the callback result
-        value = options.transform ? accumulator : value;
-
+    // if tranform set the iteration value
+    if(options.eachFn && options.transform){
+        value = accumulator;
     }
 
     // iterate over the inner elements of complex structures
@@ -66,6 +66,11 @@ var recursiveTraversal = function divhide_obj_traversal_topDownBottomUp_recursiv
             accumulator = recursiveTraversal.apply(
                 {}, [ val, options, accumulator, innerStack ].concat(extraArgs) );
 
+            // if transform set the value index
+            if(options.transform){
+                value[index] = accumulator;
+            }
+
             loopIndex++;
 
         });
@@ -73,11 +78,17 @@ var recursiveTraversal = function divhide_obj_traversal_topDownBottomUp_recursiv
     }
 
     // call callback after iteration
-    if(options.bottomUpFn){
-        accumulator = options.bottomUpFn.apply(
+    if(options.afterEachFn){
+        accumulator = options.afterEachFn.apply(
             {}, [ value, stackInfo, accumulator ].concat(extraArgs) );
     }
 
+    // return the modified value if transform
+    if(options.transform){
+        return value;
+    }
+
+    // return the accumulator otherwise
     return accumulator;
 
 };
@@ -111,9 +122,9 @@ var recursiveTraversal = function divhide_obj_traversal_topDownBottomUp_recursiv
  *
  * @param  {Any} value
  * @param  {Object}     options
- * @param  {Function}   options.topDownFn   Top-Down callback
- * @param  {Function}   options.bottomUpFn  Bottom-Up callback
- * @param  {Boolean}    options.transform   If true use the topDownFn result as the value to iterate to
+ * @param  {Function}   options.eachFn   Top-Down callback
+ * @param  {Function}   options.afterEachFn  Bottom-Up callback
+ * @param  {Boolean}    options.transform   If true use the eachFn result as the value to iterate to
  * @param  {Any} accumulator
  *
  * @return {Any} The accumulator value
@@ -128,9 +139,9 @@ var traverse = function divhide_obj_traversal_topDownBottomUp(value, options, ac
 
     var tOptions = {
         // callback called on item traversal (top-down)
-        topDownFn: Safe.function(options.topDownFn, null),
+        eachFn: Safe.function(options.eachFn, null),
         // callback called after item traversal (bottom-up)
-        bottomUpFn: Safe.function(options.bottomUpFn, null),
+        afterEachFn: Safe.function(options.afterEachFn, null),
         // callback called to transform the value before traversal
         transform: Safe.boolean(options.transform, false)
     };

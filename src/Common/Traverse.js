@@ -5,8 +5,8 @@ var Chain = require("./Chain"),
     topDownBottomUp = require("./Traverse/topDownBottomUp");
 
 var TraverseChainContext = function divhide_Traverse_TraverseChainContext(){
-    this.topDownFn = null;
-    this.bottomUpFn = null;
+    this.eachFn = null;
+    this.afterEachFn = null;
     this.transform = false;
 };
 
@@ -18,11 +18,11 @@ var TraverseChainContext = function divhide_Traverse_TraverseChainContext(){
 var TraverseChain = function divhide_Traverse() {
 
     var chainableFns = {
-        topDown: function divhide_Traverse_topDown(val, fn){
-            this.topDownFn = Safe.function(fn, null);
+        each: function divhide_Traverse_each(val, fn){
+            this.eachFn = Safe.function(fn, null);
         },
-        bottomUp: function divhide_Traverse_bottomUp(val, fn){
-            this.bottomUpFn = Safe.function(fn, null);
+        afterEach: function divhide_Traverse_afterEach(val, fn){
+            this.afterEachFn = Safe.function(fn, null);
         },
         transform: function divhide_Traverse_transform(val, isTransform){
             this.transform = Safe.boolean(isTransform, false);
@@ -40,8 +40,8 @@ var TraverseChain = function divhide_Traverse() {
             return topDownBottomUp(
                 value,
                 {
-                    topDownFn: this.topDownFn,
-                    bottomUpFn: this.bottomUpFn,
+                    eachFn: this.eachFn,
+                    afterEachFn: this.afterEachFn,
                     transform: this.transform
                 },
                 this.accumulator,
