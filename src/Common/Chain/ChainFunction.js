@@ -2,7 +2,7 @@
 
 var _    = require("lodash"),
     Type = require("../Type"),
-    Safe = require("../Safe");
+    Coerce = require("../Coerce");
 
 /**
  * The ChainFunction wraps the functionality of a function executed
@@ -19,11 +19,11 @@ var _    = require("lodash"),
  */
 var ChainFunction = function divhide_chain_ChainFunction(options){
 
-    options = Safe.object(options);
+    options = Coerce.object(options);
 
-    this.name   = Safe.string(options.name, "?");
-    this.fn     = Safe.function(options.fn, function(){});
-    this.args   = Safe.array(options.args);
+    this.name   = Coerce.string(options.name, "?");
+    this.fn     = Coerce.function(options.fn, function(){});
+    this.args   = Coerce.array(options.args);
 
 };
 
@@ -43,9 +43,9 @@ var ChainFunction = function divhide_chain_ChainFunction(options){
  */
 ChainFunction.prototype.apply = function divhide_chain_ChainFunction_apply(scope, args, extraArgs) {
 
-    scope       = Safe.object(scope);
-    args        = Safe.array(args);
-    extraArgs   = Safe.array(extraArgs);
+    scope       = Coerce.object(scope);
+    args        = Coerce.array(args);
+    extraArgs   = Coerce.array(extraArgs);
 
     /// the given args should always exist
     if(args.length === 0) args = [ null ];

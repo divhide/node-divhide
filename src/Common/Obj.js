@@ -1,7 +1,7 @@
 'use strict';
 
 var _     = require("lodash"),
-    Safe  = require("./Safe");
+    Coerce  = require("./Coerce");
 
 /**
  *
@@ -30,8 +30,8 @@ var Obj = {
      */
     filter: function(obj, filter){
 
-        obj         = Safe.object(obj);
-        filter      = Safe.regexp(filter, "/.*/");
+        obj         = Coerce.object(obj);
+        filter      = Coerce.regexp(filter, "/.*/");
 
         return _.transform(
             obj,

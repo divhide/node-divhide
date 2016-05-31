@@ -6,8 +6,8 @@
 
 var _    = require("lodash"),
     Type = require("./Type"),
-    Safe = require("./Safe"),
-    ChainContext    = require("./Chain/ChainContext");
+    Coerce = require("./Coerce"),
+    ChainContext = require("./Chain/ChainContext");
 
 /**
  *
@@ -53,7 +53,7 @@ Internal.getArgumentList = function divhide_Chain_getArgumentList(argsObj){
  */
 Internal.wrapChainableFunction = function divhide_Chain_wrapChainableFunction(context, fn, chainableFns, evaluationFns, options){
 
-    options = Safe.object(options);
+    options = Coerce.object(options);
 
     return function() {
 
@@ -69,7 +69,7 @@ Internal.wrapChainableFunction = function divhide_Chain_wrapChainableFunction(co
         curContext.add(fn, args);
 
         /// this is usefull to create "typed" instances of the Chain
-        var ChainClass = Safe.function(options.type, Chain);
+        var ChainClass = Coerce.function(options.type, Chain);
 
         return new ChainClass(chainableFns, evaluationFns, options, curContext);
 
@@ -97,7 +97,7 @@ Internal.wrapChainableFunction = function divhide_Chain_wrapChainableFunction(co
  */
 Internal.wrapReturnableFunction = function divhide_Chain_wrapReturnableFunction(context, fn, chainableFns, evaluationFns, options){
 
-    options = Safe.object(options);
+    options = Coerce.object(options);
 
     return function() {
 
@@ -133,11 +133,11 @@ Internal.wrapReturnableFunction = function divhide_Chain_wrapReturnableFunction(
         }
 
         /// create the evaluation function arguments
-        var fnArgs = Safe.array(result, [ null ])
+        var fnArgs = Coerce.array(result, [ null ])
             /// concat the arguments if they are not undefined
-            .concat(Safe.array(args))
+            .concat(Coerce.array(args))
             /// concat the argument if is not undefined
-            .concat(Safe.array(options.argument))
+            .concat(Coerce.array(options.argument))
             /// concat the err as last argument
             .concat([err]);
 

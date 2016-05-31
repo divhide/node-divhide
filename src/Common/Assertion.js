@@ -5,7 +5,7 @@
  */
 
 var _               = require("lodash"),
-    Safe            = require("./Safe"),
+    Coerce          = require("./Coerce"),
     Chain           = require("./Chain"),
     ChainContext    = require("./Chain/ChainContext");
 
@@ -88,7 +88,7 @@ AssertionFns.assert = function(result, err){
  */
 var Assertion = function(fns){
 
-    fns = Safe.object(fns);
+    fns = Coerce.object(fns);
     fns = _.assign({}, fns, ChainableFns);
 
     /// Get the current ChainContext of the assertion, in order

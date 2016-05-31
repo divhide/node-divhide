@@ -1,7 +1,7 @@
 "use strict";
 
 var _       = require("lodash"),
-    Safe    = require("../Safe");
+    Coerce  = require("../Coerce");
 
 
 /**
@@ -29,14 +29,14 @@ var Internal = {};
  */
 Internal.applyTemplate = function(name, data, messages, customMessages){
 
-    name            = Safe.string(name);
-    data            = Safe.object(data);
-    messages        = Safe.object(messages);
-    customMessages  = Safe.object(customMessages);
+    name            = Coerce.string(name);
+    data            = Coerce.object(data);
+    messages        = Coerce.object(messages);
+    customMessages  = Coerce.object(customMessages);
 
     messages = _.extend({}, messages, customMessages);
 
-    var tmplStr = Safe.string(messages[name]) || name;
+    var tmplStr = Coerce.string(messages[name]) || name;
 
     return _.template(tmplStr)(data);
 
@@ -57,9 +57,9 @@ Internal.applyTemplate = function(name, data, messages, customMessages){
  */
 var I18NString = function(name, data, messages){
 
-    name        = Safe.string(name);
-    data        = Safe.object(data);
-    messages    = Safe.object(messages);
+    name        = Coerce.string(name);
+    data        = Coerce.object(data);
+    messages    = Coerce.object(messages);
 
     /**
      *

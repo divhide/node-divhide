@@ -2,7 +2,7 @@
 
 var _               = require("lodash"),
     Type            = require("../Type"),
-    Safe            = require("../Safe"),
+    Coerce          = require("../Coerce"),
     Exception       = require("./Exception");
 
 /**
@@ -15,7 +15,7 @@ var _               = require("lodash"),
 var getStackTrace = function(){
 
     var error    = new Error(),
-        stackStr = Safe.string(error.stack),
+        stackStr = Coerce.string(error.stack),
         stack    = stackStr.split('\n');
 
     /// Remove Error message + 2 first lines of the stack trace
@@ -101,7 +101,7 @@ var ExceptionList = function() {
         }
 
         /// make sure errors is an array
-        errors = Safe.array(errors);
+        errors = Coerce.array(errors);
 
         /// adds the elements to the list
         _.each(

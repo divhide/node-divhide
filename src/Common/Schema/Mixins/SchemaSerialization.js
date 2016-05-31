@@ -2,7 +2,6 @@
 
 var _       = require("lodash"),
     Type    = require("../../Type"),
-    Safe    = require("../../Safe"),
     Obj     = require("../../Obj"),
     Traverse    = require("../../Traverse");
 

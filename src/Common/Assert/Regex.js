@@ -2,7 +2,7 @@
 
 var _           = require("lodash"),
     Type        = require("../Type"),
-    Safe        = require("../Safe"),
+    Coerce      = require("../Coerce"),
     Exception   = require("../Exception/Exception");
 
 /**
@@ -28,7 +28,7 @@ var _           = require("lodash"),
  */
 var Regex = function(val, regex){
 
-    regex = Safe.regexp(regex);
+    regex = Coerce.regexp(regex);
 
     var isValid = !!regex.exec(val);
 

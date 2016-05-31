@@ -1,9 +1,8 @@
 "use strict";
 
-
 var _                       = require("lodash"),
     Type                    = require("../Type"),
-    Safe                    = require("../Safe"),
+    Coerce                  = require("../Coerce"),
     ExceptionList           = require("../Exception/ExceptionList"),
     Types                   = require("./Types"),
     SchemaDefinition        = require("./SchemaDefinition");
@@ -39,7 +38,7 @@ var SchemaEvaluator = function(schema, validationFns, cOptions){
      * @type {Object}
      *
      */
-    validationFns = Safe.object(validationFns);
+    validationFns = Coerce.object(validationFns);
 
     /**
      *

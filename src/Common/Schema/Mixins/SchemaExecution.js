@@ -1,7 +1,6 @@
 "use strict";
 
 var _                           = require("lodash"),
-    Safe                        = require("../../Safe"),
     Type                        = require("../../Type"),
     Assert                      = require("../../Assert"),
     Exception                   = require("../../Exception/Exception"),

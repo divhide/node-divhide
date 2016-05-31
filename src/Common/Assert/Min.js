@@ -2,7 +2,7 @@
 
 var _           = require("lodash"),
     Type        = require("../Type"),
-    Safe        = require("../Safe"),
+    Coerce      = require("../Coerce"),
     Exception   = require("../Exception/Exception");
 
 /**
@@ -25,8 +25,8 @@ var _           = require("lodash"),
  */
 var Min = function(val, min){
 
-    min = Safe.number(min);
-    var length = Safe.length(val);
+    min = Coerce.number(min);
+    var length = Coerce.length(val);
 
     if(length < min){
         throw new Exception("VALIDATION_MIN", { value: min });

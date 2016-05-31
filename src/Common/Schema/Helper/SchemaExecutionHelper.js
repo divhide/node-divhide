@@ -1,7 +1,7 @@
 "use strict";
 
 var _                   = require("lodash"),
-    Safe                = require("../../Safe"),
+    Coerce              = require("../../Coerce"),
     Type                = require("../../Type"),
     Assert              = require("../../Assert"),
     ExceptionList       = require("../../Exception/ExceptionList"),
@@ -25,8 +25,8 @@ var _                   = require("lodash"),
  */
 var prepareSchema = function(schema, value, validationFns){
 
-    value           = Safe.value(value);
-    validationFns   = Safe.object(validationFns);
+    value           = Coerce.value(value);
+    validationFns   = Coerce.object(validationFns);
 
     /* jshint -W064 */
     var errors = new ExceptionList();
@@ -71,7 +71,7 @@ var prepareSchema = function(schema, value, validationFns){
  */
 var prepareObject = function(schema, value){
 
-    value = Safe.object(value);
+    value = Coerce.object(value);
 
     /* jshint -W064 */
     var errors      = new ExceptionList(),
@@ -91,7 +91,7 @@ var prepareObject = function(schema, value){
             }
             else {
                 /// key is a regexp string
-                var regexp  = Safe.regexp(key);
+                var regexp  = Coerce.regexp(key);
                 keys = _.filter(
                     valueKeys,
                     function(key){
@@ -134,7 +134,7 @@ var prepareObject = function(schema, value){
  */
 var prepareArray = function(schema, value){
 
-    value = Safe.array(value);
+    value = Coerce.array(value);
 
     /* jshint -W064 */
     var errors  = new ExceptionList(),
@@ -222,7 +222,7 @@ var SchemaExecutionHelper = {
         Assert.instanceOf(Types.SchemaDefinition)
             .assert(schema);
 
-        value = Safe.value(value);
+        value = Coerce.value(value);
 
         /// initalize the list of errors
         var errors = new ExceptionList();
@@ -230,7 +230,7 @@ var SchemaExecutionHelper = {
         /// if not strict tries to normalize
         /// the value (e.g. a number can be represented by a string )
         if(!schema.strict){
-            value = Safe.coerce(value, schema.schema);
+            value = Coerce.coerce(value, schema.schema);
         }
 
         /// if the value is required and it has no value, throw error
@@ -257,10 +257,10 @@ var SchemaExecutionHelper = {
                 schema.validations,
                 function(v){
 
-                    v = Safe.object(v);
+                    v = Coerce.object(v);
 
-                    var fn      = Safe.function(validationFns[v.name]),
-                        args    = Safe.array(v.args);
+                    var fn      = Coerce.function(validationFns[v.name]),
+                        args    = Coerce.array(v.args);
 
                     try{
                         fn.apply({}, [value].concat(args));

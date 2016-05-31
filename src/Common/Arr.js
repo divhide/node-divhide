@@ -6,7 +6,7 @@
 
 var _           = require("lodash"),
     Type        = require("./Type"),
-    Safe        = require("./Safe");
+    Coerce      = require("./Coerce");
 
 
 var Arr = {
@@ -22,8 +22,8 @@ var Arr = {
      */
     index: function(array, index){
 
-        array = Safe.array(array);
-        index = Safe.number(index);
+        array = Coerce.array(array);
+        index = Coerce.number(index);
 
         if(index < 0 || index > array.length - 1)
             return null;
@@ -43,7 +43,7 @@ var Arr = {
      */
     last: function(array){
 
-        array = Safe.array(array);
+        array = Coerce.array(array);
 
         return Arr.index(array, array.length - 1);
 
@@ -74,7 +74,7 @@ var Arr = {
      */
     length: function(array){
 
-        array = Safe.array(array);
+        array = Coerce.array(array);
 
         return array.length;
 
@@ -93,14 +93,14 @@ var Arr = {
      */
     insert: function(array, value, index){
 
-        array = Safe.array(array);
-        value = Safe.array(value);
+        array = Coerce.array(array);
+        value = Coerce.array(value);
 
         /* jshint -W041 */
         if(index == null){
             index = Arr.length(array);
         } else {
-            index = Safe.number(index);
+            index = Coerce.number(index);
         }
 
         // merge the structures
@@ -130,9 +130,9 @@ var Arr = {
      */
     remove: function(array, index, n){
 
-        array   = Safe.array(array);
-        index   = Safe.number(index, 0);
-        n       = Safe.number(n, 1);
+        array   = Coerce.array(array);
+        index   = Coerce.number(index, 0);
+        n       = Coerce.number(n, 1);
 
         return array.splice(index, n);
 

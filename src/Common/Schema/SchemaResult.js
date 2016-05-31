@@ -1,7 +1,7 @@
 "use strict";
 
 var _                   = require("lodash"),
-    Safe                = require("../Safe"),
+    Coerce              = require("../Coerce"),
     Type                = require("../Type"),
     Assert              = require("../Assert"),
     Types               = require("./Types"),
@@ -213,8 +213,8 @@ var SchemaResult = function(schema){
         set: function(val, index) {
 
             // arguments normalization
-            val = Safe.value(val);
-            index = Safe.coerce(index, "");
+            val = Coerce.value(val);
+            index = Coerce.coerce(index, "");
 
             // set SchemaResult object
             if(Type.instanceOf(val, Types.SchemaResult)){

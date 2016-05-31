@@ -35,7 +35,7 @@ bower install divhide
 
 <script type="text/javascript" src="//bower_components/divhide/dist/divhide.js"></script>
 <script type="text/javascript">
-    var fn = Divhide.Safe.function();
+    var fn = Divhide.Coerce.function();
     ...
 </script>
 

@@ -24,10 +24,10 @@ var Common = {
     Type: require("./Common/Type"),
 
     /**
-     * Safe utility
-     * @type {module:Divhide/Safe}
+     * Coerce utility
+     * @type {module:Divhide/Coerce}
      */
-    Safe: require("./Common/Safe"),
+    Coerce: require("./Common/Coerce"),
 
     /**
      * Array utility

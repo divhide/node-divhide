@@ -8,9 +8,6 @@ describe("CustomSchema", function () {
         jasmine.addMatchers(window.JasmineCustomMatchers);
     });
 
-    ///
-    /// .value(String)
-    ///
     describe('.value(String)', function(){
 
         it(".default() should return default value", function () {
@@ -26,9 +23,6 @@ describe("CustomSchema", function () {
 
     });
 
-    ///
-    /// .value(Object)
-    ///
     describe('.value(Object)', function(){
 
         it(".required() should return value", function () {
@@ -91,9 +85,6 @@ describe("CustomSchema", function () {
 
     });
 
-    ///
-    /// .value(Array)
-    ///
     describe('.value(Array)', function(){
 
         it("should return value", function () {
@@ -121,9 +112,6 @@ describe("CustomSchema", function () {
 
     });
 
-    ///
-    /// .value(Any)
-    ///
     describe('.value(Any)', function(){
 
         it(".optional().value() should return value or null", function () {
@@ -169,9 +157,6 @@ describe("CustomSchema", function () {
 
     });
 
-    ///
-    /// .value(Boolean)
-    ///
     describe('.value(Boolean)', function(){
 
         it("should return a value", function () {
@@ -222,9 +207,6 @@ describe("CustomSchema", function () {
 
     });
 
-    ///
-    /// .value(Boolean)
-    ///
     describe('.value(function)', function(){
 
         it(".function()", function () {
@@ -248,9 +230,6 @@ describe("CustomSchema", function () {
 
     });
 
-    ///
-    /// .errors
-    ///
     describe('.errors()', function(){
 
         it("should return errors", function () {
@@ -265,9 +244,6 @@ describe("CustomSchema", function () {
 
     });
 
-    ///
-    /// .serialize()
-    ///
     describe('.serialize()', function(){
 
         it(".any() should return a json structure", function () {
@@ -342,9 +318,6 @@ describe("CustomSchema", function () {
 
     });
 
-    ///
-    /// .serialize()
-    ///
     describe('.deserialize()', function(){
 
         it("object() should return a Schema", function () {
@@ -401,9 +374,6 @@ describe("CustomSchema", function () {
 
     });
 
-    ///
-    /// Compile() tests
-    ///
     describe('.compile()', function(){
 
         it(".value() should return a value", function () {
@@ -426,6 +396,5 @@ describe("CustomSchema", function () {
         });
 
     });
-
 
 });

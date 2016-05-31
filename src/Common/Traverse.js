@@ -1,7 +1,7 @@
 "use strict";
 
 var Chain = require("./Chain"),
-    Safe = require("./Safe"),
+    Coerce = require("./Coerce"),
     topDownBottomUp = require("./Traverse/topDownBottomUp");
 
 var TraverseChainContext = function divhide_Traverse_TraverseChainContext(){
@@ -19,19 +19,19 @@ var TraverseChain = function divhide_Traverse() {
 
     var chainableFns = {
         each: function divhide_Traverse_each(val, fn){
-            this.eachFn = Safe.function(fn, null);
+            this.eachFn = Coerce.function(fn, null);
         },
         afterEach: function divhide_Traverse_afterEach(val, fn){
-            this.afterEachFn = Safe.function(fn, null);
+            this.afterEachFn = Coerce.function(fn, null);
         },
         transform: function divhide_Traverse_transform(val, isTransform){
-            this.transform = Safe.boolean(isTransform, false);
+            this.transform = Coerce.boolean(isTransform, false);
         },
         accumulator: function divhide_Traverse_accumulator(val, accumulator){
-            this.accumulator = Safe.value(accumulator);
+            this.accumulator = Coerce.value(accumulator);
         },
         options: function divhide_Traverse_options(val, options){
-            this.options = Safe.value(options);
+            this.options = Coerce.value(options);
         }
     };
 

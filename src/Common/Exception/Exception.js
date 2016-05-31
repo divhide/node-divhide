@@ -2,7 +2,7 @@
 
 var _           = require("lodash"),
     Type        = require("../Type"),
-    Safe        = require("../Safe"),
+    Coerce      = require("../Coerce"),
     I18NString  = require("../I18N/String"),
     Messages    = require("../I18N/Messages");
 
@@ -27,7 +27,7 @@ var Internal = {};
  */
 Internal.getI18NMessage = function(message, messageData){
 
-    messageData = Safe.object(messageData);
+    messageData = Coerce.object(messageData);
 
     if( message instanceof I18NString ){
         return message;
@@ -52,7 +52,7 @@ Internal.getI18NMessage = function(message, messageData){
 Internal.getStackTrace = function(){
 
     var error    = new Error(),
-        stackStr = Safe.string(error.stack),
+        stackStr = Coerce.string(error.stack),
         stack    = stackStr.split('\n');
 
     /// Remove Error message + 2 first lines of the stack trace
@@ -72,7 +72,7 @@ Internal.getStackTrace = function(){
 var Exception = function(message, messageData) {
 
     message     = Internal.getI18NMessage(message, messageData);
-    messageData = Safe.object(messageData);
+    messageData = Coerce.object(messageData);
 
     /// get the stack trace
     var stack = Internal.getStackTrace();

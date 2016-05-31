@@ -3,7 +3,7 @@
 var _               = require("lodash"),
     Types           = require("./Types"),
     Type            = require("../Type"),
-    Safe            = require("../Safe"),
+    Coerce          = require("../Coerce"),
     Assert          = require("../Assert");
 
 /**
@@ -127,7 +127,7 @@ var Defaults = {
  */
 var normalizeSchemaValue = function(value){
 
-    value = Safe.value(value);
+    value = Coerce.value(value);
 
     if(Type.isString(value)){
         return "";
@@ -198,7 +198,7 @@ var compile = function(schema, options){
  */
 var SchemaDefinition = function(options){
 
-    options = Safe.object(options);
+    options = Coerce.object(options);
 
     /**
      *
@@ -225,7 +225,7 @@ var SchemaDefinition = function(options){
          * @type {Boolean}
          *
          */
-        strict: Safe.boolean(options.strict, false),
+        strict: Coerce.boolean(options.strict, false),
 
         /**
          *
@@ -234,7 +234,7 @@ var SchemaDefinition = function(options){
          * @type {Boolean}
          *
          */
-        any: Safe.boolean(options.any, false),
+        any: Coerce.boolean(options.any, false),
 
         /**
          *
@@ -251,7 +251,7 @@ var SchemaDefinition = function(options){
          * @type {Boolean}
          *
          */
-        required: Safe.boolean(options.required, true),
+        required: Coerce.boolean(options.required, true),
 
         /**
          *
@@ -260,7 +260,7 @@ var SchemaDefinition = function(options){
          *
          * @type {Boolean}
          */
-        repeatable: Safe.boolean(options.repeatable),
+        repeatable: Coerce.boolean(options.repeatable),
 
         /**
          *
@@ -270,7 +270,7 @@ var SchemaDefinition = function(options){
          * @type {Array}
          *
          */
-        validations: Safe.array(options.validations),
+        validations: Coerce.array(options.validations),
 
     };
 
@@ -292,9 +292,9 @@ var SchemaDefinition = function(options){
 var CompiledSchemaDefinition = function(options, cOptions){
 
     /// normalize the given compilation options
-    cOptions = Safe.object(cOptions);
-    cOptions.compile = Safe.boolean(cOptions.compile, true);
-    cOptions.prepare = Safe.function(cOptions.prepare, function(v){ return v; });
+    cOptions = Coerce.object(cOptions);
+    cOptions.compile = Coerce.boolean(cOptions.compile, true);
+    cOptions.prepare = Coerce.function(cOptions.prepare, function(v){ return v; });
 
     /* jshint -W064 */
     var schema = SchemaDefinition(options);

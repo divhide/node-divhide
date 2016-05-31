@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * @module Divhide/Safe
+ * @module Divhide/Coerce
  */
 
 var _       = require('lodash'),
@@ -28,7 +28,7 @@ Internal.RegExpFormat = /^\/.*\/(\w*)$/;
  */
 Internal.stringToRegExp = function(str){
 
-    str = Safe.string(str);
+    str = Coerce.string(str);
 
     var flags = "",
         regexp = Internal.RegExpFormat.exec(str);
@@ -53,10 +53,10 @@ Internal.stringToRegExp = function(str){
 };
 
 
-var Safe = {};
+var Coerce = {};
 
 /*
- * Safelly get array from value
+ * Coercelly get array from value
  *
  * @param {*} value The value to get
  * @param {*} defaultValue The value to get
@@ -64,13 +64,13 @@ var Safe = {};
  * @return {Array}
  *
  */
-Safe.array = function(value, defaultValue){
+Coerce.array = function(value, defaultValue){
 
     /// if value is null and there is a default value, then
     /// fallback
     /* jshint -W041 */
     if(value == null && defaultValue != null){
-        return Safe.array(defaultValue);
+        return Coerce.array(defaultValue);
     }
 
     var isArray = Type.isArray(value);
@@ -88,14 +88,14 @@ Safe.array = function(value, defaultValue){
 };
 
 /*
- * Safelly get Boolean from value
+ * Coercelly get Boolean from value
  *
  * @param {*} value The value to get
  *
  * @return {Boolean}
  *
  */
-Safe.boolean = function(value, defaultValue){
+Coerce.boolean = function(value, defaultValue){
 
     if(Type.isBoolean(value)){
         return Boolean(value);
@@ -103,7 +103,7 @@ Safe.boolean = function(value, defaultValue){
 
     /// fallback to the default value
     if(defaultValue !== undefined){
-        return Safe.boolean(!!defaultValue);
+        return Coerce.boolean(!!defaultValue);
     }
 
     /// if is Number
@@ -123,7 +123,7 @@ Safe.boolean = function(value, defaultValue){
 
 
 /*
- * Safelly get Boolean from value
+ * Coercelly get Boolean from value
  *
  * @param {*} value
  * @param {*} defaultValue
@@ -131,20 +131,20 @@ Safe.boolean = function(value, defaultValue){
  * @return {String}
  *
  */
-Safe.string = function(value, defaultValue){
+Coerce.string = function(value, defaultValue){
 
     if(Type.isString(value)){
         return value;
     }
 
     return defaultValue !== undefined ?
-                Safe.string(defaultValue) : "";
+                Coerce.string(defaultValue) : "";
 
 };
 
 
 /*
- * Safelly get Object from value
+ * Coercelly get Object from value
  *
  * @param {value}           The value to get
  * @param {defaultValue}    The default value
@@ -152,20 +152,20 @@ Safe.string = function(value, defaultValue){
  * @return {Object}
  *
  */
-Safe.object = function(value, defaultValue){
+Coerce.object = function(value, defaultValue){
 
     if(Type.isObject(value)){
         return value;
     }
 
     return defaultValue !== undefined ?
-                Safe.object(defaultValue) : {};
+                Coerce.object(defaultValue) : {};
 
 };
 
 
 /*
- * Safelly get Number from value
+ * Coercelly get Number from value
  *
  * @param {*} value The value to get
  * @param {*} defaultValue The default value
@@ -173,21 +173,21 @@ Safe.object = function(value, defaultValue){
  * @return {Number} The number or 0 if was not success
  *
  */
-Safe.number = function(value, defaultValue){
+Coerce.number = function(value, defaultValue){
 
     if(Type.isNumber(value)){
         return Number(value);
     }
     else {
         return  defaultValue !== undefined ?
-                Safe.number(defaultValue) : 0;
+                Coerce.number(defaultValue) : 0;
     }
 
 };
 
 
 /*
- * Safelly get Function from value
+ * Coercelly get Function from value
  *
  * @param {*} value         The value to get
  * @param {*} defaultValue  The value to get
@@ -195,7 +195,7 @@ Safe.number = function(value, defaultValue){
  * @return {Function}
  *
  */
-Safe.function = function(value, defaultValue){
+Coerce.function = function(value, defaultValue){
 
     if(Type.isFunction(value)){
         return value;
@@ -215,7 +215,7 @@ Safe.function = function(value, defaultValue){
 
 
 /*
- * Safelly get the value. This never return undefined!
+ * Coercelly get the value. This never return undefined!
  *
  * @param {*} value         The value to get
  * @param {*} defaultValue  The value to get
@@ -223,14 +223,14 @@ Safe.function = function(value, defaultValue){
  * @return {*}
  *
  */
-Safe.value = function(value, defaultValue){
+Coerce.value = function(value, defaultValue){
 
     if(Type.isDefined(value)){
         return value;
     }
 
     if( Type.isDefined(defaultValue) ){
-        return Safe.value(defaultValue);
+        return Coerce.value(defaultValue);
     }
 
     return null;
@@ -239,7 +239,7 @@ Safe.value = function(value, defaultValue){
 
 /**
  *
- * Safelly gets an instance of the Class. If the value is an instance of Class
+ * Coercelly gets an instance of the Class. If the value is an instance of Class
  * return it, otherwise return a new instance.
  *
  * @param  {Object} value
@@ -249,10 +249,10 @@ Safe.value = function(value, defaultValue){
  * @return {Object}
  *
  */
-Safe.instanceOf = function(value, Class){
+Coerce.instanceOf = function(value, Class){
 
-    value   = Safe.object(value);
-    Class   = Safe.function(Class);
+    value   = Coerce.object(value);
+    Class   = Coerce.function(Class);
 
     if( value instanceof Class )
     {
@@ -268,7 +268,7 @@ Safe.instanceOf = function(value, Class){
 
 /**
  *
- * Safelly gets the RegExp
+ * Coercelly gets the RegExp
  *
  * @param {*} value
  * @param {*} defaultValue
@@ -276,7 +276,7 @@ Safe.instanceOf = function(value, Class){
  * @return {}
  *
  */
-Safe.regexp = function(value, defaultValue){
+Coerce.regexp = function(value, defaultValue){
 
     if(Type.isString(value)){
         return Internal.stringToRegExp(value);
@@ -287,7 +287,7 @@ Safe.regexp = function(value, defaultValue){
     }
 
     if(Type.isDefined(defaultValue)){
-        return Safe.regexp(defaultValue);
+        return Coerce.regexp(defaultValue);
     }
 
     return Internal.stringToRegExp();
@@ -296,13 +296,13 @@ Safe.regexp = function(value, defaultValue){
 
 /**
  *
- * Safelly get the length of the object
+ * Coercelly get the length of the object
  *
  * @param {*} val
  *
  * @return {Number}
  */
-Safe.length = function(val){
+Coerce.length = function(val){
 
     if( Type.isString(val) || Type.isArray(val) ){
         return val.length;
@@ -334,7 +334,7 @@ Safe.length = function(val){
  * @return {*}
  *
  */
-Safe.coerce = function(value, expected){
+Coerce.coerce = function(value, expected){
 
     var expectedType    = Type.of(expected),
         type            = Type.of(value);
@@ -367,7 +367,7 @@ Safe.coerce = function(value, expected){
         /// try to get it from a number
         if(Type.isNumber(value)){
 
-            value = Safe.number(value);
+            value = Coerce.number(value);
             if(value === 1){
                 return Boolean(true);
             }
@@ -396,4 +396,4 @@ Safe.coerce = function(value, expected){
 
 };
 
-module.exports = Safe;
+module.exports = Coerce;

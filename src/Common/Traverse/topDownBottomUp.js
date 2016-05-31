@@ -2,7 +2,7 @@
 
 var _ = require("lodash"),
     Type = require("../Type"),
-    Safe = require("../Safe"),
+    Coerce = require("../Coerce"),
     TraverseStack = require("./TraverseStack");
 
 /**
@@ -24,7 +24,7 @@ var recursiveTraversal = function divhide_obj_traversal_topDownBottomUp_recursiv
     var extraArgs = arguments.length > 4 ?
         _.slice(arguments, 4) : [];
 
-    accumulator = Safe.value(accumulator);
+    accumulator = Coerce.value(accumulator);
 
     // initialize stack if it's empty, otherwise the inner loop will set it
     /* jshint -W041 */
@@ -135,15 +135,15 @@ var traverse = function divhide_obj_traversal_topDownBottomUp(value, options, ac
     var extraArgs = arguments.length > 3 ?
         _.slice(arguments, 3) : [];
 
-    options = Safe.object(options, {});
+    options = Coerce.object(options, {});
 
     var tOptions = {
         // callback called on item traversal (top-down)
-        eachFn: Safe.function(options.eachFn, null),
+        eachFn: Coerce.function(options.eachFn, null),
         // callback called after item traversal (bottom-up)
-        afterEachFn: Safe.function(options.afterEachFn, null),
+        afterEachFn: Coerce.function(options.afterEachFn, null),
         // callback called to transform the value before traversal
-        transform: Safe.boolean(options.transform, false)
+        transform: Coerce.boolean(options.transform, false)
     };
 
     return recursiveTraversal.apply(

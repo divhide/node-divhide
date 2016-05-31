@@ -6,7 +6,7 @@
 
 var _                        = require("lodash"),
     Type                     = require("./Type"),
-    Safe                     = require("./Safe"),
+    Coerce                   = require("./Coerce"),
     Chain                    = require("./Chain"),
     ChainContext             = require("./Chain/ChainContext"),
     Types                    = require("./Schema/Types"),
@@ -35,7 +35,7 @@ var Internal = {};
 Internal.wrapValidationFunction = function(name){
 
     /// arguments normalization
-    name = Safe.string(name);
+    name = Coerce.string(name);
 
     /// return the wrapped function
     return function(){
@@ -121,14 +121,14 @@ var SchemaChainableFns = {
     },
 
     object : function(val, obj){
-        obj = Safe.object(obj, {});
+        obj = Coerce.object(obj, {});
         this.schema = obj;
         this.required = true;
         this.any = false;
     },
 
     array : function(val, obj){
-        obj = Safe.array(obj, []);
+        obj = Coerce.array(obj, []);
         this.schema = obj;
         this.required = true;
         this.any = false;
@@ -315,7 +315,7 @@ var EvaluationFns = {
  */
 var Schema = function(customFns){
 
-    customFns = Safe.object(customFns);
+    customFns = Coerce.object(customFns);
 
     /// get the Schema validation functions. This is an extension point
     /// for the schema validation.

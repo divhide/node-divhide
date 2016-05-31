@@ -3,7 +3,7 @@
 /** @module Divhide/Obj/TraverseStack */
 
 var _ = require("lodash"),
-    Safe = require("../Safe"),
+    Coerce = require("../Coerce"),
     Type = require("../Type");
 
 /**
@@ -29,7 +29,7 @@ var TraverseStack = function divhide_obj_traversal_TraverseStack(stack, indexLoo
      * @private
      * @ignore
      */
-    stack = Safe.array(stack, []);
+    stack = Coerce.array(stack, []);
 
     /**
      * Index lookup of structures.
@@ -37,7 +37,7 @@ var TraverseStack = function divhide_obj_traversal_TraverseStack(stack, indexLoo
      * @private
      * @ignore
      */
-    indexLookup = Safe.object(indexLookup, {});
+    indexLookup = Coerce.object(indexLookup, {});
 
     /**
      *
@@ -56,7 +56,7 @@ var TraverseStack = function divhide_obj_traversal_TraverseStack(stack, indexLoo
      */
     var createStackRecord = function divhide_obj_traversal_TraverseStack_createstackrecord(value, index, options){
 
-        options = Safe.object(options);
+        options = Coerce.object(options);
 
         /* jshint -W041 */
         var parentRecord = _.last(stack),
@@ -70,7 +70,7 @@ var TraverseStack = function divhide_obj_traversal_TraverseStack(stack, indexLoo
             value: value,
             info: {
                 parent: parent,
-                index: Safe.value(index),
+                index: Coerce.value(index),
                 level: level,
                 isFirst: isFirst,
                 isLast: isLast,

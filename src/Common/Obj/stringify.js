@@ -2,7 +2,7 @@
 
 var _ = require("lodash"),
     Type = require("../Type"),
-    Safe = require("../Safe"),
+    Coerce = require("../Coerce"),
     Traverse = require("../Traverse");
 
 /**
@@ -46,10 +46,10 @@ var getAnnotation = function divhide_obj_stringify_getAnnotation(annotateCallbac
     }
 
     var res = annotateCallback.apply({}, [ value, info ]);
-    res = Safe.object(res);
+    res = Coerce.object(res);
 
-    annotation.before = Safe.string(res.before);
-    annotation.after = Safe.string(res.after);
+    annotation.before = Coerce.string(res.before);
+    annotation.after = Coerce.string(res.after);
 
     return annotation;
 
@@ -175,7 +175,7 @@ var stringify = function divhide_obj_stringify(value, options){
     }, options);
 
     // convert the given identation number into a repeatable string
-    var identationSpaces = _.repeat(" ", Safe.number(options.space, 0));
+    var identationSpaces = _.repeat(" ", Coerce.number(options.space, 0));
 
     return Traverse
         .each(stringifyTopDownFn)
@@ -183,7 +183,7 @@ var stringify = function divhide_obj_stringify(value, options){
         .accumulator("")
         .options({
             space: identationSpaces,
-            annotate: Safe.function(options.annotate, null)
+            annotate: Coerce.function(options.annotate, null)
         })
         .traverse(value);
 };

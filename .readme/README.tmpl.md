@@ -46,8 +46,8 @@ Please note that **all examples are integrated on the CI build** and that's the 
 ### Type
 {%= _.doc("Common/Type.md") %}
 
-### Safe
-{%= _.doc("Common/Safe.md") %}
+### Coerce
+{%= _.doc("Common/Coerce.md") %}
 
 ### Obj
 {%= _.doc("Common/Obj.md") %}

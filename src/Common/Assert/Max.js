@@ -2,7 +2,7 @@
 
 var _           = require("lodash"),
     Type        = require("../Type"),
-    Safe        = require("../Safe"),
+    Coerce      = require("../Coerce"),
     Exception   = require("../Exception/Exception");
 
 /**
@@ -25,8 +25,8 @@ var _           = require("lodash"),
  */
 var Max = function(val, max){
 
-    max = Safe.number(max);
-    var length = Safe.length(val);
+    max = Coerce.number(max);
+    var length = Coerce.length(val);
 
     if(length > max){
         throw new Exception("VALIDATION_MAX", { value: max });

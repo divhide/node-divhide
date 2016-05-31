@@ -51,7 +51,7 @@ bower install divhide
 
 <script type="text/javascript" src="//bower_components/divhide/dist/divhide.js"></script>
 <script type="text/javascript">
-    var fn = Divhide.Safe.function();
+    var fn = Divhide.Coerce.function();
     ...
 </script>
 
@@ -83,7 +83,7 @@ var Divhide = require("/vendor/divhide");
   * [Schema](#schema)
   * [CustomSchema](#customschema)
   * [Type](#type)
-  * [Safe](#safe)
+  * [Coerce](#coerce)
   * [Obj](#obj)
   * [Arr](#arr)
   * [Traverse](#traverse)
@@ -1063,69 +1063,69 @@ expect(isString).toBe(true);
 
 
 
-### Safe
+### Coerce
 
-
-Safe facility provides an API that can helps you safelly working with javascript data types. This methods
-are supposed to work with different value types.
+Coerce facility provides an API to coerce data types safely. Using `Divhide.Coerce` you can
+be sure that you always have the correct value to work with.
 
 **Methods**
 
-* `Safe.array(value, defaultValue?)`
-<br />
-Gets the value in the array representation. __defaultValue__ is returned if defined and if value is not
-an array.
+* `Coerce.array(value, defaultValue?)`
 
-* `Safe.boolean(value, defaultValue?)`
+        Gets the value in the array representation.
+        __defaultValue__ is returned if defined and if value is not an array.
 
-* `Safe.string(value, defaultValue?)`
+* `Coerce.boolean(value, defaultValue?)`
 
-* `Safe.object(value, defaultValue?)`
+* `Coerce.string(value, defaultValue?)`
 
-* `Safe.number(value, defaultValue?)`
+* `Coerce.object(value, defaultValue?)`
 
-* `Safe.function(value, defaultValue?)`
+* `Coerce.number(value, defaultValue?)`
 
-* `Safe.value(value, defaultValue?)`
+* `Coerce.function(value, defaultValue?)`
 
-* `Safe.regexp(value, defaultValue)`
+* `Coerce.value(value, defaultValue?)`
 
-* `Safe.instanceOf(value, Class)`
-<br />
-Gets an instance of the given value if is an instance of the given Class, otherwise it will
-create an instance.
+* `Coerce.regexp(value, defaultValue)`
 
-* `Safe.length(value)`
-<br />
-Gets the length of the value.
+* `Coerce.instanceOf(value, Class)`
 
-* `Safe.coerce(value, expected)`
-Gets the value coerced by the expected value type.
+        Gets an instance of the given value if is an instance of the given Class, otherwise it will
+        create an instance.
+
+* `Coerce.length(value)`
+
+        Gets the length of the value.
+
+* `Coerce.coerce(value, expected)`
+
+        Gets the value coerced by the expected value type.
 
 **Example** Array
 
 ```js
 
 
-var Safe = Divhide.Safe;
+var Coerce = Divhide.Coerce;
 
-var value = Safe.array(1);
+var value = Coerce.array(1);
 expect(value)
     .equals([1]);
 
-var value = Safe.array(1);
+var value = Coerce.array(1);
 expect(value)
     .equals([1]);
 
-var value = Safe.array([1, 2]);
+var value = Coerce.array([1, 2]);
 expect(value)
     .equals([1, 2]);
 
-var value = Safe.array(null, [ 1, 2 ]);
+var value = Coerce.array(null, [ 1, 2 ]);
 expect(value)
     .equals([1, 2]);
 
-var value = Safe.array("1", [1, 2]);
+var value = Coerce.array("1", [1, 2]);
 expect(value)
     .equals(["1"]);
 
@@ -1138,33 +1138,33 @@ expect(value)
 ```js
 
 
-var Safe = Divhide.Safe;
+var Coerce = Divhide.Coerce;
 
-var value = Safe.boolean(true);
+var value = Coerce.boolean(true);
 expect(value).toBe(true);
 
-var value = Safe.boolean(false);
+var value = Coerce.boolean(false);
 expect(value).toBe(false);
 
-var value = Safe.boolean(1);
+var value = Coerce.boolean(1);
 expect(value).toBe(true);
 
-var value = Safe.boolean("1");
+var value = Coerce.boolean("1");
 expect(value).toBe(true);
 
-var value = Safe.boolean("0");
+var value = Coerce.boolean("0");
 expect(value).toBe(false);
 
-var value = Safe.boolean({});
+var value = Coerce.boolean({});
 expect(value).toBe(false);
 
-var value = Safe.boolean({}, true);
+var value = Coerce.boolean({}, true);
 expect(value).toBe(true);
 
-var value = Safe.boolean([]);
+var value = Coerce.boolean([]);
 expect(value).toBe(false);
 
-var value = Safe.boolean(null);
+var value = Coerce.boolean(null);
 expect(value).toBe(false);
 
 
@@ -1176,17 +1176,17 @@ expect(value).toBe(false);
 ```js
 
 
-var Safe = Divhide.Safe;
+var Coerce = Divhide.Coerce;
 
-var fn = Safe.function(function(){});
+var fn = Coerce.function(function(){});
 expect(fn())
     .toBe(undefined);
 
-var fn = Safe.function("");
+var fn = Coerce.function("");
 expect(fn())
     .toBe(undefined);
 
-var fn = Safe.function("", function(){ return 1; });
+var fn = Coerce.function("", function(){ return 1; });
 expect(fn())
     .toBe(1);
 
@@ -1199,18 +1199,18 @@ expect(fn())
 ```js
 
 
-var Safe = Divhide.Safe;
+var Coerce = Divhide.Coerce;
 
-var value = Safe.length([1, 2]);
+var value = Coerce.length([1, 2]);
 expect(value).toBe(2);
 
-var value = Safe.length({ one: 1, two: 2});
+var value = Coerce.length({ one: 1, two: 2});
 expect(value).toBe(2);
 
-var value = Safe.length(2);
+var value = Coerce.length(2);
 expect(value).toBe(2);
 
-var value = Safe.length("hello");
+var value = Coerce.length("hello");
 expect(value).toBe(5);
 
 
@@ -1222,21 +1222,21 @@ expect(value).toBe(5);
 ```js
 
 
-var Safe = Divhide.Safe;
+var Coerce = Divhide.Coerce;
 
-var value = Safe.number(1);
+var value = Coerce.number(1);
 expect(value).equals(1);
 
-var value = Safe.number("");
+var value = Coerce.number("");
 expect(value).equals(0);
 
-var value = Safe.number("1");
+var value = Coerce.number("1");
 expect(value).equals(1);
 
-var value = Safe.number({});
+var value = Coerce.number({});
 expect(value).equals(0);
 
-var value = Safe.number("", 1);
+var value = Coerce.number("", 1);
 expect(value).equals(1);
 
 
@@ -1248,15 +1248,15 @@ expect(value).equals(1);
 ```js
 
 
-var Safe = Divhide.Safe;
+var Coerce = Divhide.Coerce;
 
-var value = Safe.object({ one: 1 });
+var value = Coerce.object({ one: 1 });
 expect(value).equals({ one: 1 });
 
-var value = Safe.object([]);
+var value = Coerce.object([]);
 expect(value).equals({});
 
-var value = Safe.object([], { one: 1 });
+var value = Coerce.object([], { one: 1 });
 expect(value).equals({ one: 1 });
 
 
@@ -1269,25 +1269,25 @@ expect(value).equals({ one: 1 });
 ```js
 
 
-var Safe = Divhide.Safe;
+var Coerce = Divhide.Coerce;
 
-var value = Safe.regexp(/regexp/);
+var value = Coerce.regexp(/regexp/);
 expect(value)
     .toEqual(/regexp/);
 
-var value = Safe.regexp("/regexp/");
+var value = Coerce.regexp("/regexp/");
 expect(value)
     .toEqual(/regexp/);
 
-var value = Safe.regexp("");
+var value = Coerce.regexp("");
 expect(value)
     .toEqual(/^$/);
 
-var value = Safe.regexp("name");
+var value = Coerce.regexp("name");
 expect(value)
     .toEqual(/^name$/);
 
-var value = Safe.regexp({}, /regexp/);
+var value = Coerce.regexp({}, /regexp/);
 expect(value)
     .toEqual(/regexp/);
 
@@ -1300,15 +1300,15 @@ expect(value)
 ```js
 
 
-var Safe = Divhide.Safe;
+var Coerce = Divhide.Coerce;
 
-var value = Safe.string("");
+var value = Coerce.string("");
 expect(value).toBe("");
 
-var value = Safe.string({});
+var value = Coerce.string({});
 expect(value).toBe("");
 
-var value = Safe.string({}, "default");
+var value = Coerce.string({}, "default");
 expect(value).toBe("default");
 
 
@@ -1321,21 +1321,21 @@ expect(value).toBe("default");
 ```js
 
 
-var Safe = Divhide.Safe;
+var Coerce = Divhide.Coerce;
 
-var value = Safe.value(1);
+var value = Coerce.value(1);
 expect(value).toBe(1);
 
-var value = Safe.value("1");
+var value = Coerce.value("1");
 expect(value).toBe("1");
 
-var value = Safe.value(null);
+var value = Coerce.value(null);
 expect(value).toBe(null);
 
-var value = Safe.value(undefined);
+var value = Coerce.value(undefined);
 expect(value).toBe(null);
 
-var value = Safe.value(null, 1);
+var value = Coerce.value(null, 1);
 expect(value).toBe(1);
 
 

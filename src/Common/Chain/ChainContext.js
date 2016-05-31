@@ -1,7 +1,7 @@
 'use strict';
 
 var _    = require("lodash"),
-    Safe = require("../Safe"),
+    Coerce = require("../Coerce"),
     Type = require("../Type"),
     ChainFunction   = require("./ChainFunction");
 
@@ -21,7 +21,7 @@ var _    = require("lodash"),
  */
 var ChainContext = function divhide_chain_ChainContext(options){
 
-    options = Safe.object(options);
+    options = Coerce.object(options);
 
     /**
      * The context registered functions
@@ -47,7 +47,7 @@ var ChainContext = function divhide_chain_ChainContext(options){
      * @type {Boolean}
      *
      */
-    this.pipe = Safe.boolean(options.pipe);
+    this.pipe = Coerce.boolean(options.pipe);
 
 };
 
@@ -68,7 +68,7 @@ ChainContext.prototype.setScope = function divhide_chain_ChainContext_setScope(s
     scope = scope || this.scope;
 
     /// set the context
-    this.scope = Safe.object(scope, {});
+    this.scope = Coerce.object(scope, {});
 
     return this.scope;
 
@@ -109,8 +109,8 @@ ChainContext.prototype.add = function divhide_chain_ChainContext_add(fn, args){
  */
 ChainContext.prototype.exec = function divhide_chain_ChainContext_exec(args, extraArgs, errCallback){
 
-    extraArgs   = Safe.value(extraArgs);
-    errCallback = Safe.function(errCallback, function(err){ throw err; });
+    extraArgs   = Coerce.value(extraArgs);
+    errCallback = Coerce.function(errCallback, function(err){ throw err; });
 
     var self    = this,
         result  = args,
