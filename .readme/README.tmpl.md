@@ -55,6 +55,9 @@ Please note that **all examples are integrated on the CI build** and that's the 
 ### Arr
 {%= _.doc("Common/Arr.md") %}
 
+### Traverse
+{%= _.doc("Common/Traverse.md") %}
+
 ## Contribute
 {%= _.include("Contribute.md") %}
 
