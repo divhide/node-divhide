@@ -48,300 +48,240 @@ describe("CoerceSpec", function () {
 
     });
 
-    it(".array()", function (done) {
+    it(".array()", function() {
 
-        var Coerce = Divhide.Coerce;
-
-        var array = Coerce.array([1]);
+        var array = Divhide.Coerce.array([1]);
         expect(array).not.toBeNull();
         expect(array.length).toEqual(1);
 
-        array = Coerce.array(1);
+        array = Divhide.Coerce.array(1);
         expect(array).not.toBeNull();
         expect(array.length).toEqual(1);
 
-        array = Coerce.array(null);
+        array = Divhide.Coerce.array(null);
         expect(array).not.toBeNull();
         expect(array.length).toEqual(0);
 
-        array = Coerce.array(null, [1]);
+        array = Divhide.Coerce.array(null, [1]);
         expect(array).not.toBeNull();
         expect(array.length).toEqual(1);
 
-        done();
+    });
 
+    it(".boolean()", function() {
+
+        var bool = Divhide.Coerce.boolean(true);
+        expect(bool).toBeTruthy();
+
+        bool = Divhide.Coerce.boolean(1);
+        expect(bool).toBeTruthy();
+
+        bool = Divhide.Coerce.boolean("1");
+        expect(bool).toBeTruthy();
+
+        bool = Divhide.Coerce.boolean(0);
+        expect(bool).not.toBeTruthy();
+
+        bool = Divhide.Coerce.boolean("0");
+        expect(bool).not.toBeTruthy();
+
+        bool = Divhide.Coerce.boolean(10);
+        expect(bool).toBeTruthy();
+
+        bool = Divhide.Coerce.boolean(10, false);
+        expect(bool).not.toBeTruthy();
+
+        bool = Divhide.Coerce.boolean({});
+        expect(bool).not.toBeTruthy();
+
+        bool = Divhide.Coerce.boolean([]);
+        expect(bool).not.toBeTruthy();
+
+        bool = Divhide.Coerce.boolean(null);
+        expect(bool).not.toBeTruthy();
+
+        bool = Divhide.Coerce.boolean(null, true);
+        expect(bool).toBeTruthy();
 
     });
 
+    it(".function()", function() {
 
+        var fn = Divhide.Coerce.function(function(){});
+        expect(fn).not.toBe(null);
 
-    it(".boolean()", function (done) {
+        fn = Divhide.Coerce.function(null);
+        expect(fn).not.toBe(null);
 
-        var Coerce = Divhide.Coerce;
-
-        var bool = Coerce.boolean(true);
-        expect(bool).toBeTruthy();
-
-        bool = Coerce.boolean(1);
-        expect(bool).toBeTruthy();
-
-        bool = Coerce.boolean("1");
-        expect(bool).toBeTruthy();
-
-        bool = Coerce.boolean(0);
-        expect(bool).not.toBeTruthy();
-
-        bool = Coerce.boolean("0");
-        expect(bool).not.toBeTruthy();
-
-        bool = Coerce.boolean(10);
-        expect(bool).toBeTruthy();
-
-        bool = Coerce.boolean(10, false);
-        expect(bool).not.toBeTruthy();
-
-        bool = Coerce.boolean({});
-        expect(bool).not.toBeTruthy();
-
-        bool = Coerce.boolean([]);
-        expect(bool).not.toBeTruthy();
-
-        bool = Coerce.boolean(null);
-        expect(bool).not.toBeTruthy();
-
-        bool = Coerce.boolean(null, true);
-        expect(bool).toBeTruthy();
-
-        done();
+        fn = Divhide.Coerce.function(null, function(){});
+        expect(fn).not.toBe(null);
 
     });
 
+    it(".string()", function() {
 
-
-    it(".function()", function (done) {
-
-        var Coerce = Divhide.Coerce;
-
-        var fn = Coerce.function(function(){});
-        expect(fn).not.toBe(null);
-
-        fn = Coerce.function(null);
-        expect(fn).not.toBe(null);
-
-        fn = Coerce.function(null, function(){});
-        expect(fn).not.toBe(null);
-
-        done();
-
-
-    });
-
-
-    it(".string()", function (done) {
-
-        var Coerce = Divhide.Coerce;
-
-        var str = Coerce.string("a");
+        var str = Divhide.Coerce.string("a");
         expect(str).toBe("a");
 
-        str = Coerce.string(null);
+        str = Divhide.Coerce.string(null);
         expect(str).toBe("");
 
-        str = Coerce.string({}, "lol");
+        str = Divhide.Coerce.string({}, "lol");
         expect(str).toBe("lol");
 
-        str = Coerce.string({}, {});
+        str = Divhide.Coerce.string({}, {});
         expect(str).toBe("");
-
-
-        done();
-
 
     });
 
+    it(".object()", function() {
 
-
-    it(".object()", function (done) {
-
-        var Coerce = Divhide.Coerce;
-
-        var obj = Coerce.object({ one: 1 });
+        var obj = Divhide.Coerce.object({ one: 1 });
 
         expect(obj).not.toBe(null);
         expect(_.keys(obj).length).toBe(1);
 
-
-        obj = Coerce.object(null);
+        obj = Divhide.Coerce.object(null);
 
         expect(obj).not.toBe(null);
         expect(_.keys(obj).length).toBe(0);
 
-
-        obj = Coerce.object(null, { one: 1 });
+        obj = Divhide.Coerce.object(null, { one: 1 });
 
         expect(obj).not.toBe(null);
         expect(obj.one).toBe(1);
 
-        obj = Coerce.object(null, "a");
+        obj = Divhide.Coerce.object(null, "a");
+
         expect(obj).not.toBe(null);
         expect(obj).not.toBe("a");
 
-        done();
+    });
 
+    it(".number()", function() {
+
+        expect(Divhide.Coerce.number(1)).toBe(1);
+        expect(Divhide.Coerce.number("1")).toBe(1);
+        expect(Divhide.Coerce.number(null)).toBe(0);
+        expect(Divhide.Coerce.number("a", 2)).toBe(2);
+        expect(Divhide.Coerce.number("a", "b")).toBe(0);
 
     });
 
+    it(".value()", function() {
 
-
-    it(".number()", function (done) {
-
-        var Coerce = Divhide.Coerce;
-
-        expect(Coerce.number(1)).toBe(1);
-        expect(Coerce.number("1")).toBe(1);
-        expect(Coerce.number(null)).toBe(0);
-        expect(Coerce.number("a", 2)).toBe(2);
-        expect(Coerce.number("a", "b")).toBe(0);
-
-        done();
+        expect(Divhide.Coerce.value(1)).toBe(1);
+        expect(Divhide.Coerce.value("1")).toBe("1");
+        expect(Divhide.Coerce.value(null, 2)).toBe(2);
+        expect(Divhide.Coerce.value(null)).toBe(null);
+        expect(Divhide.Coerce.value(undefined)).toBe(null);
 
     });
 
+    it(".regexp()", function() {
 
-    it(".value()", function (done) {
-
-        var Coerce = Divhide.Coerce;
-
-        expect(Coerce.value(1)).toBe(1);
-        expect(Coerce.value("1")).toBe("1");
-        expect(Coerce.value(null, 2)).toBe(2);
-        expect(Coerce.value(null)).toBe(null);
-        expect(Coerce.value(undefined)).toBe(null);
-
-        done();
-
-    });
-
-
-    it(".regexp()", function (done) {
-
-        var Coerce = Divhide.Coerce;
-
-        var result = Coerce.regexp("");
+        var result = Divhide.Coerce.regexp("");
         expect( !!result.exec("lol") )
             .toBe(false);
 
-        result = Coerce.regexp("");
+        result = Divhide.Coerce.regexp("");
         expect( !!result.exec("") )
             .toBe(true);
 
-        result = Coerce.regexp("/lol/");
+        result = Divhide.Coerce.regexp("/lol/");
         expect( !!result.exec("lol") )
             .toBe(true);
 
-        result = Coerce.regexp(new RegExp("lol"));
+        result = Divhide.Coerce.regexp(new RegExp("lol"));
         expect( !!result.exec("lol") )
             .toBe(true);
 
-        result = Coerce.regexp({}, "");
+        result = Divhide.Coerce.regexp({}, "");
         expect( !!result.exec("lol") )
             .toBe(false);
 
-        result = Coerce.regexp({});
+        result = Divhide.Coerce.regexp({});
         expect( !!result.exec("lol") )
             .toBe(false);
 
-        result = Coerce.regexp([]);
+        result = Divhide.Coerce.regexp([]);
         expect( !!result.exec("lol") )
             .toBe(false);
 
-        result = Coerce.regexp(null);
+        result = Divhide.Coerce.regexp(null);
         expect( !!result.exec("lol") )
             .toBe(false);
 
-        result = Coerce.regexp(undefined);
+        result = Divhide.Coerce.regexp(undefined);
         expect( !!result.exec("lol") )
             .toBe(false);
-
-        done();
 
     });
 
+    it(".length()", function() {
 
-    it(".length()", function (done) {
-
-        var Coerce = Divhide.Coerce;
-
-        expect(Coerce.length(12))
+        expect(Divhide.Coerce.length(12))
             .toBe(12);
 
-        expect(Coerce.length("aa"))
+        expect(Divhide.Coerce.length("aa"))
             .toBe(2);
 
-        expect(Coerce.length(""))
+        expect(Divhide.Coerce.length(""))
             .toBe(0);
 
-        expect(Coerce.length([1,2,3]))
+        expect(Divhide.Coerce.length([1,2,3]))
             .toBe(3);
 
-        expect(Coerce.length({ one: 1, two: 1}))
+        expect(Divhide.Coerce.length({ one: 1, two: 1}))
             .toBe(2);
 
-        expect(Coerce.length(true))
+        expect(Divhide.Coerce.length(true))
             .toBe(1);
 
-        expect(Coerce.length(false))
+        expect(Divhide.Coerce.length(false))
             .toBe(0);
 
-        expect(Coerce.length(null))
+        expect(Divhide.Coerce.length(null))
             .toBe(0);
 
-        expect(Coerce.length(undefined))
+        expect(Divhide.Coerce.length(undefined))
             .toBe(0);
-
-        done();
 
     });
 
-
-    it(".instanceOf()", function (done) {
-
-        var Coerce = Divhide.Coerce;
+    it(".instance()", function() {
 
         var Class = function(name){
             this.name = name || "default";
         };
 
-        var instance = Coerce.instanceOf(new Class("new"), Class);
+        var instance = Divhide.Coerce.instance(new Class("new"), Class);
         expect(instance.name)
             .equals("new");
 
-        instance = Coerce.instanceOf({}, Class);
+        instance = Divhide.Coerce.instance({}, Class);
         expect(instance.name)
             .equals("default");
 
-        instance = Coerce.instanceOf("", Class);
+        instance = Divhide.Coerce.instance("", Class);
         expect(instance.name)
             .equals("default");
 
-        instance = Coerce.instanceOf(null, Class);
+        instance = Divhide.Coerce.instance(null, Class);
         expect(instance.name)
             .equals("default");
 
-        instance = Coerce.instanceOf(undefined, Class);
+        instance = Divhide.Coerce.instance(undefined, Class);
         expect(instance.name)
             .equals("default");
 
-        instance = Coerce.instanceOf(null);
+        instance = Divhide.Coerce.instance(null);
         expect(Type.isObject(instance))
             .equals(true);
 
-        instance = Coerce.instanceOf();
+        instance = Divhide.Coerce.instance();
         expect(Type.isObject(instance))
             .equals(true);
-
-
-        done();
 
     });
 
@@ -349,37 +289,35 @@ describe("CoerceSpec", function () {
 
         it(".coerce(, Boolean)", function () {
 
-            var Coerce = Divhide.Coerce;
-
-            var value = Coerce.coerce(true, Boolean());
+            var value = Divhide.Coerce.coerce(true, Boolean());
             expect(value)
                 .toBe(true);
 
-            value = Coerce.coerce(false, Boolean());
+            value = Divhide.Coerce.coerce(false, Boolean());
             expect(value)
                 .toBe(false);
 
-            value = Coerce.coerce(1, Boolean());
+            value = Divhide.Coerce.coerce(1, Boolean());
             expect(value)
                 .toBe(true);
 
-            value = Coerce.coerce(0, Boolean());
+            value = Divhide.Coerce.coerce(0, Boolean());
             expect(value)
                 .toBe(false);
 
-            value = Coerce.coerce(9999, Boolean());
+            value = Divhide.Coerce.coerce(9999, Boolean());
             expect(value)
                 .toBe(9999);
 
-            value = Coerce.coerce("true", Boolean());
+            value = Divhide.Coerce.coerce("true", Boolean());
             expect(value)
                 .toBe(true);
 
-            value = Coerce.coerce("false", Boolean());
+            value = Divhide.Coerce.coerce("false", Boolean());
             expect(value)
                 .toBe(false);
 
-            value = Coerce.coerce("no", Boolean());
+            value = Divhide.Coerce.coerce("no", Boolean());
             expect(value)
                 .toBe("no");
 

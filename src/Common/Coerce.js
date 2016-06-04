@@ -249,17 +249,15 @@ Coerce.value = function Divhide_Coerce_value(value, defaultValue){
  * @return {Object}
  *
  */
-Coerce.instanceOf = function Divhide_Coerce_instanceOf(value, Class){
+Coerce.instance = function Divhide_Coerce_instance(value, Class){
 
     value   = Coerce.object(value);
     Class   = Coerce.function(Class);
 
-    if( value instanceof Class )
-    {
+    if(value instanceof Class){
         return value;
     }
-    else
-    {
+    else {
         return new Class();
     }
 

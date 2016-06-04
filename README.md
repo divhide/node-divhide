@@ -1089,9 +1089,9 @@ be sure that you always have the correct value to work with.
 
 * `Coerce.regexp(value, defaultValue)`
 
-* `Coerce.instanceOf(value, Class)`
+* `Coerce.instance(value, fn)`
 
-        Gets an instance of the given value if is an instance of the given Class, otherwise it will
+        Gets an instance of the given value if is an instance of the given fn, otherwise it will
         create an instance.
 
 * `Coerce.length(value)`
