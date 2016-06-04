@@ -32,7 +32,7 @@ var Internal = {};
  * @return {ValidationFunction}
  *
  */
-Internal.wrapValidationFunction = function(name){
+Internal.wrapValidationFunction = function Divhide_CustomSchema_wrapValidationFunction(name){
 
     /// arguments normalization
     name = Coerce.string(name);
@@ -79,7 +79,7 @@ Internal.compileOptions = {
      * @return {*}
      *
      */
-    prepare: function(val){
+    prepare: function Divhide_CustomSchema_prepare(val){
 
         if(Type.instanceOf(val, Types.Schema)){
             var schemaData = val.serialize();
@@ -105,66 +105,66 @@ Internal.compileOptions = {
  */
 var SchemaChainableFns = {
 
-    any: function(){
+    any: function Divhide_CustomSchema_any(){
         this.any = true;
         this.schema = null;
     },
 
-    strict: function(){
+    strict: function Divhide_CustomSchema_strict(){
         this.strict = true;
     },
 
-    string : function(val, obj){
+    string : function Divhide_CustomSchema_string(val, obj){
         this.schema = "";
         this.required = true;
         this.any = false;
     },
 
-    object : function(val, obj){
+    object : function Divhide_CustomSchema_object(val, obj){
         obj = Coerce.object(obj, {});
         this.schema = obj;
         this.required = true;
         this.any = false;
     },
 
-    array : function(val, obj){
+    array : function Divhide_CustomSchema_array(val, obj){
         obj = Coerce.array(obj, []);
         this.schema = obj;
         this.required = true;
         this.any = false;
     },
 
-    function : function(){
+    function : function Divhide_CustomSchema_function(){
         this.schema = function(){};
         this.required = true;
         this.any = false;
     },
 
-    number : function(){
+    number : function Divhide_CustomSchema_number(){
         this.schema = 0;
         this.required = true;
         this.any = false;
     },
 
-    boolean : function(){
+    boolean : function Divhide_CustomSchema_boolean(){
         this.schema = Boolean(true);
         this.required = true;
         this.any = false;
     },
 
-    default : function(val, defaultValue){
+    default : function Divhide_CustomSchema_default(val, defaultValue){
         this.default = defaultValue;
     },
 
-    required : function(){
+    required : function Divhide_CustomSchema_required(){
         this.required = true;
     },
 
-    optional : function(){
+    optional : function Divhide_CustomSchema_optional(){
         this.required = false;
     },
 
-    repeatable: function(){
+    repeatable: function Divhide_CustomSchema_repeatable(){
         this.repeatable = true;
     }
 
@@ -199,7 +199,7 @@ var EvaluationFns = {
      * @return {SchemaEvaluator}
      *
      */
-    compile: function(result, argument, err){
+    compile: function Divhide_CustomSchema_compile(result, argument, err){
 
         /// throw error if there was some in the chain
         if(err){
@@ -221,7 +221,7 @@ var EvaluationFns = {
      * @return {*}
      *
      */
-    value: function(result, argument, err){
+    value: function Divhide_CustomSchema_value(result, argument, err){
 
         /// throw error if there was some in the chain
         if(err){
@@ -242,7 +242,7 @@ var EvaluationFns = {
      * @return {*}
      *
      */
-    errors: function(result, argument, err){
+    errors: function Divhide_CustomSchema_errors(result, argument, err){
 
         /// throw error if there was some in the chain
         if(err){
@@ -263,7 +263,7 @@ var EvaluationFns = {
      * @return {Boolean}
      *
      */
-    isValid: function(result, argument, err){
+    isValid: function Divhide_CustomSchema_isValid(result, argument, err){
 
         /// throw error if there was some in the chain
         if(err) {
@@ -282,7 +282,7 @@ var EvaluationFns = {
      * @return {Object}
      *
      */
-    serialize: function(result, argument, err){
+    serialize: function Divhide_CustomSchema_serialize(result, argument, err){
 
         var evaluator = new SchemaEvaluator(this, argument, Internal.compileOptions);
         return evaluator.serialize();
@@ -296,7 +296,7 @@ var EvaluationFns = {
      * @return {SchemaEvaluator}
      *
      */
-    deserialize: function(value, argument, err){
+    deserialize: function Divhide_CustomSchema_deserialize(value, argument, err){
 
         var evaluator = new SchemaEvaluator(this, argument, Internal.compileOptions);
         return evaluator.deserialize(value);

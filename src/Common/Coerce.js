@@ -26,7 +26,7 @@ Internal.RegExpFormat = /^\/.*\/(\w*)$/;
  * @param  {String} str
  * @return {RegExp}
  */
-Internal.stringToRegExp = function(str){
+Internal.stringToRegExp = function Divhide_Coerce_Internal_stringToRegExp(str){
 
     str = Coerce.string(str);
 
@@ -64,7 +64,7 @@ var Coerce = {};
  * @return {Array}
  *
  */
-Coerce.array = function(value, defaultValue){
+Coerce.array = function Divhide_Coerce_array(value, defaultValue){
 
     /// if value is null and there is a default value, then
     /// fallback
@@ -95,7 +95,7 @@ Coerce.array = function(value, defaultValue){
  * @return {Boolean}
  *
  */
-Coerce.boolean = function(value, defaultValue){
+Coerce.boolean = function Divhide_Coerce_boolean(value, defaultValue){
 
     if(Type.isBoolean(value)){
         return Boolean(value);
@@ -131,7 +131,7 @@ Coerce.boolean = function(value, defaultValue){
  * @return {String}
  *
  */
-Coerce.string = function(value, defaultValue){
+Coerce.string = function Divhide_Coerce_string(value, defaultValue){
 
     if(Type.isString(value)){
         return value;
@@ -152,7 +152,7 @@ Coerce.string = function(value, defaultValue){
  * @return {Object}
  *
  */
-Coerce.object = function(value, defaultValue){
+Coerce.object = function Divhide_Coerce_object(value, defaultValue){
 
     if(Type.isObject(value)){
         return value;
@@ -173,7 +173,7 @@ Coerce.object = function(value, defaultValue){
  * @return {Number} The number or 0 if was not success
  *
  */
-Coerce.number = function(value, defaultValue){
+Coerce.number = function Divhide_Coerce_number(value, defaultValue){
 
     if(Type.isNumber(value)){
         return Number(value);
@@ -195,7 +195,7 @@ Coerce.number = function(value, defaultValue){
  * @return {Function}
  *
  */
-Coerce.function = function(value, defaultValue){
+Coerce.function = function Divhide_Coerce_function(value, defaultValue){
 
     if(Type.isFunction(value)){
         return value;
@@ -223,7 +223,7 @@ Coerce.function = function(value, defaultValue){
  * @return {*}
  *
  */
-Coerce.value = function(value, defaultValue){
+Coerce.value = function Divhide_Coerce_value(value, defaultValue){
 
     if(Type.isDefined(value)){
         return value;
@@ -249,7 +249,7 @@ Coerce.value = function(value, defaultValue){
  * @return {Object}
  *
  */
-Coerce.instanceOf = function(value, Class){
+Coerce.instanceOf = function Divhide_Coerce_instanceOf(value, Class){
 
     value   = Coerce.object(value);
     Class   = Coerce.function(Class);
@@ -276,7 +276,7 @@ Coerce.instanceOf = function(value, Class){
  * @return {}
  *
  */
-Coerce.regexp = function(value, defaultValue){
+Coerce.regexp = function Divhide_Coerce_regex(value, defaultValue){
 
     if(Type.isString(value)){
         return Internal.stringToRegExp(value);
@@ -302,7 +302,7 @@ Coerce.regexp = function(value, defaultValue){
  *
  * @return {Number}
  */
-Coerce.length = function(val){
+Coerce.length = function Divhide_Coerce_length(val){
 
     if( Type.isString(val) || Type.isArray(val) ){
         return val.length;
@@ -334,7 +334,7 @@ Coerce.length = function(val){
  * @return {*}
  *
  */
-Coerce.coerce = function(value, expected){
+Coerce.coerce = function Divhide_Coerce_coerce(value, expected){
 
     var expectedType    = Type.of(expected),
         type            = Type.of(value);

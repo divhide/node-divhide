@@ -14,7 +14,7 @@ var _           = require("lodash"),
  * @param {String} url The Url
  *
  */
-var Url = function(url){
+var Url = function Divhide_Type_Url(url){
 
     url = UrlParser.normalize(url);
 
@@ -29,7 +29,7 @@ var Url = function(url){
          * @return {Boolean}
          *
          */
-        isAbsolute: function(){
+        isAbsolute: function Divhide_Url_isAbsolute(){
             return UrlParser.isAbsolute(url);
         },
 
@@ -39,7 +39,7 @@ var Url = function(url){
          * @return {String}
          *
          */
-        baseUrl: function(){
+        baseUrl: function Divhide_Url_baseUrl(){
             return UrlParser.baseUrl(url);
         },
 
@@ -49,7 +49,7 @@ var Url = function(url){
          * @return {String}
          *
          */
-        protocol: function(){
+        protocol: function Divhide_Url_protocol(){
             return UrlParser.protocol(url);
         },
 
@@ -59,7 +59,7 @@ var Url = function(url){
          * @return {String}
          *
          */
-        path: function(){
+        path: function Divhide_Url_path(){
             return UrlParser.path(url);
         },
 
@@ -67,7 +67,7 @@ var Url = function(url){
          * Gets the file name
          * @return {String}
          */
-        filename: function(){
+        filename: function Divhide_Url_filename(){
             return UrlParser.filename(url);
         },
 
@@ -75,7 +75,7 @@ var Url = function(url){
          * Gets the file path
          * @return {String}
          */
-        filepath: function(){
+        filepath: function Divhide_Url_filepath(){
             return UrlParser.filepath(url);
         },
 
@@ -85,7 +85,7 @@ var Url = function(url){
          * @return {String}
          *
          */
-        setPath: function(path){
+        setPath: function Divhide_Url_setPath(path){
 
             path = UrlParser.normalize(path);
 
@@ -107,7 +107,7 @@ var Url = function(url){
          * Get the URL string representation
          * @return {String}
          */
-        toString: function(){
+        toString: function Divhide_Url_toString(){
             return UrlParser.normalize(url);
         }
 

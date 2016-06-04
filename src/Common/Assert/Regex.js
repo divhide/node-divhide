@@ -26,7 +26,7 @@ var _           = require("lodash"),
  * @return {Any}
  *
  */
-var Regex = function(val, regex){
+var Regex = function Divhide_Assert_Regex(val, regex){
 
     regex = Coerce.regexp(regex);
 

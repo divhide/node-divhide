@@ -19,7 +19,7 @@ var UrlParser = {
      *
      * @return{String} the current url
      */
-    normalize: function(url) {
+    normalize: function Divhide_Url_Parser_normalize(url) {
 
         if(!url) return "";
 
@@ -38,7 +38,7 @@ var UrlParser = {
      * @return {Boolean}
      *
      */
-    isAbsolute: function(url){
+    isAbsolute: function Divhide_Url_Parser_isAbsolute(url){
 
         var regex = new RegExp(BaseUrlRegExStr, "i");
         return !! regex.exec(url);
@@ -51,7 +51,7 @@ var UrlParser = {
      * @param  {String} url
      * @return {String}
      */
-    protocol: function(url){
+    protocol: function Divhide_Url_Parser_protocol(url){
 
         var regex = new RegExp(ProtocolRegExStr, "gi");
         var result = regex.exec(url);
@@ -67,7 +67,7 @@ var UrlParser = {
      * @param  {String} url
      * @return {String}
      */
-    baseUrl: function(url){
+    baseUrl: function Divhide_Url_Parser_baseUrl(url){
 
         var regex = new RegExp(BaseUrlRegExStr, "i");
 
@@ -89,7 +89,7 @@ var UrlParser = {
      * @param  {String} url
      * @return {String}
      */
-    path: function(url){
+    path: function Divhide_Url_Parser_path(url){
 
         // sanitize input
         url = url || "";
@@ -114,7 +114,7 @@ var UrlParser = {
      * Get the file name
      * @return {String}
      */
-    filename: function(url){
+    filename: function Divhide_Url_Parser_filename(url){
 
         // sanitize input
         url = url || "";
@@ -134,7 +134,7 @@ var UrlParser = {
      * @param  {String} url
      * @return {String}
      */
-    filepath: function(url){
+    filepath: function Divhide_Url_Parser_filepath(url){
 
         return UrlParser.normalize(
             UrlParser.baseUrl(url) +
@@ -150,7 +150,7 @@ var UrlParser = {
      * @param{separator} The url qs separator. Normally is ?
      * @return{String} The query string part of the url
      */
-    queryString: function(href, separator) {
+    queryString: function Divhide_Url_Parser_queryString(href, separator) {
 
         href = href || "";
         separator = separator || '?';
@@ -179,7 +179,7 @@ var UrlParser = {
      * @param{separator} The url qs separator. Normally is ?
      * @return An hash with all the query string key/value's
      */
-    queryStringObj: function(href, separator) {
+    queryStringObj: function Divhide_Url_Parser_queryStringObj(href, separator) {
 
         href = href || "";
 

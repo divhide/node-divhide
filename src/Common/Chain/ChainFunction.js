@@ -17,7 +17,7 @@ var _    = require("lodash"),
  * });
  *
  */
-var ChainFunction = function divhide_chain_ChainFunction(options){
+var ChainFunction = function Divhide_Chain_ChainFunction(options){
 
     options = Coerce.object(options);
 
@@ -41,7 +41,7 @@ var ChainFunction = function divhide_chain_ChainFunction(options){
  * @return {*}
  *
  */
-ChainFunction.prototype.apply = function divhide_chain_ChainFunction_apply(scope, args, extraArgs) {
+ChainFunction.prototype.apply = function Divhide_Chain_ChainFunction_apply(scope, args, extraArgs) {
 
     scope       = Coerce.object(scope);
     args        = Coerce.array(args);

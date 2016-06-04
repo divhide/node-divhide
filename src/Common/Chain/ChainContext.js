@@ -19,7 +19,7 @@ var _    = require("lodash"),
  *     pipe:
  * })
  */
-var ChainContext = function divhide_chain_ChainContext(options){
+var ChainContext = function Divhide_Chain_ChainContext(options){
 
     options = Coerce.object(options);
 
@@ -58,7 +58,7 @@ var ChainContext = function divhide_chain_ChainContext(options){
  * @param  {Object|Function} scope
  * @return {Object}
  */
-ChainContext.prototype.setScope = function divhide_chain_ChainContext_setScope(scope){
+ChainContext.prototype.setScope = function Divhide_Chain_ChainContext_setScope(scope){
 
     if(Type.isDefined(scope)){
         scope = Type.isFunction(scope) ? scope() : scope;
@@ -84,7 +84,7 @@ ChainContext.prototype.setScope = function divhide_chain_ChainContext_setScope(s
  * @return {Internal.Chain}
  *
  */
-ChainContext.prototype.add = function divhide_chain_ChainContext_add(fn, args){
+ChainContext.prototype.add = function Divhide_Chain_ChainContext_add(fn, args){
 
     if(Type.isFunction(fn)) {
 
@@ -107,7 +107,7 @@ ChainContext.prototype.add = function divhide_chain_ChainContext_add(fn, args){
  * @return {*}
  **
  */
-ChainContext.prototype.exec = function divhide_chain_ChainContext_exec(args, extraArgs, errCallback){
+ChainContext.prototype.exec = function Divhide_Chain_ChainContext_exec(args, extraArgs, errCallback){
 
     extraArgs   = Coerce.value(extraArgs);
     errCallback = Coerce.function(errCallback, function(err){ throw err; });

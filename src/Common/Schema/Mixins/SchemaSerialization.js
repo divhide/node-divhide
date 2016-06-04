@@ -12,7 +12,7 @@ var _       = require("lodash"),
  * @param  {Any} value
  * @return {Any}
  */
-var convertToJSON = function divhide_schema_mixins_SchemaSerialization_serializeToJSON(value){
+var convertToJSON = function Divhide_Schema_Mixins_SchemaSerialization_serializeToJSON(value){
 
     if(Type.isObject(value)){
         return _.assign({}, value);
@@ -31,7 +31,7 @@ var convertToJSON = function divhide_schema_mixins_SchemaSerialization_serialize
  * @type {Object}
  *
  */
-var Serialization = function divhide_schema_mixins_SchemaSerialization(){
+var Serialization = function Divhide_Schema_Mixins_SchemaSerialization(){
 
     /**
      *
@@ -40,7 +40,7 @@ var Serialization = function divhide_schema_mixins_SchemaSerialization(){
      * @return {Object}
      *
      */
-    this.serialize = function divhide_schema_mixins_SchemaSerialization_serialize(){
+    this.serialize = function Divhide_Schema_Mixins_SchemaSerialization_serialize(){
 
         return Traverse
             .each(convertToJSON)
@@ -56,7 +56,7 @@ var Serialization = function divhide_schema_mixins_SchemaSerialization(){
      * @return {SchemaDefinition}
      *
      */
-    this.deserialize = function divhide_schema_mixins_SchemaSerialization_deserialize(value){
+    this.deserialize = function Divhide_Schema_Mixins_SchemaSerialization_deserialize(value){
         return new this.constructor(value);
     };
 

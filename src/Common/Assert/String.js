@@ -21,7 +21,7 @@ var Type        = require("../Type"),
  * @return {String}
  *
  */
-var Str = function(val){
+var Str = function Divhide_Assert_String(val){
 
     var v = Type.isString(val);
 

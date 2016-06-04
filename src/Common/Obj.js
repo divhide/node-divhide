@@ -28,7 +28,7 @@ var Obj = {
      * @return {Array}
      *
      */
-    filter: function(obj, filter){
+    filter: function Divhide_Obj_filter(obj, filter){
 
         obj         = Coerce.object(obj);
         filter      = Coerce.regexp(filter, "/.*/");

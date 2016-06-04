@@ -17,7 +17,7 @@ var _               = require("lodash"),
  */
 var Defaults = {
 
-    array: function(value){
+    array: function Divhide_Schema_SchemaDefinition_Defaults_array(value){
 
         if(!Type.isArray(value)){
             return;
@@ -33,7 +33,7 @@ var Defaults = {
 
     },
 
-    object: function(value){
+    object: function Divhide_Schema_SchemaDefinition_Defaults_object(value){
 
         if(!Type.isObject(value)){
             return;
@@ -49,7 +49,7 @@ var Defaults = {
 
     },
 
-    string: function(value){
+    string: function Divhide_Schema_SchemaDefinition_Defaults_string(value){
 
         if(!Type.isString(value)){
             return;
@@ -65,7 +65,7 @@ var Defaults = {
 
     },
 
-    number: function(value){
+    number: function Divhide_Schema_SchemaDefinition_Defaults_number(value){
 
         if(!Type.isNumber(value)){
             return;
@@ -81,7 +81,7 @@ var Defaults = {
 
     },
 
-    boolean: function(value){
+    boolean: function Divhide_Schema_SchemaDefinition_Defaults_boolean(value){
 
         if(!Type.isBoolean(value)){
             return;
@@ -97,7 +97,7 @@ var Defaults = {
 
     },
 
-    function: function(value){
+    function: function Divhide_Schema_SchemaDefinition_Defaults_function(value){
 
         if(!Type.isFunction(value)){
             return;
@@ -125,7 +125,7 @@ var Defaults = {
  * @return {*}
  *
  */
-var normalizeSchemaValue = function(value){
+var normalizeSchemaValue = function Divhide_Schema_SchemaDefinition_normalizeSchemaValue(value){
 
     value = Coerce.value(value);
 
@@ -156,7 +156,7 @@ var normalizeSchemaValue = function(value){
  * @return {SchemaDefinition}
  *
  */
-var compile = function(schema, options){
+var compile = function Divhide_Schema_SchemaDefinition_compile(schema, options){
 
     /// extensibility point - prepare the value before the
     /// compilation
@@ -196,7 +196,7 @@ var compile = function(schema, options){
  * @param {Object} options
  *
  */
-var SchemaDefinition = function(options){
+var SchemaDefinition = function Divhide_Schema_SchemaDefinition(options){
 
     options = Coerce.object(options);
 
@@ -289,7 +289,7 @@ var SchemaDefinition = function(options){
  * @param {Object} cOptions The compilation options
  *
  */
-var CompiledSchemaDefinition = function(options, cOptions){
+var CompiledSchemaDefinition = function Divhide_Schema_CompiledSchemaDefinition(options, cOptions){
 
     /// normalize the given compilation options
     cOptions = Coerce.object(cOptions);

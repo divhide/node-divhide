@@ -20,7 +20,7 @@ var Arr = {
      * @return {*}
      *
      */
-    index: function(array, index){
+    index: function Divhide_Arr_index(array, index){
 
         array = Coerce.array(array);
         index = Coerce.number(index);
@@ -41,7 +41,7 @@ var Arr = {
      * @return {Object}
      *
      */
-    last: function(array){
+    last: function Divhide_Arr_last(array){
 
         array = Coerce.array(array);
 
@@ -57,7 +57,7 @@ var Arr = {
      * @return {Object}
      *
      */
-    first: function(array){
+    first: function Divhide_Arr_first(array){
 
         return Arr.index(array);
 
@@ -72,7 +72,7 @@ var Arr = {
      * @return {Number}
      *
      */
-    length: function(array){
+    length: function Divhide_Arr_length(array){
 
         array = Coerce.array(array);
 
@@ -91,7 +91,7 @@ var Arr = {
      * @return {Array}
      *
      */
-    insert: function(array, value, index){
+    insert: function Divhide_Arr_insert(array, value, index){
 
         array = Coerce.array(array);
         value = Coerce.array(value);
@@ -128,7 +128,7 @@ var Arr = {
      * @return {Array}
      *
      */
-    remove: function(array, index, n){
+    remove: function Divhide_Arr_remove(array, index, n){
 
         array   = Coerce.array(array);
         index   = Coerce.number(index, 0);

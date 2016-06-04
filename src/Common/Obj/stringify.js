@@ -17,7 +17,7 @@ var _ = require("lodash"),
  * @param  {*} value
  * @return {String}
  */
-var convertLiteralToString = function divhide_obj_stringify_convertLiteralToString(value){
+var convertLiteralToString = function Divhide_Obj_stringify_convertLiteralToString(value){
     // wrap the string with quotes if it's a string.
     if(Type.isString(value)){
         value = "\"" + value + "\"";
@@ -34,7 +34,7 @@ var convertLiteralToString = function divhide_obj_stringify_convertLiteralToStri
  * @param  {Object} info
  * @return {Comment}
  */
-var getAnnotation = function divhide_obj_stringify_getAnnotation(annotateCallback, value, info){
+var getAnnotation = function Divhide_Obj_stringify_getAnnotation(annotateCallback, value, info){
 
     var annotation = {
         before: "",
@@ -68,7 +68,7 @@ var getAnnotation = function divhide_obj_stringify_getAnnotation(annotateCallbac
  * @return {String}
  *
  */
-var stringifyTopDownFn = function divhide_obj_stringify_stringifyTopDownFn(value, info, accumulator, options){
+var stringifyTopDownFn = function Divhide_Obj_stringify_stringifyTopDownFn(value, info, accumulator, options){
 
     var resultStr = "",
         isLiteral = !Type.isComplex(value);
@@ -124,7 +124,7 @@ var stringifyTopDownFn = function divhide_obj_stringify_stringifyTopDownFn(value
  * @return {String}
  *
  */
-var stringifyBottomUpFn = function divhide_obj_stringify_stringifyBottomUpFn(value, info, accumulator, options){
+var stringifyBottomUpFn = function Divhide_Obj_stringify_stringifyBottomUpFn(value, info, accumulator, options){
 
     var resultStr = "",
         isLiteral = !Type.isComplex(value),
@@ -167,7 +167,7 @@ var stringifyBottomUpFn = function divhide_obj_stringify_stringifyBottomUpFn(val
  * @return {String} The string representation of the value.
  *
  */
-var stringify = function divhide_obj_stringify(value, options){
+var stringify = function Divhide_Obj_stringify(value, options){
 
     options = _.extend({
         space: 4,

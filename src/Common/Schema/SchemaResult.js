@@ -21,7 +21,7 @@ var _                   = require("lodash"),
  * @param {*} schema The Schema object
  *
  */
-var SchemaResult = function(schema){
+var SchemaResult = function Divhide_Schema_SchemaResult(schema){
 
     /// validate schema
     Assert.instanceOf(Types.SchemaDefinition)
@@ -53,7 +53,7 @@ var SchemaResult = function(schema){
      * @param {String}  index The index of the value, if complex structure
      *
      */
-    var setErrorValue = function(error, index){
+    var setErrorValue = function Divhide_Schema_SchemaResult_setErrorValue(error, index){
 
         // always save the error at the structure level
         errors.push(error);
@@ -90,7 +90,7 @@ var SchemaResult = function(schema){
      * @param {SchemaResult}    schemaResult
      * @param {String}          index
      */
-    var setInnerSchemaResultValue = function(schemaResult, index){
+    var setInnerSchemaResultValue = function Divhide_Schema_SchemaResult_setInnerSchemaResultValue(schemaResult, index){
 
         if(!index){
             throw new Error("index must be defined");
@@ -129,7 +129,7 @@ var SchemaResult = function(schema){
      * @param {SchemaResult}    val
      * @param {String}          index
      */
-    var setValue = function(val, index){
+    var setValue = function Divhide_Schema_SchemaResult_setValue(val, index){
 
         // set non-error and simple structures
         if(!index){
@@ -158,7 +158,7 @@ var SchemaResult = function(schema){
          * @return {SchemaDefinition}
          *
          */
-        getSchema: function(){
+        getSchema: function Divhide_Schema_SchemaResult_getSchema(){
             return schema;
         },
 
@@ -174,7 +174,7 @@ var SchemaResult = function(schema){
          * @return {Any|ExceptionList}
          *
          */
-        getValue: function(){
+        getValue: function Divhide_Schema_SchemaResult_getValue(){
             return value;
         },
 
@@ -185,7 +185,7 @@ var SchemaResult = function(schema){
          * @return {ExceptionList}
          *
          */
-        getErrors: function(){
+        getErrors: function Divhide_Schema_SchemaResult_getErrors(){
             return errors;
         },
 
@@ -196,7 +196,7 @@ var SchemaResult = function(schema){
          * @return {Boolean}
          *
          */
-        isValid: function(){
+        isValid: function Divhide_Schema_SchemaResult_isValid(){
             return errors.length === 0;
         },
 
@@ -210,7 +210,7 @@ var SchemaResult = function(schema){
          * @return {SchemaResult} The current SchemaResult instance
          *
          */
-        set: function(val, index) {
+        set: function Divhide_Schema_SchemaResult_set(val, index) {
 
             // arguments normalization
             val = Coerce.value(val);

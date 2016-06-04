@@ -21,7 +21,7 @@ var Type        = require("../Type"),
  * @return {Any}
  *
  */
-var Required = function(val){
+var Required = function Divhide_Assert_Required(val){
 
     var v = Type.isDefined(val);
 

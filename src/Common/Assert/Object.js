@@ -21,7 +21,7 @@ var Type        = require("../Type"),
  * @return {Object}
  *
  */
-var Obj = function(val){
+var Obj = function Divhide_Assert_Object(val){
 
     var v = Type.isObject(val);
 

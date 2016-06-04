@@ -27,7 +27,7 @@ var Internal = {};
  * @return {String}
  *
  */
-Internal.applyTemplate = function(name, data, messages, customMessages){
+Internal.applyTemplate = function Divhide_I18N_String_applyTemplate(name, data, messages, customMessages){
 
     name            = Coerce.string(name);
     data            = Coerce.object(data);
@@ -55,7 +55,7 @@ Internal.applyTemplate = function(name, data, messages, customMessages){
  * var str = new I18nString("asas", {}, {});
  *
  */
-var I18NString = function(name, data, messages){
+var I18NString = function Divhide_I18N_String(name, data, messages){
 
     name        = Coerce.string(name);
     data        = Coerce.object(data);
@@ -72,7 +72,7 @@ var I18NString = function(name, data, messages){
      * @return {String}
      *
      */
-    this.toString = function(customMessages){
+    this.toString = function Divhide_I18N_String_toString(customMessages){
 
         try{
 

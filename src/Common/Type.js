@@ -27,7 +27,7 @@ var Type = {};
  * @return{string}
  *
  */
-Type.of = function (obj) {
+Type.of = function Divhide_Type_of(obj) {
 
     var t = typeof obj;
 
@@ -49,7 +49,7 @@ Type.of = function (obj) {
  * @return True|False
  *
  */
-Type.isArray = function (value) {
+Type.isArray = function Divhide_Type_isArray(value) {
 
     return (value instanceof Array);
 
@@ -63,7 +63,7 @@ Type.isArray = function (value) {
  * @return True|False
  *
  */
-Type.isBoolean = function (value) {
+Type.isBoolean = function Divhide_Type_isBoolean(value) {
 
     return typeof(value) === "boolean";
 
@@ -77,7 +77,7 @@ Type.isBoolean = function (value) {
  * @return True|False
  *
  */
-Type.isFunction = function (value) {
+Type.isFunction = function Divhide_Type_isFunction(value) {
 
     return typeof(value) === "function";
 
@@ -91,7 +91,7 @@ Type.isFunction = function (value) {
  * @return True|False
  *
  */
-Type.isString = function (value) {
+Type.isString = function Divhide_Type_isString(value) {
 
     return typeof(value) === "string" ||
            value instanceof String;         /// support to custom String declarations
@@ -106,7 +106,7 @@ Type.isString = function (value) {
  * @return True|False
  *
  */
-Type.isObject = function (value) {
+Type.isObject = function Divhide_Type_isObject(value) {
 
     // null or undefined values are objects, but we don't care
     /* jshint -W041 */
@@ -123,7 +123,7 @@ Type.isObject = function (value) {
  * @param  {*}          value
  * @return {Boolean}
  */
-Type.isRegExp = function (value) {
+Type.isRegExp = function Divhide_Type_isRegExp(value) {
     return (value instanceof RegExp);
 };
 
@@ -135,7 +135,7 @@ Type.isRegExp = function (value) {
  * @return {Boolean}
  *
  */
-Type.isComplex = function(value){
+Type.isComplex = function Divhide_Type_isComplex(value){
     return Type.isObject(value) || Type.isArray(value);
 };
 
@@ -146,7 +146,7 @@ Type.isComplex = function(value){
  * @return {Boolean}
  *
  */
-Type.isRegExpStr = function (value) {
+Type.isRegExpStr = function Divhide_Type_isRegExpStr(value) {
 
     if(!Type.isString(value)){
         return false;
@@ -163,7 +163,7 @@ Type.isRegExpStr = function (value) {
  * @return True|False
  *
  */
-Type.isNumber = function (value) {
+Type.isNumber = function Divhide_Type_isNumber(value) {
 
     var type = typeof(value);
     if(type != "number" && type != "string"){
@@ -188,7 +188,7 @@ Type.isNumber = function (value) {
  *
  * @return {Boolean}
  */
-Type.isDefined = function(value){
+Type.isDefined = function Divhide_Type_isDefined(value){
 
     /* jshint -W041 */
     if(value != null){
@@ -209,7 +209,7 @@ Type.isDefined = function(value){
  * @return {Boolean}
  *
  */
-Type.instanceOf = function(value, fn){
+Type.instanceOf = function Divhide_Type_instanceOf(value, fn){
 
     /// take care of javascript quirks first!
 
@@ -236,7 +236,7 @@ Type.instanceOf = function(value, fn){
  * @return {Boolean}
  *
  */
-Type.isEmpty = function(value){
+Type.isEmpty = function Divhide_Type_isEmpty(value){
 
     if( !Type.isDefined(value) ){
 

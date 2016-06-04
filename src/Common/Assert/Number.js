@@ -20,7 +20,7 @@ var Type        = require("../Type"),
  * @return {Number}
  *
  */
-var Numb = function(val){
+var Numb = function Divhide_Assert_Number(val){
 
     var v = Type.isNumber(val);
 

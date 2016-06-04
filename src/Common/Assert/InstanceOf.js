@@ -18,7 +18,7 @@ var _           = require("lodash"),
  * @return {String}
  *
  */
-var getFnName = function(fun) {
+var getFnName = function Divhide_Assert_InstanceOf_getFnName(fun) {
 
 	var ret = fun.toString();
 	ret = ret.substr('function '.length);
@@ -44,7 +44,7 @@ var getFnName = function(fun) {
  * @return {Any}
  *
  */
-var InstanceOf = function(val, expectedFn){
+var InstanceOf = function Divhide_Assert_InstanceOf(val, expectedFn){
 
 	/// test with instanceof
 	if(!Type.instanceOf(val, expectedFn)){

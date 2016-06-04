@@ -45,7 +45,7 @@ var AssertionFns = {};
  * @param  {Error}      err
  * @return {Boolean}
  */
-AssertionFns.isValid = function(result, err){
+AssertionFns.isValid = function Divhide_Assertion_isValid(result, err){
     return !err;
 };
 
@@ -58,7 +58,7 @@ AssertionFns.isValid = function(result, err){
  * @return {}
  *
  */
-AssertionFns.assert = function(result, err){
+AssertionFns.assert = function Divhide_Assertion_assert(result, err){
 
     if(err){
         throw err;
@@ -86,7 +86,7 @@ AssertionFns.assert = function(result, err){
  *     [ .isValid("aaaa") | .assert("aaaa") ]
  *
  */
-var Assertion = function(fns){
+var Assertion = function Divhide_Assertion(fns){
 
     fns = Coerce.object(fns);
     fns = _.assign({}, fns, ChainableFns);

@@ -19,7 +19,7 @@ var _ = require("lodash"),
  * @return {*} The accumulator
  *
  */
-var recursiveTraversal = function divhide_obj_traversal_topDownBottomUp_recursiveTraversal(value, options, accumulator, stack){
+var recursiveTraversal = function Divhide_Obj_Traversal_topDownBottomUp_recursiveTraversal(value, options, accumulator, stack){
 
     var extraArgs = arguments.length > 4 ?
         _.slice(arguments, 4) : [];
@@ -130,7 +130,7 @@ var recursiveTraversal = function divhide_obj_traversal_topDownBottomUp_recursiv
  * @return {Any} The accumulator value
  *
  */
-var traverse = function divhide_obj_traversal_topDownBottomUp(value, options, accumulator){
+var traverse = function Divhide_Obj_Traversal_topDownBottomUp(value, options, accumulator){
 
     var extraArgs = arguments.length > 3 ?
         _.slice(arguments, 3) : [];

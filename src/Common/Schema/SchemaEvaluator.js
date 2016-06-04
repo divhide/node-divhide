@@ -19,7 +19,7 @@ var _                       = require("lodash"),
  * @param {Object}  cOptions        The SchemaDefinition compilation options
  *
  */
-var SchemaEvaluator = function(schema, validationFns, cOptions){
+var SchemaEvaluator = function Divhide_Schema_SchemaEvaluator(schema, validationFns, cOptions){
 
     /* jshint -W064 */
     /**
@@ -59,7 +59,7 @@ var SchemaEvaluator = function(schema, validationFns, cOptions){
          * @return {Error}
          *
          */
-        errors: function(value){
+        errors: function Divhide_Schema_SchemaEvaluator_errors(value){
 
             var result = schema.execute(value, validationFns);
             return result.getErrors();
@@ -75,7 +75,7 @@ var SchemaEvaluator = function(schema, validationFns, cOptions){
          * @return {Boolean}
          *
          */
-        isValid: function(value){
+        isValid: function Divhide_Schema_SchemaEvaluator_isValid(value){
 
             var result = schema.execute(value, validationFns);
             return result.isValid();
@@ -93,7 +93,7 @@ var SchemaEvaluator = function(schema, validationFns, cOptions){
          * @return {*}
          *
          */
-        value: function(value){
+        value: function Divhide_Schema_SchemaEvaluator_value(value){
 
             var result = schema.execute(value, validationFns);
 
@@ -112,7 +112,7 @@ var SchemaEvaluator = function(schema, validationFns, cOptions){
          * @return {Object}
          *
          */
-        serialize: function(){
+        serialize: function Divhide_Schema_SchemaEvaluator_serialize(){
 
             return schema.serialize();
 
@@ -125,12 +125,12 @@ var SchemaEvaluator = function(schema, validationFns, cOptions){
          * @return {SchemaEvaluator}
          *
          */
-        deserialize: function(value){
+        deserialize: function Divhide_Schema_SchemaEvaluator_deserialize(value){
 
             /// use a prepare option that builds the SchemaDefinition to
             /// avoid fallback on the Default object builder
             var cOptions = {
-                prepare: function(val){
+                prepare: function Divhide_Schema_SchemaEvaluator_deserialize_prepare(val){
 
                     /// make sure that that the return value is a SchemaDefinition
                     /// NOTE: don't compile the inner structures because the SchemaEvaluator will

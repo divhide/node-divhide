@@ -21,7 +21,7 @@ var _ = require("lodash"),
  * @param {Object|null} indexLookup The index lookup object of the stack array
  *
  */
-var TraverseStack = function divhide_obj_traversal_TraverseStack(stack, indexLookup){
+var TraverseStack = function Divhide_Obj_Traversal_TraverseStack(stack, indexLookup){
 
     /**
      * Saves all the structure path
@@ -54,7 +54,7 @@ var TraverseStack = function divhide_obj_traversal_TraverseStack(stack, indexLoo
      * @return {Object}
      *
      */
-    var createStackRecord = function divhide_obj_traversal_TraverseStack_createstackrecord(value, index, options){
+    var createStackRecord = function Divhide_Obj_Traversal_TraverseStack_createstackrecord(value, index, options){
 
         options = Coerce.object(options);
 
@@ -102,7 +102,7 @@ var TraverseStack = function divhide_obj_traversal_TraverseStack(stack, indexLoo
          * @return {Boolean} False if a circular reference is detected; True otherwise.
          *
          */
-        push: function divhide_obj_traversal_TraverseStack_push(value, index, options){
+        push: function Divhide_Obj_Traversal_TraverseStack_push(value, index, options){
 
             var isComplex = Type.isComplex(value),
             isCircularReference = false;
@@ -145,7 +145,7 @@ var TraverseStack = function divhide_obj_traversal_TraverseStack(stack, indexLoo
          * @return {Object} info
          *
          */
-        currentInfo: function divhide_obj_traversal_TraverseStack_currentinfo(){
+        currentInfo: function Divhide_Obj_Traversal_TraverseStack_currentinfo(){
 
             var last = _.last(stack);
             if(!last){
@@ -168,7 +168,7 @@ var TraverseStack = function divhide_obj_traversal_TraverseStack(stack, indexLoo
          * @return {TraverseStack}
          *
          */
-        clone: function divhide_obj_traversal_TraverseStack_clone(){
+        clone: function Divhide_Obj_Traversal_TraverseStack_clone(){
             return new TraverseStack(
                 _.clone(stack),
                 _.clone(indexLookup));

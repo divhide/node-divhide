@@ -10,7 +10,7 @@ var Obj = require("../Obj");
  * @param {SchemaResult} schemaResult
  *
  */
-var SchemaEvaluatorException = function(schemaResult){
+var SchemaEvaluatorException = function Divhide_Schema_SchemaEvaluatorException(schemaResult){
 
     /**
      * Gets the string representation of a SchemaResult instance.
@@ -21,7 +21,7 @@ var SchemaEvaluatorException = function(schemaResult){
      * @return {String}
      *
      */
-    this.toString = function(options, translations){
+    this.toString = function Divhide_Schema_SchemaEvaluatorException_toString(options, translations){
         return Obj.stringify(
             schemaResult.getValue());
     };

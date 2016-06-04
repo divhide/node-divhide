@@ -25,7 +25,7 @@ var Internal = {};
  * @return {I18NMessage}
  *
  */
-Internal.getI18NMessage = function(message, messageData){
+Internal.getI18NMessage = function Divhide_Exception_getI18NMessage(message, messageData){
 
     messageData = Coerce.object(messageData);
 
@@ -49,7 +49,7 @@ Internal.getI18NMessage = function(message, messageData){
  * @return {String}
  *
  */
-Internal.getStackTrace = function(){
+Internal.getStackTrace = function Divhide_Exception_getStackTrace(){
 
     var error    = new Error(),
         stackStr = Coerce.string(error.stack),
@@ -69,7 +69,7 @@ Internal.getStackTrace = function(){
  * @param {String|I18NString} message
  *
  */
-var Exception = function(message, messageData) {
+var Exception = function Divhide_Exception(message, messageData) {
 
     message     = Internal.getI18NMessage(message, messageData);
     messageData = Coerce.object(messageData);
@@ -109,7 +109,7 @@ var Exception = function(message, messageData) {
      * @return {String}
      *
      */
-    this.toString = function(translations){
+    this.toString = function Divhide_Exception_toString(translations){
         return message.toString(translations);
     };
 

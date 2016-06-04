@@ -23,7 +23,7 @@ var _           = require("lodash"),
  * @return {Any}
  *
  */
-var Max = function(val, max){
+var Max = function Divhide_Assert_Max(val, max){
 
     max = Coerce.number(max);
     var length = Coerce.length(val);

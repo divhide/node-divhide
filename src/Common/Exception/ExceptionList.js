@@ -12,7 +12,7 @@ var _               = require("lodash"),
  * @return {String}
  *
  */
-var getStackTrace = function(){
+var getStackTrace = function Divhide_ExceptionList_getStackTrace(){
 
     var error    = new Error(),
         stackStr = Coerce.string(error.stack),
@@ -31,7 +31,7 @@ var getStackTrace = function(){
  * @class
  *
  */
-var ExceptionList = function() {
+var ExceptionList = function Divhide_ExceptionList() {
 
     /// instance of error
     var items  = [];
@@ -91,7 +91,7 @@ var ExceptionList = function() {
      * @param {*} errors
      *
      */
-    this.push = function(errors){
+    this.push = function Divhide_ExceptionList_push(errors){
 
         var scope = this;
 
@@ -128,7 +128,7 @@ var ExceptionList = function() {
      * Clear the error list
      *
      */
-    this.clear = function(){
+    this.clear = function Divhide_ExceptionList_clear(){
         while(items.length) items.pop();
     };
 
@@ -141,7 +141,7 @@ var ExceptionList = function() {
      * @return {String}
      *
      */
-    this.toString = function(translations){
+    this.toString = function Divhide_ExceptionList_toString(translations){
 
         var str         = "",
             length      = items.length,

@@ -26,7 +26,7 @@ var Internal = {};
  * @return {Array}
  *
  */
-Internal.getArgumentList = function divhide_Chain_getArgumentList(argsObj){
+Internal.getArgumentList = function Divhide_Chain_getArgumentList(argsObj){
 
     var args = [];
 
@@ -51,7 +51,7 @@ Internal.getArgumentList = function divhide_Chain_getArgumentList(argsObj){
  * @return {Function}
  *
  */
-Internal.wrapChainableFunction = function divhide_Chain_wrapChainableFunction(context, fn, chainableFns, evaluationFns, options){
+Internal.wrapChainableFunction = function Divhide_Chain_wrapChainableFunction(context, fn, chainableFns, evaluationFns, options){
 
     options = Coerce.object(options);
 
@@ -95,7 +95,7 @@ Internal.wrapChainableFunction = function divhide_Chain_wrapChainableFunction(co
  * @return {Function}
  *
  */
-Internal.wrapReturnableFunction = function divhide_Chain_wrapReturnableFunction(context, fn, chainableFns, evaluationFns, options){
+Internal.wrapReturnableFunction = function Divhide_Chain_wrapReturnableFunction(context, fn, chainableFns, evaluationFns, options){
 
     options = Coerce.object(options);
 
@@ -159,7 +159,7 @@ Internal.wrapReturnableFunction = function divhide_Chain_wrapReturnableFunction(
  * @return {Object}
  *
  */
-Internal.getChainFunctions = function divhide_Chain_getChainFunctions(context, chainableFns, evaluationFns, options){
+Internal.getChainFunctions = function Divhide_Chain_getChainFunctions(context, chainableFns, evaluationFns, options){
 
     /// merge the default fns and the custom functions
     var fns = _.assign({}, chainableFns);
@@ -229,7 +229,7 @@ Internal.getChainFunctions = function divhide_Chain_getChainFunctions(context, c
  *
  *
  */
-var Chain = function divhide_Chain(chainableFns, evaluationFns, options, context){
+var Chain = function Divhide_Chain(chainableFns, evaluationFns, options, context){
 
     var scope   = this;
 

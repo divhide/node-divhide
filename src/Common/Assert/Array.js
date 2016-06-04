@@ -21,7 +21,7 @@ var Type        = require("../Type"),
  * @return {Array}
  *
  */
-var Arr = function(val){
+var Arr = function Divhide_Assert_Array(val){
 
     var v = Type.isArray(val);
 

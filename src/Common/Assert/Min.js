@@ -23,7 +23,7 @@ var _           = require("lodash"),
  * @return {Any}
  *
  */
-var Min = function(val, min){
+var Min = function Divhide_Assert_Min(val, min){
 
     min = Coerce.number(min);
     var length = Coerce.length(val);
